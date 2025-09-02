@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -51,8 +50,8 @@
 }
 
 :root {
-  --main: hsla(166, 79%, 33%, 1);
-  --second: #e0efed;
+  --color-main: #02a09b;
+  --color-Secondary: #f2fafa;
   --radius: 0.625rem;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.141 0.005 285.823);
@@ -123,13 +122,11 @@
   --sidebar-ring: oklch(0.552 0.016 285.938);
 }
 
-
 @layer base {
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-poppins), sans-serif;
   }
-
 }
 
 @utility flex-center {
@@ -142,7 +139,6 @@
 @utility circle {
   @apply rounded-full;
 }
-
 
 .hide-scrollbar {
   /* Firefox */
@@ -158,7 +154,6 @@
 .custom-gradient {
   background: linear-gradient(to left, #02a09b, #073433);
 }
-
 
 @layer utilities {
   .text-balance {
