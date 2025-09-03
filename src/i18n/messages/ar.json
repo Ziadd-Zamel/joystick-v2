@@ -4,5 +4,11 @@
     "about": "من نحن",
     "maintenance": "طلب صيانة",
     "videos": "فيديوهات"
-  }
+  },
+  "no-features-available": "لا توجد مميزات متاحة.",
+  "failed-to-fetch-advantages": "فشل في جلب المزايا",
+  "failed-to-fetch-data": "فشل في جلب البيانات.",
+  "default-description": "وصـــف افتــراضــي",
+  "default-title": "عنــوان افـتـــراضـــــي",
+  "latest-products": "احــدث المنـتجــات"
 }

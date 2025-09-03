@@ -4,5 +4,11 @@
     "about": "About Us",
     "maintenance": "Maintenance",
     "videos": "Videos"
-  }
+  },
+  "no-features-available": "No features available.",
+  "failed-to-fetch-advantages": "Failed to fetch advantages",
+  "failed-to-fetch-data": "Failed to fetch data.",
+  "default-description": "Default Description",
+  "default-title": "Default Title",
+  "latest-products": "Latest Products"
 }
