@@ -45,13 +45,13 @@
   --color-custom-orange: hsla(37, 100%, 50%, 1);
   --color-custom-gray: rgba(251, 251, 251, 1);
   --bg-main: var(--bg-main);
-  --font-poppins: "Poppins", sans-serif;
-  --font-chillax: "Chillax", sans-serif;
+  --color-light-gray: #737791;
 }
 
 :root {
   --color-main: #02a09b;
   --color-Secondary: #f2fafa;
+  --color-light-gray: #737791;
   --radius: 0.625rem;
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.141 0.005 285.823);
@@ -83,9 +83,6 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
   --bg-main: hsla(166, 79%, 33%, 1);
-  --hero-bg: #ffffff;
-  --footer-bg: #ffffff;
-  --border-gradient: none;
 }
 
 .dark {
@@ -133,7 +130,7 @@
   @apply flex items-center justify-center;
 }
 @utility box-container {
-  @apply container mx-auto w-full px-5 md:px-2 lg:px-5 2xl:max-w-[85%];
+  @apply container mx-auto w-full px-5 md:px-2 lg:px-5 2xl:max-w-[1480px];
 }
 
 @utility circle {

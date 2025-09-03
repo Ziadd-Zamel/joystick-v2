@@ -3,26 +3,43 @@
     "home": "الرئيسية",
     "about": "من نحن",
     "maintenance": "طلب صيانة",
-    "videos": "فيديوهات",
-    "categories": "الاقسام"
+    "videos": "فيديوهات"
   },
+  "no-features-available": "لا توجد مميزات متاحة.",
+  "failed-to-fetch-advantages": "فشل في جلب المزايا",
+  "failed-to-fetch-data": "فشل في جلب البيانات.",
+  "default-description": "وصـــف افتــراضــي",
+  "default-title": "عنــوان افـتـــراضـــــي",
+  "latest-products": "احــدث المنـتجــات",
+  "videos": "فيديوهات",
+  "categories": "الاقسام",
   "auth": {
-    "phone": "رقم الهاتف\n",
-    "auth": {
-      "login": {
-        "fields": {
-          "phone": {
-            "placeholder": "01091732409"
-          }
-        }
-      }
-    },
+    "phone": "رقم الهاتف",
     "phone-placeholder": "رقم هاتفك",
-    "password-label": "كلمة المرور\n",
+    "password-label": "كلمة المرور",
     "password-placeholder": "**********",
     "login": "تسجيل الدخول",
     "forget-password": "نسيت كلمة المرور",
     "phone-required": "رقم الهاتف مطلوب",
-    "password-required": "كلمة المرور مطلوبة"
+    "password-required": "كلمة المرور مطلوبة",
+    "name": "الاسم",
+    "name-placeholder": "أدخل اسمك",
+    "name-required": "الاسم مطلوب",
+    "confirm-password-label": "تأكيد كلمة المرور",
+    "confirm-password-placeholder": "أكد كلمة المرور",
+    "confirm-password-required": "يرجى تأكيد كلمة المرور",
+    "password-min-length": "كلمة المرور يجب أن تكون 6 أحرف على الأقل",
+    "passwords-dont-match": "كلمات المرور غير متطابقة",
+    "address": "العنوان",
+    "building-number": "رقم العمارة",
+    "floor-number": "رقم الدور",
+    "apartment-number": "رقم الشقة",
+    "building-number-required": "رقم العمارة مطلوب",
+    "floor-number-required": "رقم الدور مطلوب",
+    "apartment-number-required": "رقم الشقة مطلوب",
+    "address-placeholder": "أدخل عنوانك",
+    "address-required": "العنوان مطلوب",
+    "register": "تسجيل",
+    "select-location": "اختيار الموقع"
   }
 }

@@ -17,7 +17,7 @@ const montserrat = Montserrat({
 });
 
 export const metadata = {
-  title: "JOY STICK",
+  title: "DEV JOY STICK",
   description: "Joy stick website",
 };
 

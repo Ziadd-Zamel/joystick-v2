@@ -183,6 +183,19 @@
   dependencies:
     tslib "2"
 
+"@googlemaps/js-api-loader@1.16.8":
+  version "1.16.8"
+  resolved "https://registry.yarnpkg.com/@googlemaps/js-api-loader/-/js-api-loader-1.16.8.tgz#1595a2af80ca07e551fc961d921a2437d1cb3643"
+  integrity sha512-CROqqwfKotdO6EBjZO/gQGVTbeDps5V7Mt9+8+5Q+jTg5CRMi3Ii/L9PmV3USROrt2uWxtGzJHORmByxyo9pSQ==
+
+"@googlemaps/markerclusterer@2.5.3":
+  version "2.5.3"
+  resolved "https://registry.yarnpkg.com/@googlemaps/markerclusterer/-/markerclusterer-2.5.3.tgz#9f891ce7e8e161775f3a3e2c9f66956810284591"
+  integrity sha512-x7lX0R5yYOoiNectr10wLgCBasNcXFHiADIBdmn7jQllF2B5ENQw5XtZK+hIw4xnV0Df0xhN4LN98XqA5jaiOw==
+  dependencies:
+    fast-deep-equal "^3.1.3"
+    supercluster "^8.0.1"
+
 "@hookform/resolvers@^5.2.1":
   version "5.2.1"
   resolved "https://registry.npmjs.org/@hookform/resolvers/-/resolvers-5.2.1.tgz"
@@ -1196,6 +1209,28 @@
   resolved "https://registry.npmjs.org/@radix-ui/rect/-/rect-1.1.1.tgz"
   integrity sha512-HPwpGIzkl28mWyZqG52jiqDJ12waP11Pa1lGoiyUkIEuMLBP0oeK/C89esbXrxsky5we7dfd8U58nm0SgAWpVw==
 
+"@react-google-maps/api@^2.20.7":
+  version "2.20.7"
+  resolved "https://registry.yarnpkg.com/@react-google-maps/api/-/api-2.20.7.tgz#8ff85c595bab7de5493442b8b9676340f8bf9c99"
+  integrity sha512-ys7uri3V6gjhYZUI43srHzSKDC6/jiKTwHNlwXFTvjeaJE3M3OaYBt9FZKvJs8qnOhL6i6nD1BKJoi1KrnkCkg==
+  dependencies:
+    "@googlemaps/js-api-loader" "1.16.8"
+    "@googlemaps/markerclusterer" "2.5.3"
+    "@react-google-maps/infobox" "2.20.0"
+    "@react-google-maps/marker-clusterer" "2.20.0"
+    "@types/google.maps" "3.58.1"
+    invariant "2.2.4"
+
+"@react-google-maps/infobox@2.20.0":
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/@react-google-maps/infobox/-/infobox-2.20.0.tgz#7c3dd1821c9f1e1e92570f37419b97f6f956c7ee"
+  integrity sha512-03PJHjohhaVLkX6+NHhlr8CIlvUxWaXhryqDjyaZ8iIqqix/nV8GFdz9O3m5OsjtxtNho09F/15j14yV0nuyLQ==
+
+"@react-google-maps/marker-clusterer@2.20.0":
+  version "2.20.0"
+  resolved "https://registry.yarnpkg.com/@react-google-maps/marker-clusterer/-/marker-clusterer-2.20.0.tgz#6b64177843a60c66e0ebaf85037a47ecd07007df"
+  integrity sha512-tieX9Va5w1yP88vMgfH1pHTacDQ9TgDTjox3tLlisKDXRQWdjw+QeVVghhf5XqqIxXHgPdcGwBvKY6UP+SIvLw==
+
 "@rtsao/scc@^1.1.0":
   version "1.1.0"
   resolved "https://registry.npmjs.org/@rtsao/scc/-/scc-1.1.0.tgz"
@@ -1365,6 +1400,16 @@
   version "1.0.8"
   resolved "https://registry.npmjs.org/@types/estree/-/estree-1.0.8.tgz"
   integrity sha512-dWHzHa2WqEXI/O1E9OjrocMTKJl2mSrEolh1Iomrv6U+JuNwaHXsXx9bLu5gG7BUWFIN0skIQJQ/L1rIex4X6w==
+
+"@types/google.maps@3.58.1":
+  version "3.58.1"
+  resolved "https://registry.yarnpkg.com/@types/google.maps/-/google.maps-3.58.1.tgz#71ce3dec44de1452f56641d2c87c7dd8ea964b4d"
+  integrity sha512-X9QTSvGJ0nCfMzYOnaVs/k6/4L+7F5uCS+4iUmkLEls6J9S/Phv+m/i3mDeyc49ZBgwab3EFO1HEoBY7k98EGQ==
+
+"@types/googlemaps@^3.39.1":
+  version "3.43.3"
+  resolved "https://registry.yarnpkg.com/@types/googlemaps/-/googlemaps-3.43.3.tgz#70cf962154a160fe78bcd69d6ccc296dd9175b1f"
+  integrity sha512-ZWNoz/O8MPEpiajvj7QiqCY8tTLFNqNZ/a+s+zTV58wFVNAvvqV4bdGfnsjTb5Cs4V6wEsLrX8XRhmnyYJ2Tdg==
 
 "@types/json-schema@^7.0.15":
   version "7.0.15"
@@ -2016,7 +2061,7 @@ dunder-proto@^1.0.0, dunder-proto@^1.0.1:
 
 embla-carousel-react@^8.6.0:
   version "8.6.0"
-  resolved "https://registry.npmjs.org/embla-carousel-react/-/embla-carousel-react-8.6.0.tgz"
+  resolved "https://registry.yarnpkg.com/embla-carousel-react/-/embla-carousel-react-8.6.0.tgz#b737042a32761c38d6614593653b3ac619477bd1"
   integrity sha512-0/PjqU7geVmo6F734pmPqpyHqiM99olvyecY7zdweCw+6tKEXnrE90pBiBbMMU8s5tICemzpQ3hi5EpxzGW+JA==
   dependencies:
     embla-carousel "8.6.0"
@@ -2581,6 +2626,13 @@ globalthis@^1.0.4:
     define-properties "^1.2.1"
     gopd "^1.0.1"
 
+google-maps@^4.3.3:
+  version "4.3.3"
+  resolved "https://registry.yarnpkg.com/google-maps/-/google-maps-4.3.3.tgz#b8026723534e04713303f80853c32a1f1f6ed3cd"
+  integrity sha512-MQbEgBNQbGyV7mfS2tlFgW4EoGKLia24BvAl4a+kgsYWt4283kyPpaay/yKIsScQLr7nSUONaLNfOdMsCuJDEw==
+  dependencies:
+    "@types/googlemaps" "^3.39.1"
+
 gopd@^1.0.1, gopd@^1.2.0:
   version "1.2.0"
   resolved "https://registry.npmjs.org/gopd/-/gopd-1.2.0.tgz"
@@ -2695,6 +2747,13 @@ intl-messageformat@^10.5.14:
     "@formatjs/fast-memoize" "2.2.7"
     "@formatjs/icu-messageformat-parser" "2.11.2"
     tslib "^2.8.0"
+
+invariant@2.2.4:
+  version "2.2.4"
+  resolved "https://registry.yarnpkg.com/invariant/-/invariant-2.2.4.tgz#610f3c92c9359ce1db616e538008d23ff35158e6"
+  integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
+  dependencies:
+    loose-envify "^1.0.0"
 
 is-array-buffer@^3.0.4, is-array-buffer@^3.0.5:
   version "3.0.5"
@@ -2973,6 +3032,11 @@ jsonp@^0.2.1:
     object.assign "^4.1.4"
     object.values "^1.1.6"
 
+kdbush@^4.0.2:
+  version "4.0.2"
+  resolved "https://registry.yarnpkg.com/kdbush/-/kdbush-4.0.2.tgz#2f7b7246328b4657dd122b6c7f025fbc2c868e39"
+  integrity sha512-WbCVYJ27Sz8zi9Q7Q0xHC+05iwkm3Znipc2XTlrnJbsHMYktW4hPhXUE8Ys1engBrvffoSCqbil1JQAa7clRpA==
+
 keyv@^4.5.4:
   version "4.5.4"
   resolved "https://registry.npmjs.org/keyv/-/keyv-4.5.4.tgz"
@@ -3080,7 +3144,7 @@ lodash.merge@^4.6.2:
   resolved "https://registry.npmjs.org/lodash.merge/-/lodash.merge-4.6.2.tgz"
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
 
-loose-envify@^1.4.0:
+loose-envify@^1.0.0, loose-envify@^1.4.0:
   version "1.4.0"
   resolved "https://registry.npmjs.org/loose-envify/-/loose-envify-1.4.0.tgz"
   integrity sha512-lyuxPGr/Wfhrlem2CL/UcnUc1zcqKAImBDzukY7Y5F/yQiNdko6+fRLevlw1HgMySw7f611UIY408EtxRSoK3Q==
@@ -3985,6 +4049,13 @@ styled-jsx@5.1.6:
   integrity sha512-qSVyDTeMotdvQYoHWLNGwRFJHC+i+ZvdBRYosOFgC+Wg1vx4frN2/RG/NA7SYqqvKNLf39P2LSRA2pu6n0XYZA==
   dependencies:
     client-only "0.0.1"
+
+supercluster@^8.0.1:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/supercluster/-/supercluster-8.0.1.tgz#9946ba123538e9e9ab15de472531f604e7372df5"
+  integrity sha512-IiOea5kJ9iqzD2t7QJq/cREyLHTtSmUT6gQsweojg9WH2sYJqZK9SswTu6jrscO6D1G5v5vYZ9ru/eq85lXeZQ==
+  dependencies:
+    kdbush "^4.0.2"
 
 supports-color@^7.1.0:
   version "7.2.0"

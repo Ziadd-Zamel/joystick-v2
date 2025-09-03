@@ -3,26 +3,43 @@
     "home": "Home",
     "about": "About Us",
     "maintenance": "Maintenance",
-    "videos": "Videos",
-    "categories": "Categories"
+    "videos": "Videos"
   },
+  "no-features-available": "No features available.",
+  "failed-to-fetch-advantages": "Failed to fetch advantages",
+  "failed-to-fetch-data": "Failed to fetch data.",
+  "default-description": "Default Description",
+  "default-title": "Default Title",
+  "latest-products": "Latest Products",
+  "videos": "Videos",
+  "categories": "Categories",
   "auth": {
     "phone": "Phone Number",
-    "auth": {
-      "login": {
-        "fields": {
-          "phone": {
-            "placeholder": "01091732409"
-          }
-        }
-      }
-    },
     "phone-placeholder": "Your Phone number",
     "password-label": "Password",
     "password-placeholder": "**********",
     "login": "Login",
     "forget-password": "Forget your password",
     "phone-required": "Your phone number is required",
-    "password-required": "Password is required"
+    "password-required": "Password is required",
+    "name": "Name",
+    "name-placeholder": "Enter your name",
+    "name-required": "Name is required",
+    "confirm-password-label": "Confirm Password",
+    "confirm-password-placeholder": "Confirm your password",
+    "confirm-password-required": "Please confirm your password",
+    "password-min-length": "Password must be at least 6 characters",
+    "passwords-dont-match": "Passwords don't match",
+    "address": "Address",
+    "building-number": "Building No.",
+    "floor-number": "Floor No.",
+    "apartment-number": "Apartment No.",
+    "building-number-required": "Building number is required",
+    "floor-number-required": "Floor number is required",
+    "apartment-number-required": "Apartment number is required",
+    "address-placeholder": "Enter your address",
+    "address-required": "Address is required",
+    "register": "Register",
+    "select-location": "Select Location"
   }
 }
