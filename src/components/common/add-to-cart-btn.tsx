@@ -5,9 +5,10 @@ import { Button } from "../ui/button";
 import { RiShoppingBasketFill } from "react-icons/ri";
 import { cn } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
-import { addToCart } from "@/lib/actions/cart.action";
+
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
+import { addToCart } from "@/lib/actions/cart.actions";
 
 type AddToCartButtonProps = {
   className?: string;
