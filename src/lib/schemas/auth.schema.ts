@@ -69,15 +69,10 @@ export const useChangePasswordSchema = () => {
 export type ChangePasswordFields = z.infer<ReturnType<typeof useChangePasswordSchema>>;
 
 export const useLoginSchema = () => {
-  const t = useTranslations();
+  const t = useTranslations("auth");
 
   return z.object({
-    phone: z
-      .string()
-      .min(1, { message: t("phone-required") })
-      .regex(phoneRegex, {
-        message: t("phone-invalid"),
-      }),
+    phone: z.string().min(1, { message: t("phone-required") }),
     password: z.string().min(1, { message: t("password-required") }),
   });
 };

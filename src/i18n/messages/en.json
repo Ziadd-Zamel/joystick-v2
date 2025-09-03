@@ -3,6 +3,26 @@
     "home": "Home",
     "about": "About Us",
     "maintenance": "Maintenance",
-    "videos": "Videos"
+    "videos": "Videos",
+    "categories": "Categories"
+  },
+  "auth": {
+    "phone": "Phone Number",
+    "auth": {
+      "login": {
+        "fields": {
+          "phone": {
+            "placeholder": "01091732409"
+          }
+        }
+      }
+    },
+    "phone-placeholder": "Your Phone number",
+    "password-label": "Password",
+    "password-placeholder": "**********",
+    "login": "Login",
+    "forget-password": "Forget your password",
+    "phone-required": "Your phone number is required",
+    "password-required": "Password is required"
   }
 }

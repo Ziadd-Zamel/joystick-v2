@@ -5,13 +5,13 @@ import { cn } from "@/lib/utils";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const inputVariants = cva(
-  "flex w-full rounded-[16px] px-5 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-white text-zinc-500 placeholder:text-zinc-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
+  "flex w-full rounded-xs h-12 px-5 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-white text-zinc-500 placeholder:text-zinc-500 focus-visible:outline-none disabled:cursor-not-allowed disabled:opacity-50",
   {
     variants: {
       variant: {
         default: "border border-[#F0EEF0] bg-background",
         outline:
-          "rounded-[16px] border border-gray-shade-300 hover:border-gray-shade-400 text-zinc-800 pla ceholder:text-black/50 focus:border-main disabled:bg-gray-200 disabled:border-none",
+          "rounded-sm border-[#F0EEF0] border  hover:border-gray-shade-400 text-zinc-800 pla ceholder:text-black/50 focus:border-main disabled:bg-gray-200 disabled:border-none",
       },
       state: {
         default: "",
@@ -35,7 +35,7 @@ interface InputProps
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   ({ className, type, variant, inputSize, state, placeholder = "Placeholder", ...props }, ref) => {
     return (
-      <div className="w-full relative">
+      <div className="relative w-full">
         <input
           type={type}
           className={cn(

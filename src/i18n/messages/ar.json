@@ -3,6 +3,26 @@
     "home": "الرئيسية",
     "about": "من نحن",
     "maintenance": "طلب صيانة",
-    "videos": "فيديوهات"
+    "videos": "فيديوهات",
+    "categories": "الاقسام"
+  },
+  "auth": {
+    "phone": "رقم الهاتف\n",
+    "auth": {
+      "login": {
+        "fields": {
+          "phone": {
+            "placeholder": "01091732409"
+          }
+        }
+      }
+    },
+    "phone-placeholder": "رقم هاتفك",
+    "password-label": "كلمة المرور\n",
+    "password-placeholder": "**********",
+    "login": "تسجيل الدخول",
+    "forget-password": "نسيت كلمة المرور",
+    "phone-required": "رقم الهاتف مطلوب",
+    "password-required": "كلمة المرور مطلوبة"
   }
 }
