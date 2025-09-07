@@ -10,5 +10,9 @@
   "failed-to-fetch-data": "Failed to fetch data.",
   "default-description": "Default Description",
   "default-title": "Default Title",
-  "latest-products": "Latest Products"
+  "latest-products": "Latest Products",
+  "our-products": "Our Products",
+  "no-products-found-in-category": "There are no products available in this category at the moment.",
+  "customers-reviews": "Customers Reviews",
+  "lorem": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
 }

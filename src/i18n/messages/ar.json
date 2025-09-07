@@ -10,5 +10,9 @@
   "failed-to-fetch-data": "فشل في جلب البيانات.",
   "default-description": "وصـــف افتــراضــي",
   "default-title": "عنــوان افـتـــراضـــــي",
-  "latest-products": "احــدث المنـتجــات"
+  "latest-products": "احــدث المنـتجــات",
+  "our-products": "منتجـاتنا",
+  "no-products-found-in-category": "لا توجد منتجات متاحة في هذه الفئة حالياً.",
+  "customers-reviews": "اراء العمــلاء",
+  "lorem": "هناك حقيقة مثبتة منذ زمن طويل وهي أن المحتوى المقروء لصفحة"
 }

@@ -22,7 +22,7 @@ export const ProductCard = ({ product }: CardProps) => {
   };
 
   return (
-    <Card className="my-4 flex h-full shrink-0 cursor-grab flex-col rounded-lg bg-white p-4 shadow-[0_0_15px_-5px_rgba(0,0,0,0.1)]">
+    <Card className="my-4 flex h-fit shrink-0 cursor-grab flex-col rounded-lg bg-white p-4 shadow-[0_0_15px_-5px_rgba(0,0,0,0.1)]">
       <CardContent className="relative h-full px-0">
         {/* Fav Button */}
         <AddToFavoriteButton productId={1} isFav={Boolean(product.is_favorite)} />

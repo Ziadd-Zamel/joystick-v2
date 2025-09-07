@@ -4,7 +4,6 @@ import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carouse
 import Image from "next/image";
 
 export default function Slides({ data }: { data: [] }) {
-  console.log("data Slides: ", data);
   return (
     <section className="box-container my-10">
       <Carousel className="w-full cursor-grab select-none">
