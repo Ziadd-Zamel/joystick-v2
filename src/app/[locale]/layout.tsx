@@ -3,6 +3,7 @@ import { routing } from "@/i18n/routing";
 import Providers from "@/components/providers";
 import NotFound from "./not-found";
 import { Tajawal, Montserrat } from "next/font/google";
+import Navbar from "@/components/layout/header";
 
 // Arabic font
 const tajawal = Tajawal({
@@ -28,13 +29,17 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
     return NotFound();
   }
 
-  // ✅ Choose font depending on locale
   const font = locale === "ar" ? tajawal : montserrat;
 
   return (
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body className={font.className}>
-        <Providers>{children}</Providers>
+        <Providers>
+          <div className="flex min-h-screen flex-col overflow-x-hidden">
+            <Navbar />
+            <div className="flex-1">{children}</div>
+          </div>
+        </Providers>
       </body>
     </html>
   );
