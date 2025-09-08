@@ -15,7 +15,7 @@ import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useTranslations } from "next-intl";
 import { PasswordInput } from "./password-input";
-import RegisterMap from "./register-map";
+// import RegisterMap from "./register-map";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { RegisterFields, useRegisterSchema } from "@/lib/schemas/auth.schema";
@@ -66,6 +66,7 @@ export default function RegisterForm() {
   });
 
   const onSubmit: SubmitHandler<RegisterFields> = async (values) => {
+    console.log(values);
     registerMutation.mutate(values);
   };
 
@@ -208,12 +209,12 @@ export default function RegisterForm() {
                 )}
               />
 
-              <div className="space-y-2">
+              {/* <div className="space-y-2">
                 <FormLabel className="text-muted-foreground text-sm">
                   Click on the map to select your location
                 </FormLabel>
                 <RegisterMap setValue={form.setValue} watch={form.watch} />
-              </div>
+              </div> */}
             </div>
 
             <Button className="w-full" type="submit" disabled={registerMutation.isPending}>

@@ -1,10 +1,10 @@
+import LoginForm from "@/components/auth/login-form";
 import HomePage from "./_components";
-import RegisterForm from "@/components/auth/register-form";
 
 export default function Home() {
   return (
     <>
-      <RegisterForm />
+      <LoginForm />
       <HomePage />
     </>
   );
