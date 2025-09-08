@@ -54,5 +54,17 @@
     "address-required": "العنوان مطلوب",
     "register": "تسجيل",
     "select-location": "اختيار الموقع"
+  },
+  "profile-route": {
+    "profile-settings": "إعدادات الملف الشخصي",
+    "name": "الاسم",
+    "phone-number": "رقم الهاتف",
+    "save-changes": "حفظ التغييرات",
+    "profile-email": "البريد الإلكتروني",
+    "email": "البريد الإلكتروني",
+    "change-password": "تغيير كلمة المرور",
+    "old-password": "كلمة المرور القديمة",
+    "new-password": "كلمة المرور الجديدة",
+    "confirm-new-password": "تأكيد كلمة المرور الجديدة"
   }
 }
