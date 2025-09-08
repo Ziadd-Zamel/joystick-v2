@@ -14,5 +14,17 @@
   "our-products": "Our Products",
   "no-products-found-in-category": "There are no products available in this category at the moment.",
   "customers-reviews": "Customers Reviews",
-  "lorem": "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+  "lorem": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  "login-required-for-maintenance": "You must be logged in to access the maintenance page",
+  "maintenance": "Maintenance",
+  "other-links": "Other Links",
+  "quick-links": "Quick Links",
+  "contact-info": "Contact Info",
+  "copy-right-before": "All rights reserved to",
+  "copy-right-company": "evyX LTD",
+  "copy-right-after": "| Copyright © 2025",
+  "maintenance-service-text": "We provide professional maintenance services for game controllers.",
+  "terms": "Terms & Conditions",
+  "privacy-policy": "Privacy Policy",
+  "return-policy": "Return Policy"
 }

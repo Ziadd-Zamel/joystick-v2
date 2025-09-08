@@ -11,8 +11,8 @@ export default function HeadLine({
   description?: string;
 }) {
   return (
-    <div className="mb-6">
-      <h1 className={cn("py-4 text-center text-2xl font-bold", className)}>{title}</h1>
+    <div className={cn("mb-6", className)}>
+      <h1 className={cn("py-4 text-center text-2xl font-bold")}>{title}</h1>
       <p className="text-medium text-center text-zinc-500">{description && description}</p>
     </div>
   );
