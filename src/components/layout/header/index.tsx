@@ -14,7 +14,7 @@ export default async function Navbar() {
       <header className="p-4 shadow-md shadow-[#EEEEEE80]">
         <div className="box-container flex items-center justify-between">
           {/** mobile sidebar */}
-          <Sidebar categories={categories.data.data} />
+          <Sidebar categories={categories} />
 
           {/**Main Logo */}
           <Link href="/" className="relative hidden h-12 w-40 lg:flex">
@@ -22,7 +22,7 @@ export default async function Navbar() {
           </Link>
 
           {/**Main nav links (desktop only) */}
-          <NavLinks categories={categories.data.data} />
+          <NavLinks categories={categories} />
 
           {/**Buttons*/}
           <div className="flex items-center gap-2">
