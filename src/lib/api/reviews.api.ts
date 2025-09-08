@@ -2,11 +2,11 @@ import { getLocale, getTranslations } from "next-intl/server";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
 
-export const getAllCategories = async () => {
+export const getAllReviews = async () => {
   const t = await getTranslations();
   const lang = await getLocale();
 
-  const response = await fetch(`${apiUrl}categories`, {
+  const response = await fetch(`${apiUrl}reviews/get`, {
     headers: {
       "Content-Type": "application/json",
       lang,

@@ -22,7 +22,7 @@ export function ClientImage({
     : `https://joystick.evyx.lol/${src?.startsWith("/") ? src.slice(1) : src}`;
 
   return error ? (
-    <Image src={"/assets/Images/placeholder.svg"} alt={alt} {...props} />
+    <Image src={"/assets/Images/placeholder.svg"} alt={alt} {...props} loading="lazy" />
   ) : (
     <Image src={finalSrc} alt={alt} onError={() => setError(true)} {...props} />
   );
