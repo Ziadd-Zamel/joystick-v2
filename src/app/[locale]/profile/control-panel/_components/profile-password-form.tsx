@@ -14,6 +14,7 @@ import { ProfilePasswordFormValues, profilePasswordSchema } from "@/lib/schemas/
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export default function ProfilePasswordForm() {
   const t = useTranslations("profile-route");
@@ -30,9 +31,11 @@ export default function ProfilePasswordForm() {
   async function onSubmit(values: ProfilePasswordFormValues) {
     try {
       const data = await updateUserPassword(values);
-      console.log("password data", data);
+      toast.success(data.message);
+      form.reset();
     } catch (err) {
       console.log(err);
+      toast.success((err as Error).message);
     }
   }
 

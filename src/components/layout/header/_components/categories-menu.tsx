@@ -10,7 +10,7 @@ import Link from "next/link";
 
 export default function CategoriesMenu({ categories }: { categories: Category[] }) {
   // Translation
-  const t = useTranslations("nav");
+  const t = useTranslations();
   return (
     <NavigationMenu>
       <NavigationMenuList>
