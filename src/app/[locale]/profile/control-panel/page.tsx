@@ -5,7 +5,7 @@ import ProfilePasswordForm from "./_components/profile-password-form";
 
 export default function Page() {
   return (
-    <div className="mx-auto my-10 max-w-[1000px] space-y-5">
+    <div className="mx-auto space-y-5">
       {/* Profile Settings */}
       <ProfileSettingsForm />
 

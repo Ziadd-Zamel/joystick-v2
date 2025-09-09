@@ -66,7 +66,6 @@
     "registrationFailedDescription": "Something went wrong. Please try again.",
     "registrationErrorDescription": "An unexpected error occurred. Please try again.",
     "logging-in": "Logining..."
-    "select-location": "Select Location"
   },
   "profile-route": {
     "profile-settings": "Profile Settings",
