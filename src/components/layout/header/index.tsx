@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import LoginButton from "./_components/login-button";
 import NavLinks from "./_components/nav-links";
 import { getAllCategories } from "@/lib/api/categories.api";
 import Sidebar from "./_components/sidebar";
 import ShoppingCartButton from "./_components/shoping-cart-button";
+import AuthDialog from "./_components/auth-dialog";
 
 export default async function Navbar() {
   // get all categories
@@ -27,7 +27,7 @@ export default async function Navbar() {
           {/**Buttons*/}
           <div className="flex items-center gap-2">
             <ShoppingCartButton />
-            <LoginButton />
+            <AuthDialog />
           </div>
         </div>
       </header>

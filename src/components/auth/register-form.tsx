@@ -20,7 +20,7 @@ import { toast } from "sonner";
 import { RegisterFields, useRegisterSchema } from "@/lib/schemas/auth.schema";
 import { registerUser } from "@/lib/actions/auth.actions";
 
-export default function RegisterForm() {
+export default function RegisterForm({ setOpen }: { setOpen: (open: boolean) => void }) {
   // Translations
   const t = useTranslations("auth");
 
@@ -35,6 +35,7 @@ export default function RegisterForm() {
       if (result.success) {
         toast.success(t("registrationSuccessTitle"));
         form.reset();
+        setOpen(false);
       } else {
         toast.error(t("registrationFailedTitle"));
       }
