@@ -14,6 +14,7 @@ import { ProfileEmailFormValues, profileEmailSchema } from "@/lib/schemas/profil
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export default function ProfileEmailForm() {
   const t = useTranslations("profile-route");
@@ -28,9 +29,11 @@ export default function ProfileEmailForm() {
   async function onSubmit(values: ProfileEmailFormValues) {
     try {
       const payload = await updateUserEmail(values);
-      console.log("data", payload);
+      toast.success(payload.message);
+      form.reset();
     } catch (err) {
       console.log(err);
+      toast.error((err as Error).message);
     }
   }
 

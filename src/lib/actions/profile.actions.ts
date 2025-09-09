@@ -2,6 +2,7 @@
 
 import { cookies } from "next/headers";
 import { ProfileEmailFormValues, ProfilePasswordFormValues } from "../schemas/profile.schema";
+import { revalidatePath } from "next/cache";
 
 export const getUserDetails = async () => {
   const cookieStore = await cookies();
@@ -20,7 +21,6 @@ export const getUserDetails = async () => {
 };
 
 export const updateUserEmail = async (values: ProfileEmailFormValues) => {
-  console.log("values", values);
   const cookieStore = await cookies();
   const token = cookieStore.get("auth_token")?.value;
   try {
@@ -54,8 +54,6 @@ export const updateUserPassword = async (values: ProfilePasswordFormValues) => {
   const cookieStore = await cookies();
   const token = cookieStore.get("auth_token")?.value;
 
-  console.log("password token", token);
-
   try {
     if (!token) {
       throw new Error("User not authenticated");
@@ -74,19 +72,75 @@ export const updateUserPassword = async (values: ProfilePasswordFormValues) => {
       }),
     });
 
-    console.log("res", res);
-
     const payload = await res.json();
 
     if (!res.ok) {
       throw new Error(payload.message || "حدث خطأ أثناء تغيير كلمة المرور");
     }
 
-    console.log("payload", payload);
-
     return payload;
   } catch (error) {
     console.error("Error Changing password", (error as Error).message);
+    throw error;
+  }
+};
+
+export const updateProfile = async (username: string | undefined) => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("auth_token")?.value;
+
+  try {
+    if (!token) {
+      throw new Error("User not authenticated");
+    }
+    const formData = new FormData();
+    formData.append("username", username!);
+
+    const response = await fetch(`${process.env.API}user/update-profile`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      body: formData,
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to update profile");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const updateUserPhone = async (phone: string | undefined) => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("auth_token")?.value;
+  try {
+    if (!token) {
+      throw new Error("User not authenticated");
+    }
+
+    const response = await fetch(`${process.env.API}user/update-user-phone`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ phone }),
+    });
+
+    const responseData = await response.json();
+
+    if (!response.ok) {
+      throw new Error(responseData.message || "حدث خطأ أثناء إرسال OTP");
+    }
+
+    return responseData;
+  } catch (error) {
+    console.error("Error sending OTP:", (error as Error).message);
     throw error;
   }
 };

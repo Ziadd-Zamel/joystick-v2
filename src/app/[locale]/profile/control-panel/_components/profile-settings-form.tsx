@@ -9,13 +9,17 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useRouter } from "@/i18n/routing";
+import { updateProfile, updateUserPhone } from "@/lib/actions/profile.actions";
 import { ProfileSettingFormValues, profileSettingsSchema } from "@/lib/schemas/profile.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export default function ProfileSettingsForm({ userData }: { userData: User }) {
   const t = useTranslations("profile-route");
+  const router = useRouter();
 
   const form = useForm<ProfileSettingFormValues>({
     resolver: zodResolver(profileSettingsSchema),
@@ -25,8 +29,21 @@ export default function ProfileSettingsForm({ userData }: { userData: User }) {
     },
   });
 
-  function onSubmit(values: ProfileSettingFormValues) {
-    console.log(values);
+  async function onSubmit(values: ProfileSettingFormValues) {
+    try {
+      if (values.name !== userData.username) {
+        const profileData = await updateProfile(values.name);
+        toast.success(profileData.message);
+      }
+
+      if (values.phoneNumber !== userData.phone) {
+        const phoneData = await updateUserPhone(values.phoneNumber);
+        toast.success(phoneData.message);
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error((err as Error).message);
+    }
   }
 
   return (
@@ -69,7 +86,12 @@ export default function ProfileSettingsForm({ userData }: { userData: User }) {
             )}
           />
 
-          <Button variant="default" type="submit" className="self-end">
+          <Button
+            disabled={!form.formState.isDirty}
+            variant="default"
+            type="submit"
+            className="self-end"
+          >
             {t("save-changes")}
           </Button>
         </form>
