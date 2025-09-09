@@ -97,6 +97,7 @@
     "password-change-failed": "Failed to change password. Please try again."
   },
   "profile-route": {
+    "profile": "Profile",
     "main": "Profile",
     "control-panel": "Control Panel",
     "added-location": "Added Locations",
@@ -151,6 +152,7 @@
     "passwords-not-match": "Passwords do not match",
     "firstname-required": "Full name is required",
     "otp-length": "OTP must be exactly 6 digits",
-    "otp-numbers-only": "OTP must contain only numbers"
+    "otp-numbers-only": "OTP must contain only numbers",
+    "sign-out": "Sign Out"
   }
 }

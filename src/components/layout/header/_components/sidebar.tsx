@@ -28,7 +28,7 @@ export default function Sidebar({ categories }: { categories: Category[] }) {
   const pathName = usePathname();
 
   // Translation
-  const t = useTranslations("nav");
+  const t = useTranslations();
 
   // handle open
   const handleOpenChange = (open: boolean) => {
