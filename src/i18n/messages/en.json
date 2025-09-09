@@ -142,5 +142,8 @@
     "firstname-required": "Full name is required",
     "otp-length": "OTP must be exactly 6 digits",
     "otp-numbers-only": "OTP must contain only numbers"
-  }
+  },
+  "add-to-cart": "Add to cart",
+  "available-quantity": "Available quantity:",
+  "colors": "Colors"
 }

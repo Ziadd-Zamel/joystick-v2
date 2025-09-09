@@ -1,23 +1,31 @@
 "use client";
-
 import { useTranslations } from "next-intl";
 import { Button } from "../ui/button";
-import { RiShoppingBasketFill } from "react-icons/ri";
 import { cn } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
-
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { addToCart } from "@/lib/actions/cart.actions";
+import Image from "next/image";
+import { useState } from "react";
+import AuthDialog from "../layout/header/_components/auth-dialog";
 
 type AddToCartButtonProps = {
   className?: string;
   productId: number;
+  isLogedin?: boolean;
 };
 
-export default function AddToCartButton({ productId, className }: AddToCartButtonProps) {
+export default function AddToCartButton({
+  productId,
+  className,
+  isLogedin = false,
+}: AddToCartButtonProps) {
   // Translations
   const t = useTranslations();
+
+  // State for auth dialog
+  const [authOpen, setAuthOpen] = useState(false);
 
   // Mutations
   const addProductToCart = useMutation({
@@ -30,23 +38,36 @@ export default function AddToCartButton({ productId, className }: AddToCartButto
     },
   });
 
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+
+    if (!isLogedin) {
+      // Open auth dialog if user is not logged in
+      setAuthOpen(true);
+    } else {
+      // Add to cart if user is logged in
+      addProductToCart.mutate(productId);
+    }
+  };
+
   return (
-    <Button
-      onClick={(e) => {
-        e.stopPropagation();
-        // Handle add to cart logic here
-        addProductToCart.mutate(productId);
-      }}
-      className={cn("bg-light-blue flex items-center gap-2 hover:bg-blue-700", className)}
-    >
-      {addProductToCart.isPending ? (
-        <Loader2 size={18} className="animate-spin" />
-      ) : (
-        <>
-          <RiShoppingBasketFill className="text-main-yellow text-xl" />
-          {t("add-to-cart")}
-        </>
-      )}
-    </Button>
+    <>
+      <Button
+        onClick={handleClick}
+        className={cn("flex w-[200px] items-center justify-center px-4 py-7 text-xl", className)}
+      >
+        {addProductToCart.isPending ? (
+          <Loader2 size={32} className="animate-spin" />
+        ) : (
+          <>
+            <Image src={"/assets/icons/buttons.svg"} alt="Buttons Icon" width={20} height={0} />
+            {t("add-to-cart")}
+          </>
+        )}
+      </Button>
+
+      {/* Auth Dialog - only render when needed */}
+      {!isLogedin && <AuthDialog showTrigger={false} open={authOpen} onOpenChange={setAuthOpen} />}
+    </>
   );
 }

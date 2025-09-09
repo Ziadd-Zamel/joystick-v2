@@ -41,9 +41,9 @@ export default function LoginForm({
         description: "Welcome back!",
       });
 
-      // Save user data to cookies
       login(data.data);
       setOpen(false);
+      window.location.reload();
     },
     onError: () => {
       toast.error("Login failed", {
