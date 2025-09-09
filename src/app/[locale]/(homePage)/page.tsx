@@ -1,10 +1,10 @@
-import LoginForm from "@/components/auth/login-form";
+import OtpForm from "@/components/auth/otp-form";
 import HomePage from "./_components";
 
 export default function Home() {
   return (
     <>
-      <LoginForm />
+      <OtpForm />
       <HomePage />
     </>
   );

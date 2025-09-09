@@ -56,6 +56,16 @@
     "address-placeholder": "Enter your address",
     "address-required": "Address is required",
     "register": "Register",
+    "select-location": "Select Location",
+    "login-signup": "Login/Signup",
+    "signup": "Signup",
+    "registering": "Registering",
+    "registrationSuccessTitle": "Registration successful!",
+    "registrationSuccessDescription": "Your account has been created successfully.",
+    "registrationFailedTitle": "Registration failed",
+    "registrationFailedDescription": "Something went wrong. Please try again.",
+    "registrationErrorDescription": "An unexpected error occurred. Please try again.",
+    "logging-in": "Logining..."
     "select-location": "Select Location"
   },
   "profile-route": {

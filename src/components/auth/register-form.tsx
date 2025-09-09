@@ -1,5 +1,4 @@
 "use client";
-
 import { type SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
@@ -13,7 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { PasswordInput } from "./password-input";
 // import RegisterMap from "./register-map";
 import { useMutation } from "@tanstack/react-query";
@@ -22,28 +21,27 @@ import { RegisterFields, useRegisterSchema } from "@/lib/schemas/auth.schema";
 import { registerUser } from "@/lib/actions/auth.actions";
 
 export default function RegisterForm() {
-  // Hooks
-  const registerSchema = useRegisterSchema();
+  // Translations
   const t = useTranslations("auth");
 
+  // Hooks
+  const registerSchema = useRegisterSchema();
+  const locale = useLocale();
+
+  // Mutation
   const registerMutation = useMutation({
     mutationFn: registerUser,
     onSuccess: (result) => {
       if (result.success) {
-        toast.success("Registration successful!", {
-          description: "Your account has been created successfully.",
-        });
+        toast.success(t("registrationSuccessTitle"));
         form.reset();
       } else {
-        toast.error("Registration failed", {
-          description: result.error || "Something went wrong. Please try again.",
-        });
+        toast.error(t("registrationFailedTitle"));
       }
     },
-    onError: (error) => {
-      console.error("Registration error:", error);
-      toast.error("Registration failed", {
-        description: "An unexpected error occurred. Please try again.",
+    onError: () => {
+      toast.error(t("registrationFailedTitle"), {
+        description: t("registrationErrorDescription"),
       });
     },
   });
@@ -64,22 +62,26 @@ export default function RegisterForm() {
       city: "",
     },
   });
-
+  // Submit Function
   const onSubmit: SubmitHandler<RegisterFields> = async (values) => {
     console.log(values);
     registerMutation.mutate(values);
   };
 
   return (
-    <Card className="mx-auto w-full max-w-2xl">
-      <CardHeader>
+    <Card className="mx-auto w-full max-w-2xl bg-white">
+      <CardHeader className="sr-only">
         <CardTitle className="text-center text-2xl font-bold">{t("register")}</CardTitle>
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <form
+            dir={locale === "ar" ? "rtl" : "ltr"}
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-6"
+          >
             {/* Personal Information */}
-            <div className="space-y-4">
+            <div className="space-y-6">
               <FormField
                 control={form.control}
                 name="name"
@@ -87,7 +89,11 @@ export default function RegisterForm() {
                   <FormItem>
                     <FormLabel>{t("name")}</FormLabel>
                     <FormControl>
-                      <Input placeholder={t("name-placeholder")} {...field} />
+                      <Input
+                        className="border-[#F0EEF0]"
+                        placeholder={t("name-placeholder")}
+                        {...field}
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -108,35 +114,33 @@ export default function RegisterForm() {
                 )}
               />
 
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                <FormField
-                  control={form.control}
-                  name="password"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{t("password-label")}</FormLabel>
-                      <FormControl>
-                        <PasswordInput placeholder={t("password-placeholder")} {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("password-label")}</FormLabel>
+                    <FormControl>
+                      <PasswordInput placeholder={t("password-placeholder")} {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
 
-                <FormField
-                  control={form.control}
-                  name="confirmPassword"
-                  render={({ field }) => (
-                    <FormItem>
-                      <FormLabel>{t("confirm-password-label")}</FormLabel>
-                      <FormControl>
-                        <PasswordInput placeholder={t("confirm-password-placeholder")} {...field} />
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
-                  )}
-                />
-              </div>
+              <FormField
+                control={form.control}
+                name="confirmPassword"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>{t("confirm-password-label")}</FormLabel>
+                    <FormControl>
+                      <PasswordInput placeholder={t("confirm-password-placeholder")} {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
             </div>
 
             {/* Address Section */}
@@ -156,6 +160,7 @@ export default function RegisterForm() {
                           type="number"
                           min="1"
                           {...field}
+                          className="h-6"
                         />
                       </FormControl>
                       <FormMessage />
@@ -169,7 +174,13 @@ export default function RegisterForm() {
                   render={({ field }) => (
                     <FormItem>
                       <FormControl>
-                        <Input placeholder={t("floor-number")} type="number" min="1" {...field} />
+                        <Input
+                          className="h-6"
+                          placeholder={t("floor-number")}
+                          type="number"
+                          min="1"
+                          {...field}
+                        />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -183,6 +194,7 @@ export default function RegisterForm() {
                     <FormItem>
                       <FormControl>
                         <Input
+                          className="h-6"
                           placeholder={t("apartment-number")}
                           type="number"
                           min="1"
@@ -217,7 +229,7 @@ export default function RegisterForm() {
               </div> */}
             </div>
 
-            <Button className="w-full" type="submit" disabled={registerMutation.isPending}>
+            <Button className="w-full py-6" type="submit" disabled={registerMutation.isPending}>
               {registerMutation.isPending ? t("registering") : t("register")}
             </Button>
           </form>

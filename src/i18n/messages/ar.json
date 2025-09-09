@@ -53,6 +53,16 @@
     "address-placeholder": "أدخل عنوانك",
     "address-required": "العنوان مطلوب",
     "register": "تسجيل",
+    "select-location": "اختيار الموقع",
+    "login-signup": "تسجيل الدخول/الاشتراك",
+    "signup": "انشاء حساب",
+    "registering": "جاري التسجيل",
+    "registrationSuccessTitle": "تم التسجيل بنجاح!",
+    "registrationSuccessDescription": "تم إنشاء حسابك بنجاح.",
+    "registrationFailedTitle": "فشل التسجيل",
+    "registrationFailedDescription": "حدث خطأ ما. يرجى المحاولة مرة أخرى.",
+    "registrationErrorDescription": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.",
+    "logging-in": "جاري تسجيل الدخول"
     "select-location": "اختيار الموقع"
   },
   "profile-route": {
