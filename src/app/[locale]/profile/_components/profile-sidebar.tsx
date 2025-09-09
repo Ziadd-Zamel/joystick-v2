@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Cookies from "js-cookie";
 import { useState } from "react";
@@ -10,6 +9,7 @@ import { MdClose } from "react-icons/md";
 import { cn } from "@/lib/utils";
 import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
+import { Link } from "@/i18n/routing";
 
 interface ProfileLink {
   url: string;
@@ -24,8 +24,8 @@ const ProfilenavLinks: ProfileLink[] = [
     image: "/assets/icons/control-panel.svg",
   },
   {
-    url: "/profile/added-location",
-    title: "profile-route.added-location",
+    url: "/profile/added-locations",
+    title: "profile-route.added-locations",
     image: "/assets/icons/location.svg",
   },
   {
