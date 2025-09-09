@@ -57,5 +57,20 @@
     "address-required": "Address is required",
     "register": "Register",
     "select-location": "Select Location"
+  },
+  "profile-route": {
+    "main": "Profile",
+    "control-panel": "Control Panel",
+    "added-location": "Added Locations",
+    "previous-requests": "Previous Requests",
+    "favourite": "Favourites",
+    "maintenance": "Added Devices",
+    "contact-us": "Contact Us",
+    "help-center": "Help Center",
+    "store": "Store",
+    "devices": "Devices",
+    "shopping-cart": "Shopping Cart",
+    "added-devices": "Add Devices",
+    "repair-request": "Maintenance Request"
   }
 }

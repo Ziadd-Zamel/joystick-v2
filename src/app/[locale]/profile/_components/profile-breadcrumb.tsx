@@ -1,7 +1,6 @@
 "use client";
 import * as React from "react";
 import { GrFormPrevious } from "react-icons/gr";
-import { usePathname } from "next/navigation";
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -10,6 +9,7 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { usePathname } from "@/i18n/routing";
 
 interface SegmentMapping {
   [key: string]: string;
@@ -86,14 +86,14 @@ export default function ProfileBreadCrumbs({ maxWords = 4, className = "" }: Bre
   );
 
   return (
-    <div className={`mx-auto my-8 w-[82%] p-2 md:p-3 ${className}`}>
-      <div className="w-fit rounded-[30px] bg-[#EAFEF1] p-4">
+    <div className={`box-container mx-auto my-8 ${className}`}>
+      <div className="w-fit rounded-full bg-[#EAFEF1] p-4">
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbItem>
               <BreadcrumbLink
                 href="/"
-                className="text-muted-foreground hover:text-foreground font-['Tajawal,sans-serif'] no-underline"
+                className="text-muted-foreground hover:text-foreground no-underline"
               >
                 الرئيسية
               </BreadcrumbLink>
