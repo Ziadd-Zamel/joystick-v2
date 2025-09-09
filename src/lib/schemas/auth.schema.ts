@@ -4,7 +4,7 @@ import { z } from "zod";
 const phoneRegex = /^(\+?\d{10,15})$/;
 const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
-export const useForgetPasswordSchema = () => {
+export const useForgotPasswordSchema = () => {
   const t = useTranslations();
 
   return z.object({
@@ -17,7 +17,8 @@ export const useForgetPasswordSchema = () => {
   });
 };
 
-export type ForgetPasswordFields = z.infer<ReturnType<typeof useForgetPasswordSchema>>;
+export type ForgotPasswordFields = z.infer<ReturnType<typeof useForgotPasswordSchema>>;
+
 export const useChangePasswordSchema = () => {
   const t = useTranslations();
 
@@ -92,3 +93,37 @@ export const useRegisterSchema = () => {
 };
 
 export type RegisterFields = z.infer<ReturnType<typeof useRegisterSchema>>;
+
+export type OtpFields = {
+  phone: string;
+  otp: string;
+};
+
+export const useOtpSchema = () => {
+  const t = useTranslations("auth");
+
+  return z.object({
+    phone: z.string().min(1, { message: t("phone-required") }),
+    otp: z
+      .string()
+      .length(6, { message: t("otp-length") })
+      .regex(/^\d+$/, { message: t("otp-numbers-only") }),
+  });
+};
+
+export const useNewPasswordSchema = () => {
+  const t = useTranslations("auth");
+
+  return z
+    .object({
+      phone: z.string().min(1),
+      password: z.string().min(6, { message: t("password-min") }),
+      password_confirmation: z.string().min(1, { message: t("confirm-password-required") }),
+    })
+    .refine((data) => data.password === data.password_confirmation, {
+      message: t("passwords-not-match"),
+      path: ["password_confirmation"],
+    });
+};
+
+export type NewPasswordFields = z.infer<ReturnType<typeof useNewPasswordSchema>>;
