@@ -9,23 +9,20 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { ProfileSettingFormValues, profileSettingsSchema } from "@/lib/schemas/profile.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { useTranslations } from "next-intl";
+import { useForm } from "react-hook-form";
 
-const profileSettingsSchema = z.object({
-  name: z.string().min(1).optional(),
-  phoneNumber: z.string().min(1).optional(),
-});
-
-type ProfileSettingFormValues = z.infer<typeof profileSettingsSchema>;
-
-export default function ProfileSettingsForm() {
+export default function ProfileSettingsForm({ userData }: { userData: User }) {
   const t = useTranslations("profile-route");
 
   const form = useForm<ProfileSettingFormValues>({
     resolver: zodResolver(profileSettingsSchema),
+    defaultValues: {
+      name: userData.username,
+      phoneNumber: userData.phone,
+    },
   });
 
   function onSubmit(values: ProfileSettingFormValues) {

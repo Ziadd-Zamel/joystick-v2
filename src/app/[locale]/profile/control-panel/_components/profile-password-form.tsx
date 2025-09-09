@@ -9,28 +9,31 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { updateUserPassword } from "@/lib/actions/profile.actions";
+import { ProfilePasswordFormValues, profilePasswordSchema } from "@/lib/schemas/profile.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { useTranslations } from "next-intl";
-
-const profilePasswordSchema = z.object({
-  oldPassword: z.string().min(1).optional(),
-  newPassword: z.string().min(1).optional(),
-  confirmNewPassword: z.string().min(1).optional(),
-});
-
-type ProfilePasswordFormValues = z.infer<typeof profilePasswordSchema>;
+import { useForm } from "react-hook-form";
 
 export default function ProfilePasswordForm() {
   const t = useTranslations("profile-route");
 
   const form = useForm<ProfilePasswordFormValues>({
     resolver: zodResolver(profilePasswordSchema),
+    defaultValues: {
+      oldPassword: "",
+      newPassword: "",
+      confirmNewPassword: "",
+    },
   });
 
-  function onSubmit(values: ProfilePasswordFormValues) {
-    console.log(values);
+  async function onSubmit(values: ProfilePasswordFormValues) {
+    try {
+      const data = await updateUserPassword(values);
+      console.log("password data", data);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (

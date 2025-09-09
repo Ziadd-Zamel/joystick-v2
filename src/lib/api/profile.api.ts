@@ -1,4 +1,5 @@
 import Cookies from "js-cookie";
+import { ProfileEmailFormValues, ProfilePasswordFormValues } from "../schemas/profile.schema";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -84,7 +85,7 @@ export const updateUserEmail = async (email: string) => {
 };
 
 // Profile password actions
-export const updateUserPassword = async (values: string) => {
+export const updateUserPassword = async (values: ProfilePasswordFormValues) => {
   try {
     const token = Cookies.get("token");
     if (!token) {
@@ -111,17 +112,4 @@ export const updateUserPassword = async (values: string) => {
     console.error("Error Changing password", (error as Error).message);
     throw error;
   }
-};
-
-export const getUserDetails = async () => {
-  const response = await fetch(`${apiUrl}user/get-details`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${Cookies.get("token")}`,
-    },
-  });
-
-  const data = await response.json();
-  return data;
 };

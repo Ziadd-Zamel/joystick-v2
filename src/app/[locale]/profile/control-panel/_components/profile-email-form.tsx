@@ -9,26 +9,29 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { updateUserEmail } from "@/lib/actions/profile.actions";
+import { ProfileEmailFormValues, profileEmailSchema } from "@/lib/schemas/profile.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { z } from "zod";
 import { useTranslations } from "next-intl";
-
-const profileEmailSchema = z.object({
-  email: z.string().min(1).optional(),
-});
-
-type ProfileEmailFormValues = z.infer<typeof profileEmailSchema>;
+import { useForm } from "react-hook-form";
 
 export default function ProfileEmailForm() {
   const t = useTranslations("profile-route");
 
   const form = useForm<ProfileEmailFormValues>({
     resolver: zodResolver(profileEmailSchema),
+    defaultValues: {
+      email: "",
+    },
   });
 
-  function onSubmit(values: ProfileEmailFormValues) {
-    console.log(values);
+  async function onSubmit(values: ProfileEmailFormValues) {
+    try {
+      const payload = await updateUserEmail(values);
+      console.log("data", payload);
+    } catch (err) {
+      console.log(err);
+    }
   }
 
   return (
