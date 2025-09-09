@@ -2,13 +2,11 @@ import { forwardRef, useState } from "react";
 import { Input } from "@/components/ui/input";
 import { VscEye } from "react-icons/vsc";
 import { VscEyeClosed } from "react-icons/vsc";
-import { useTranslations } from "next-intl";
 
 export const PasswordInput = forwardRef<HTMLInputElement, React.ComponentProps<typeof Input>>(
   (props, ref) => {
     // State
     const [showPassword, setShowPassword] = useState(false);
-    const t = useTranslations();
 
     return (
       <div className="relative">
@@ -26,9 +24,7 @@ export const PasswordInput = forwardRef<HTMLInputElement, React.ComponentProps<t
           ) : (
             <VscEyeClosed className="h-6 w-6 text-gray-400" />
           )}
-          <span className="sr-only">
-            {showPassword ? t("auth.passwordInput.hide") : t("auth.passwordInput.show")}
-          </span>
+          <span className="sr-only">passwordInput</span>
         </button>
       </div>
     );

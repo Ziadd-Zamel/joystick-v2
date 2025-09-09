@@ -12,18 +12,19 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { LoginFields, useLoginSchema } from "@/lib/schemas/auth.schema";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { PasswordInput } from "./password-input";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { loginUser } from "@/lib/actions/auth.actions";
 import { useClientCookies } from "@/lib/utils/auth-cookies";
+import ForgotPasswordDialog from "./forget-password-flow";
 
 export default function LoginForm() {
   // Hooks
   const { login } = useClientCookies();
   const loginSchema = useLoginSchema();
-
+  const locale = useLocale();
   // Translations
   const t = useTranslations("auth");
 
@@ -63,17 +64,18 @@ export default function LoginForm() {
   return (
     <Form {...form}>
       <form
+        dir={locale === "ar" ? "rtl" : "ltr"}
         onSubmit={form.handleSubmit(onSubmit)}
         className="mx-auto flex w-full max-w-lg flex-col items-center justify-center sm:px-5"
       >
-        <div className="mt-16 w-full space-y-8">
+        <div className="mt-8 w-full space-y-8">
           {/**Phone Number */}
           <FormField
             control={form.control}
             name="phone"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel className="text-lg">{t("phone")}</FormLabel>
+                <FormLabel>{t("phone")}</FormLabel>
                 <FormControl>
                   <Input
                     className="border-[#F0EEF0]"
@@ -93,13 +95,9 @@ export default function LoginForm() {
             name="password"
             render={({ field }) => (
               <FormItem className="w-full">
-                <FormLabel className="text-lg">{t("password-label")}</FormLabel>
+                <FormLabel>{t("password-label")}</FormLabel>
                 <FormControl>
-                  <PasswordInput
-                    variant={"outline"}
-                    placeholder={t("password-placeholder")}
-                    {...field}
-                  />
+                  <PasswordInput variant={"outline"} placeholder={"******"} {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -109,9 +107,9 @@ export default function LoginForm() {
 
         {/**Action */}
         <div className="mt-3 flex w-full justify-end">
-          <p className="text-main text-end text-lg font-semibold">{t("forget-password")}</p>
+          <ForgotPasswordDialog />
         </div>
-        <Button className="mt-10 w-full py-4" type="submit" disabled={loginMutation.isPending}>
+        <Button className="mt-10 w-full py-7" type="submit" disabled={loginMutation.isPending}>
           {loginMutation.isPending ? t("logging-in") : t("login")}
         </Button>
       </form>
