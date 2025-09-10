@@ -23,7 +23,7 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { z } from "zod";
+import z from "zod";
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import AddLatLongMap from "./add-lat-long-map";
@@ -33,13 +33,31 @@ import { useState } from "react";
 import { Address } from "./added-address-list";
 
 export const userAddressSchema = z.object({
-  buildingNumber: z.any(),
-  apartmentNumber: z.any(),
-  floorNumber: z.any(),
-  addressType: z.any(),
-  latitude: z.any(),
-  longitude: z.any(),
-  address: z.any(),
+  buildingNumber: z.string().refine((val) => !isNaN(Number(val)) && Number(val) > 0, {
+    message: "Building number must be a valid positive number",
+  }),
+
+  apartmentNumber: z.string().refine((val) => !isNaN(Number(val)) && Number(val) >= 0, {
+    message: "Apartment number must be a valid number (0 or higher)",
+  }),
+
+  floorNumber: z.string().refine((val) => !isNaN(Number(val)) && Number(val) >= 0, {
+    message: "Floor number must be a valid number (0 or higher)",
+  }),
+
+  addressType: z.enum(["Home", "Work"]),
+
+  latitude: z
+    .number("Latitude must be a number")
+    .min(-90, "Latitude cannot be less than -90")
+    .max(90, "Latitude cannot be greater than 90"),
+
+  longitude: z
+    .number("Longitude must be a number")
+    .min(-180, "Longitude cannot be less than -180")
+    .max(180, "Longitude cannot be greater than 180"),
+
+  address: z.string("Address is required").min(5, "Address must be at least 5 characters long"),
 });
 
 export type UserAddressFormValues = z.infer<typeof userAddressSchema>;
@@ -58,12 +76,14 @@ export default function AddNewAddressDialog({
     resolver: zodResolver(userAddressSchema),
     defaultValues: address
       ? {
-          buildingNumber: address.building_number,
-          apartmentNumber: address.apartment_number,
-          floorNumber: address.floor_number,
-          addressType: address.key.slice(0, 1).toUpperCase().concat(address.key.slice(1)),
-          latitude: address.latitude,
-          longitude: address.longitude,
+          buildingNumber: address.building_number!,
+          apartmentNumber: address.apartment_number!,
+          floorNumber: address.floor_number!,
+          addressType: address.key.slice(0, 1).toUpperCase().concat(address.key.slice(1)) as
+            | "Home"
+            | "Work",
+          latitude: +address.latitude || 0,
+          longitude: +address.longitude || 0,
           address: address.address,
         }
       : {
@@ -71,8 +91,8 @@ export default function AddNewAddressDialog({
           apartmentNumber: "",
           floorNumber: "",
           addressType: "Home",
-          latitude: "",
-          longitude: "",
+          latitude: undefined,
+          longitude: undefined,
           address: "",
         },
   });
@@ -117,7 +137,7 @@ export default function AddNewAddressDialog({
                   <FormItem className="!space-y-1">
                     <FormLabel className="text-sm">Building Number</FormLabel>
                     <FormControl>
-                      <Input placeholder="Building Number" type="" {...field} />
+                      <Input placeholder="Building Number" type="number" {...field} />
                     </FormControl>
 
                     <FormMessage />
@@ -132,7 +152,7 @@ export default function AddNewAddressDialog({
                   <FormItem className="!space-y-1">
                     <FormLabel className="text-sm">Apartment Number</FormLabel>
                     <FormControl>
-                      <Input placeholder="Apartment Number" type="text" {...field} />
+                      <Input placeholder="Apartment Number" type="number" {...field} />
                     </FormControl>
 
                     <FormMessage />
@@ -148,7 +168,7 @@ export default function AddNewAddressDialog({
                 <FormItem className="!space-y-1">
                   <FormLabel className="text-sm">Floor Number</FormLabel>
                   <FormControl>
-                    <Input placeholder="Floor Number" type="text" {...field} />
+                    <Input placeholder="Floor Number" type="number" {...field} />
                   </FormControl>
 
                   <FormMessage />
@@ -191,7 +211,7 @@ export default function AddNewAddressDialog({
                   <FormItem className="!space-y-1">
                     <FormLabel className="text-sm">latitude</FormLabel>
                     <FormControl>
-                      <Input placeholder="latitude" type="text" {...field} />
+                      <Input placeholder="latitude" type="number" {...field} />
                     </FormControl>
 
                     <FormMessage />
@@ -206,7 +226,7 @@ export default function AddNewAddressDialog({
                   <FormItem className="!space-y-1">
                     <FormLabel className="text-sm">longitude</FormLabel>
                     <FormControl>
-                      <Input placeholder="longitude" type="text" {...field} />
+                      <Input placeholder="longitude" type="number" {...field} />
                     </FormControl>
 
                     <FormMessage />
@@ -230,6 +250,7 @@ export default function AddNewAddressDialog({
               )}
             />
 
+            {/* Google map */}
             <AddLatLongMap form={form} />
 
             <Button type="submit" className="self-start px-2">
