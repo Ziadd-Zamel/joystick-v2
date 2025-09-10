@@ -31,36 +31,38 @@ import { addNewAddress, updateAddress } from "@/lib/actions/profile.actions";
 import { useRouter } from "@/i18n/navigation";
 import { useState } from "react";
 import { Address } from "./added-address-list";
+import { useTranslations } from "next-intl";
 
-export const userAddressSchema = z.object({
-  buildingNumber: z.string().refine((val) => !isNaN(Number(val)) && Number(val) > 0, {
-    message: "Building number must be a valid positive number",
-  }),
+export const userAddressSchema = (t: TZodIntel) =>
+  z.object({
+    buildingNumber: z.string().refine((val) => !isNaN(Number(val)) && Number(val) > 0, {
+      message: t("building-number-error"),
+    }),
 
-  apartmentNumber: z.string().refine((val) => !isNaN(Number(val)) && Number(val) >= 0, {
-    message: "Apartment number must be a valid number (0 or higher)",
-  }),
+    apartmentNumber: z.string().refine((val) => !isNaN(Number(val)) && Number(val) > 0, {
+      message: t("apartment-number-error"),
+    }),
 
-  floorNumber: z.string().refine((val) => !isNaN(Number(val)) && Number(val) >= 0, {
-    message: "Floor number must be a valid number (0 or higher)",
-  }),
+    floorNumber: z.string().refine((val) => !isNaN(Number(val)) && Number(val) > 0, {
+      message: t("floor-number-error"),
+    }),
 
-  addressType: z.enum(["Home", "Work"]),
+    addressType: z.enum(["Home", "Work"]),
 
-  latitude: z
-    .number("Latitude must be a number")
-    .min(-90, "Latitude cannot be less than -90")
-    .max(90, "Latitude cannot be greater than 90"),
+    latitude: z
+      .number(t("latitude-number-error"))
+      .min(-90, t("latitude-min-error"))
+      .max(90, t("latitude-max-error")),
 
-  longitude: z
-    .number("Longitude must be a number")
-    .min(-180, "Longitude cannot be less than -180")
-    .max(180, "Longitude cannot be greater than 180"),
+    longitude: z
+      .number(t("longitude-number-error"))
+      .min(-180, t("longitude-min-error"))
+      .max(180, t("longitude-max-error")),
 
-  address: z.string("Address is required").min(5, "Address must be at least 5 characters long"),
-});
+    address: z.string(t("address-required-error")).min(5, t("address-min-error")),
+  });
 
-export type UserAddressFormValues = z.infer<typeof userAddressSchema>;
+export type UserAddressFormValues = z.infer<ReturnType<typeof userAddressSchema>>;
 
 export default function AddNewAddressDialog({
   children,
@@ -71,9 +73,10 @@ export default function AddNewAddressDialog({
 }) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
+  const t = useTranslations("profile-route");
 
   const form = useForm<UserAddressFormValues>({
-    resolver: zodResolver(userAddressSchema),
+    resolver: zodResolver(userAddressSchema(t)),
     defaultValues: address
       ? {
           buildingNumber: address.building_number!,
@@ -135,11 +138,10 @@ export default function AddNewAddressDialog({
                 name="buildingNumber"
                 render={({ field }) => (
                   <FormItem className="!space-y-1">
-                    <FormLabel className="text-sm">Building Number</FormLabel>
+                    <FormLabel className="text-sm">{t("building-number")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="Building Number" type="number" {...field} />
+                      <Input placeholder={t("building-number")} type="number" {...field} />
                     </FormControl>
-
                     <FormMessage />
                   </FormItem>
                 )}
@@ -150,11 +152,10 @@ export default function AddNewAddressDialog({
                 name="apartmentNumber"
                 render={({ field }) => (
                   <FormItem className="!space-y-1">
-                    <FormLabel className="text-sm">Apartment Number</FormLabel>
+                    <FormLabel className="text-sm">{t("apartment-number")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="Apartment Number" type="number" {...field} />
+                      <Input placeholder={t("apartment-number")} type="number" {...field} />
                     </FormControl>
-
                     <FormMessage />
                   </FormItem>
                 )}
@@ -166,11 +167,10 @@ export default function AddNewAddressDialog({
               name="floorNumber"
               render={({ field }) => (
                 <FormItem className="!space-y-1">
-                  <FormLabel className="text-sm">Floor Number</FormLabel>
+                  <FormLabel className="text-sm">{t("floor-number")}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Floor Number" type="number" {...field} />
+                    <Input placeholder={t("floor-number")} type="number" {...field} />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
@@ -181,23 +181,25 @@ export default function AddNewAddressDialog({
               name="addressType"
               render={({ field }) => (
                 <FormItem className="space-y-3">
-                  <FormLabel className="text-sm">Address Type</FormLabel>
+                  <FormLabel className="text-sm">{t("address-type")}</FormLabel>
                   <FormControl>
-                    <RadioGroup onValueChange={field.onChange} className="flex items-center gap-4">
+                    <RadioGroup
+                      onValueChange={field.onChange}
+                      className="flex items-center gap-4 rtl:flex-row-reverse"
+                    >
                       {[
-                        ["Home", "Home"],
-                        ["Work", "Work"],
-                      ].map((option, index) => (
+                        ["Home", t("home")],
+                        ["Work", t("work")],
+                      ].map(([value, label], index) => (
                         <FormItem className="flex items-center space-y-0 space-x-2" key={index}>
                           <FormControl>
-                            <RadioGroupItem checked={option[1] === field.value} value={option[1]} />
+                            <RadioGroupItem checked={value === field.value} value={value} />
                           </FormControl>
-                          <FormLabel className="m-0 text-sm font-medium">{option[0]}</FormLabel>
+                          <FormLabel className="m-0 text-sm font-medium">{label}</FormLabel>
                         </FormItem>
                       ))}
                     </RadioGroup>
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
@@ -209,11 +211,10 @@ export default function AddNewAddressDialog({
                 name="latitude"
                 render={({ field }) => (
                   <FormItem className="!space-y-1">
-                    <FormLabel className="text-sm">latitude</FormLabel>
+                    <FormLabel className="text-sm">{t("latitude")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="latitude" type="number" {...field} />
+                      <Input placeholder={t("latitude")} type="number" {...field} />
                     </FormControl>
-
                     <FormMessage />
                   </FormItem>
                 )}
@@ -224,11 +225,10 @@ export default function AddNewAddressDialog({
                 name="longitude"
                 render={({ field }) => (
                   <FormItem className="!space-y-1">
-                    <FormLabel className="text-sm">longitude</FormLabel>
+                    <FormLabel className="text-sm">{t("longitude")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="longitude" type="number" {...field} />
+                      <Input placeholder={t("longitude")} type="number" {...field} />
                     </FormControl>
-
                     <FormMessage />
                   </FormItem>
                 )}
@@ -240,11 +240,10 @@ export default function AddNewAddressDialog({
               name="address"
               render={({ field }) => (
                 <FormItem className="!space-y-1">
-                  <FormLabel className="text-sm">Address</FormLabel>
+                  <FormLabel className="text-sm">{t("address")}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Address" type="text" {...field} />
+                    <Input placeholder={t("address")} type="text" {...field} />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}

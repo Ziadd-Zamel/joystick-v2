@@ -16,10 +16,12 @@ import { deleteAddress } from "@/lib/actions/profile.actions";
 import { useState } from "react";
 import { BsTrash3 } from "react-icons/bs";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 export default function DeleteAddressDialog({ addressId }: { addressId: number }) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
+  const t = useTranslations("profile-route");
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
@@ -28,14 +30,11 @@ export default function DeleteAddressDialog({ addressId }: { addressId: number }
       </AlertDialogTrigger>
       <AlertDialogContent className="bg-white">
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-          <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your Address and remove it
-            from our servers.
-          </AlertDialogDescription>
+          <AlertDialogTitle>{t("delete-confirm-title")}</AlertDialogTitle>
+          <AlertDialogDescription>{t("delete-confirm-description")}</AlertDialogDescription>
         </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+        <AlertDialogFooter className="justify-self-start">
+          <AlertDialogCancel>{t("cancel")}</AlertDialogCancel>
           <form
             onSubmit={async (e) => {
               e.preventDefault();
@@ -50,7 +49,7 @@ export default function DeleteAddressDialog({ addressId }: { addressId: number }
               }
             }}
           >
-            <AlertDialogAction type="submit">Continue</AlertDialogAction>
+            <AlertDialogAction type="submit">{t("continue")}</AlertDialogAction>
           </form>
         </AlertDialogFooter>
       </AlertDialogContent>
