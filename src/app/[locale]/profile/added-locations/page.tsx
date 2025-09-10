@@ -2,6 +2,7 @@ import { Suspense } from "react";
 import AddNewAddressDialog from "./_components/add-new-address-dialog";
 import AddedAddressesList from "./_components/added-address-list";
 import AddressCardSkeleton from "./_components/address-card-skeleton";
+import Image from "next/image";
 
 export default async function Page() {
   return (
@@ -9,7 +10,9 @@ export default async function Page() {
       <header className="flex items-center justify-between border-b border-zinc-200 p-4">
         <h2 className="text-lg font-medium">Favorite address</h2>
         {/* Add new address dialog */}
-        <AddNewAddressDialog />
+        <AddNewAddressDialog>
+          <Image alt="add Icon" width={25} height={25} src={"/assets/icons/add-address.svg"} />
+        </AddNewAddressDialog>
       </header>
 
       {/* Profile form */}

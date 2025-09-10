@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 import { UseFormReturn } from "react-hook-form";
 import { UserAddressFormValues } from "./add-new-address-dialog";
+import { Skeleton } from "@/components/ui/skeleton";
 
 const containerStyle = {
   width: "100%",
@@ -75,7 +76,7 @@ export default function AddLatLongMap({ form, address }: AppMapProps) {
     }
   }, [address, isLoaded]);
 
-  if (!isLoaded) return <div>Loading map...</div>;
+  if (!isLoaded) return <Skeleton className="h-[200px] w-full"></Skeleton>;
 
   return (
     <GoogleMap

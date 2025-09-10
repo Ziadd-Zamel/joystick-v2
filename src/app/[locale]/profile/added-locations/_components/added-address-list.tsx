@@ -1,6 +1,7 @@
 import { fetchUserAddresses } from "@/lib/actions/profile.actions";
 import { BsTrash3 } from "react-icons/bs";
 import { FaPen } from "react-icons/fa";
+import AddNewAddressDialog from "./add-new-address-dialog";
 
 export type Address = {
   id: number;
@@ -27,7 +28,6 @@ export type Address = {
 
 export default async function AddedAddressesList() {
   const addresses: Address[] = await fetchUserAddresses();
-  console.log("user address", addresses);
 
   return (
     <div className="space-y-2 p-4">
@@ -38,11 +38,12 @@ export default async function AddedAddressesList() {
         >
           <div className="w-full space-y-5">
             <div className="flex justify-between">
-              <h3 className="text-xl font-medium">{address.key}</h3>
+              <h3 className="text-xl font-medium capitalize">{address.key}</h3>
               <div className="flex items-center justify-center gap-4">
-                <button>
+                <AddNewAddressDialog address={address}>
                   <FaPen className="text-main size-5" />
-                </button>
+                </AddNewAddressDialog>
+
                 <button>
                   <BsTrash3 className="text-main size-5" />
                 </button>

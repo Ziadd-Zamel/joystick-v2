@@ -27,9 +27,10 @@ import { z } from "zod";
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import AddLatLongMap from "./add-lat-long-map";
-import { addNewAddress } from "@/lib/actions/profile.actions";
+import { addNewAddress, updateAddress } from "@/lib/actions/profile.actions";
 import { useRouter } from "@/i18n/navigation";
 import { useState } from "react";
+import { Address } from "./added-address-list";
 
 export const userAddressSchema = z.object({
   buildingNumber: z.any(),
@@ -43,29 +44,52 @@ export const userAddressSchema = z.object({
 
 export type UserAddressFormValues = z.infer<typeof userAddressSchema>;
 
-export default function AddNewAddressDialog() {
+export default function AddNewAddressDialog({
+  children,
+  address,
+}: {
+  children: React.ReactNode;
+  address?: Address;
+}) {
   const [open, setOpen] = useState(false);
   const router = useRouter();
 
   const form = useForm<UserAddressFormValues>({
     resolver: zodResolver(userAddressSchema),
-    defaultValues: {
-      buildingNumber: "",
-      apartmentNumber: "",
-      floorNumber: "",
-      addressType: "home",
-      latitude: "",
-      longitude: "",
-      address: "",
-    },
+    defaultValues: address
+      ? {
+          buildingNumber: address.building_number,
+          apartmentNumber: address.apartment_number,
+          floorNumber: address.floor_number,
+          addressType: address.key.slice(0, 1).toUpperCase().concat(address.key.slice(1)),
+          latitude: address.latitude,
+          longitude: address.longitude,
+          address: address.address,
+        }
+      : {
+          buildingNumber: "",
+          apartmentNumber: "",
+          floorNumber: "",
+          addressType: "Home",
+          latitude: "",
+          longitude: "",
+          address: "",
+        },
   });
 
   async function onSubmit(values: UserAddressFormValues) {
+    console.log(values);
     try {
-      const data = await addNewAddress(values);
+      if (address) {
+        const data = await updateAddress(values, address.id);
+        console.log("address res data", data);
+        toast.success(data.message);
+      } else {
+        const data = await addNewAddress(values);
+        console.log("address res data", data);
+        toast.success(data.message);
+      }
 
-      console.log("address res data", data);
-      toast.success(data.message);
       router.refresh();
       setOpen(false);
     } catch (err) {
@@ -76,9 +100,7 @@ export default function AddNewAddressDialog() {
 
   return (
     <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger className="cursor-pointer">
-        <Image alt="add Icon" width={25} height={25} src={"/assets/icons/add-address.svg"} />
-      </DialogTrigger>
+      <DialogTrigger className="cursor-pointer">{children}</DialogTrigger>
       <DialogContent className="!max-w-2xl bg-white">
         <DialogHeader className="sr-only">
           <DialogTitle className="sr-only" />
@@ -143,11 +165,11 @@ export default function AddNewAddressDialog() {
                     <RadioGroup onValueChange={field.onChange} className="flex items-center gap-4">
                       {[
                         ["Home", "Home"],
-                        ["Work", "work"],
+                        ["Work", "Work"],
                       ].map((option, index) => (
                         <FormItem className="flex items-center space-y-0 space-x-2" key={index}>
                           <FormControl>
-                            <RadioGroupItem value={option[1]} />
+                            <RadioGroupItem checked={option[1] === field.value} value={option[1]} />
                           </FormControl>
                           <FormLabel className="m-0 text-sm font-medium">{option[0]}</FormLabel>
                         </FormItem>

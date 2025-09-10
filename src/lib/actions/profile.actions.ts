@@ -215,3 +215,43 @@ export const addNewAddress = async (values: UserAddressFormValues) => {
     throw error;
   }
 };
+
+export const updateAddress = async (values: UserAddressFormValues, addressId: number) => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("auth_token")?.value;
+
+  if (!token) {
+    throw new Error("Unauthorized: No token found");
+  }
+
+  try {
+    const res = await fetch(`${process.env.API}addresses-update/${addressId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        building_number: values.buildingNumber,
+        apartment_number: values.apartmentNumber,
+        floor_number: values.floorNumber,
+        key: values.addressType,
+        latitude: values.latitude,
+        longitude: values.longitude,
+        address: values.address,
+      }),
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      console.error("Error details:", errorData);
+      throw new Error(errorData.message || "Failed to update address");
+    }
+
+    const payload = res.json();
+
+    return payload;
+  } catch (err) {
+    throw err;
+  }
+};
