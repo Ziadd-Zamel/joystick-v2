@@ -1,7 +1,7 @@
 import { fetchUserAddresses } from "@/lib/actions/profile.actions";
-import { BsTrash3 } from "react-icons/bs";
 import { FaPen } from "react-icons/fa";
 import AddNewAddressDialog from "./add-new-address-dialog";
+import DeleteAddressDialog from "./delete-address-diallog";
 
 export type Address = {
   id: number;
@@ -38,18 +38,20 @@ export default async function AddedAddressesList() {
         >
           <div className="w-full space-y-5">
             <div className="flex justify-between">
+              {/* Address key / type */}
               <h3 className="text-xl font-medium capitalize">{address.key}</h3>
               <div className="flex items-center justify-center gap-4">
+                {/* Edit dialog */}
                 <AddNewAddressDialog address={address}>
                   <FaPen className="text-main size-5" />
                 </AddNewAddressDialog>
 
-                <button>
-                  <BsTrash3 className="text-main size-5" />
-                </button>
+                {/* Delete dialog */}
+                <DeleteAddressDialog addressId={address.id} />
               </div>
             </div>
             <div className="flex justify-between">
+              {/* full Address */}
               <p className="max-w-lg text-[#666666]">{address.address}</p>
             </div>
           </div>

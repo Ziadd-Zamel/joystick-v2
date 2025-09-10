@@ -255,3 +255,33 @@ export const updateAddress = async (values: UserAddressFormValues, addressId: nu
     throw err;
   }
 };
+
+export const deleteAddress = async (addressId: number) => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("auth_token")?.value;
+
+  if (!token) {
+    throw new Error("Unauthorized: No token found");
+  }
+
+  try {
+    const res = await fetch(`${process.env.API}addresses/${addressId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.message || "Failed to delete address");
+    }
+
+    const payload = await res.json();
+
+    return payload;
+  } catch (err) {
+    throw err;
+  }
+};

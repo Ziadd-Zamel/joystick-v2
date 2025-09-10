@@ -88,10 +88,11 @@ export default function AddNewAddressDialog({
         const data = await addNewAddress(values);
         console.log("address res data", data);
         toast.success(data.message);
+        form.reset();
       }
 
       router.refresh();
-      setOpen(false);
+      setTimeout(() => setOpen(false), 500);
     } catch (err) {
       console.log(err);
       toast.error((err as Error).message);
