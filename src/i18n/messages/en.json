@@ -97,6 +97,7 @@
     "password-change-failed": "Failed to change password. Please try again."
   },
   "profile-route": {
+    "profile": "Profile",
     "main": "Profile",
     "control-panel": "Control Panel",
     "added-location": "Added Locations",
@@ -110,6 +111,16 @@
     "shopping-cart": "Shopping Cart",
     "added-devices": "Add Devices",
     "repair-request": "Maintenance Request",
+    "profile-settings": "Profile Settings",
+    "name": "Name",
+    "phone-number": "Phone Number",
+    "save-changes": "Save Changes",
+    "profile-email": "Prifle Email",
+    "email": "Email",
+    "change-password": "Change Password",
+    "old-password": "Old Password",
+    "new-password": "New Password",
+    "confirm-new-password": "Confirm New Password",
     "logging-in": "Logining...",
     "forgot-password-title": "Password recovery",
     "send-otp": "Send OTP",
@@ -141,7 +152,8 @@
     "passwords-not-match": "Passwords do not match",
     "firstname-required": "Full name is required",
     "otp-length": "OTP must be exactly 6 digits",
-    "otp-numbers-only": "OTP must contain only numbers"
+    "otp-numbers-only": "OTP must contain only numbers",
+    "sign-out": "Sign Out"
   },
   "add-to-cart": "Add to cart",
   "available-quantity": "Available quantity:",

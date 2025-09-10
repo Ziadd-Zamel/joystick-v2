@@ -94,6 +94,7 @@
     "password-change-failed": "فشل في تغيير كلمة المرور. يرجى المحاولة مرة أخرى."
   },
   "profile-route": {
+    "profile": "الملف الشخصي",
     "main": "الملف الشخصي",
     "control-panel": "لوحة التحكم",
     "added-location": "العناوين المضافة",
@@ -108,6 +109,16 @@
     "confirm-request": "تأكيد الطلب",
     "added-devices": "إضافة أجهزة",
     "repair-request": "طلب صيانة",
+    "profile-settings": "إعدادات الملف الشخصي",
+    "name": "الاسم",
+    "phone-number": "رقم الهاتف",
+    "save-changes": "حفظ التغييرات",
+    "profile-email": "البريد الإلكتروني",
+    "email": "البريد الإلكتروني",
+    "change-password": "تغيير كلمة المرور",
+    "old-password": "كلمة المرور القديمة",
+    "new-password": "كلمة المرور الجديدة",
+    "confirm-new-password": "تأكيد كلمة المرور الجديدة",
     "logging-in": "جاري تسجيل الدخول",
     "forgot-password-title": "استعادة كلمة المرور",
     "send-otp": "إرسال رمز التحقق",
@@ -139,7 +150,8 @@
     "passwords-not-match": "كلمتا المرور غير متطابقتين",
     "firstname-required": "الاسم الكامل مطلوب",
     "otp-length": "يجب أن يتكون رمز التحقق من 6 أرقام",
-    "otp-numbers-only": "يجب أن يحتوي رمز التحقق على أرقام فقط"
+    "otp-numbers-only": "يجب أن يحتوي رمز التحقق على أرقام فقط",
+    "sign-out": "تسجيل الخروج"
   },
   "add-to-cart": "أضف الى العربة",
   "available-quantity": "الكمية المتاحة:",
