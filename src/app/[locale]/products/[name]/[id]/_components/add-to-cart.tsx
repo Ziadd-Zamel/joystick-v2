@@ -43,14 +43,13 @@ export default function AddToCart({
   // State
   const [quantity, setQuantity] = useState(1);
   const [selectedColor, setSelectedColor] = useState<string>(() => {
-    // Auto-select first color if only one available, otherwise no selection
+    // Auto-select first color if only one available
     return product.product_colors?.length === 1 ? product.product_colors[0].color : "";
   });
 
   // Handle color selection
   const handleColorSelect = (color: string) => {
     setSelectedColor(color);
-    // Reset quantity to 1 when color changes
     setQuantity(1);
   };
 
@@ -63,15 +62,15 @@ export default function AddToCart({
     return colorData?.quantity || 0;
   }, [selectedColor, product.product_colors]);
 
-  // Check if color is selected (for QuantitySelector)
+  // Check if color is selected
   const isColorSelected = selectedColor !== "";
 
-  // Get max quantity (either from selected color or general product quantity)
+  // Get max quantity
   const maxQuantity = useMemo(() => {
     if (product.product_colors?.length > 0) {
       return availableQuantity;
     }
-    return parseInt(product.quantity) || 50;
+    return parseInt(product.quantity) || 10;
   }, [availableQuantity, product.quantity, product.product_colors]);
 
   return (
@@ -100,7 +99,13 @@ export default function AddToCart({
           showAvailableText={true}
         />
 
-        <AddToCartButton isLogedin={isLogedin} productId={product.id} />
+        {/* Add to Cart Button */}
+        <AddToCartButton
+          isLogedin={isLogedin}
+          productId={product.id}
+          quantity={quantity}
+          selectedColor={selectedColor}
+        />
       </div>
     </div>
   );

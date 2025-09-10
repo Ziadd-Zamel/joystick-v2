@@ -26,7 +26,6 @@ export default function ColorSelector({
   label = "الألوان",
   size = "md",
   orientation = "horizontal",
-  showQuantity = false,
   className,
   disabled = false,
   colorSize = "md",
@@ -73,7 +72,7 @@ export default function ColorSelector({
           orientation === "vertical" ? "flex-col items-start" : "flex-row",
         )}
       >
-        {colors.map(({ color, quantity }) => (
+        {colors.map(({ color }) => (
           <label
             key={color}
             className={cn(
@@ -104,7 +103,6 @@ export default function ColorSelector({
               style={{ backgroundColor: color }}
               aria-label={`Select color ${color}`}
             />
-            {showQuantity && <span className="text-sm text-gray-600">({quantity} متاح)</span>}
             {orientation === "vertical" && (
               <span className="text-sm text-gray-700 capitalize">{color}</span>
             )}
