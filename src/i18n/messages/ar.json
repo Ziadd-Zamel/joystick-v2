@@ -99,7 +99,7 @@
     "control-panel": "لوحة التحكم",
     "added-locations": "العناوين المضافة",
     "previous-orders": "الطلبات السابقة",
-    "favourite": "المفضلة",
+    "favourites": "المفضلة",
     "added-devices": "الأجهزة المضافة",
     "contact-us": "تواصل معنا",
     "help-center": "مركز المساعدة",
@@ -183,7 +183,8 @@
     "order-date": "تاريخ الطلب",
     "full-price": "السعر الكامل",
 
-    "maintenance": "الصيانة"
+    "maintenance": "الصيانة",
+    "format-currency": "{value, number, currency-float}"
   },
   "add-to-cart": "أضف الى العربة",
   "available-quantity": "الكمية المتاحة:",

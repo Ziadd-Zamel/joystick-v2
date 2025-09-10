@@ -102,7 +102,7 @@
     "control-panel": "Control Panel",
     "added-locations": "Added Locations",
     "previous-orders": "Previous Orders",
-    "favourite": "Favourites",
+    "favourites": "Favourites",
     "added-devices": "Added Devices",
     "contact-us": "Contact Us",
     "help-center": "Help Center",
@@ -184,7 +184,8 @@
     "status": "Status",
     "order-date": "Order Date",
     "full-price": "Full Price",
-    "maintenance": "Maintenance"
+    "maintenance": "Maintenance",
+    "format-currency": "{value, number, currency-float}"
   },
   "add-to-cart": "Add to cart",
   "available-quantity": "Available quantity:",

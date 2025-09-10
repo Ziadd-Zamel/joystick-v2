@@ -29,8 +29,8 @@ const ProfilenavLinks = [
     icon: ShoppingCart,
   },
   {
-    url: "/profile/favourite",
-    title: "profile-route.favourite",
+    url: "/profile/favourites",
+    title: "profile-route.favourites",
     icon: Heart,
   },
   {

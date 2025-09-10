@@ -2,8 +2,8 @@ import { cn } from "@/lib/utils";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useTranslations } from "next-intl";
-import PrevOrdersTable from "./prev-orders-store-table";
-import PrevOrdersMaintenanceTable from "./prev-orders-maintenance-table";
+import PrevOrdersTable from "./_components/prev-orders-store-table";
+import PrevOrdersMaintenanceTable from "./_components/prev-orders-maintenance-table";
 
 export default function Page() {
   const t = useTranslations("profile-route");
