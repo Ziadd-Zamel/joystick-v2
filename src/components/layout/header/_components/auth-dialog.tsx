@@ -13,13 +13,28 @@ import NewPasswordForm from "@/components/auth/reset-password-form";
 // Authentication views/steps
 type AuthView = "auth" | "forgot" | "otp" | "new-password";
 
-export default function AuthDialog() {
-  // State
-  const [open, setOpen] = useState(false);
+type AuthDialogProps = {
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  showTrigger?: boolean;
+};
+
+export default function AuthDialog({
+  open: externalOpen,
+  onOpenChange: externalOnOpenChange,
+  showTrigger = true,
+}: AuthDialogProps = {}) {
+  // State - use internal state if no external control is provided
+  const [internalOpen, setInternalOpen] = useState(false);
   const [view, setView] = useState<AuthView>("auth");
   const [phoneNumber, setPhoneNumber] = useState("01091732409");
+
   // Translations
   const t = useTranslations("auth");
+
+  // Use external state if provided, otherwise use internal state
+  const isOpen = externalOpen !== undefined ? externalOpen : internalOpen;
+  const setOpen = externalOnOpenChange !== undefined ? externalOnOpenChange : setInternalOpen;
 
   // Handler to initiate forgot password
   const handleForgotPassword = () => {
@@ -38,6 +53,14 @@ export default function AuthDialog() {
     // Reset view to default after dialog closes
     setTimeout(() => {
       setView("auth");
+    }, 500);
+  };
+
+  const handleOpenChange = (newOpen: boolean) => {
+    setOpen(newOpen);
+    // Reset view to default when dialog closes
+    setTimeout(() => {
+      if (!newOpen) setView("auth");
     }, 500);
   };
 
@@ -100,22 +123,15 @@ export default function AuthDialog() {
 
   // Main component render
   return (
-    <Dialog
-      open={open}
-      onOpenChange={async (newOpen) => {
-        setOpen(newOpen);
-        // Reset view to default when dialog closes
-        setTimeout(() => {
-          if (!newOpen) setView("auth");
-        }, 500);
-      }}
-    >
-      {/* Dialog trigger button */}
-      <DialogTrigger asChild>
-        <Button variant={"outline"} className="rounded py-1.5 text-sm md:text-base">
-          {t("login-signup")}
-        </Button>
-      </DialogTrigger>
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
+      {/* Dialog trigger button - only show if showTrigger is true */}
+      {showTrigger && (
+        <DialogTrigger asChild>
+          <Button variant={"outline"} className="rounded py-1.5 text-sm md:text-base">
+            {t("login-signup")}
+          </Button>
+        </DialogTrigger>
+      )}
 
       {/* Dialog content container*/}
       <DialogContent className="min-h-fit !max-w-md bg-white p-0 pb-4">
