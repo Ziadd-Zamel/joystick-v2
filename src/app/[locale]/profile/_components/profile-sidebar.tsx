@@ -1,16 +1,16 @@
 "use client";
+import { Link } from "@/i18n/routing";
+import { cn } from "@/lib/utils";
+import Cookies from "js-cookie";
+import { Heart, Layers, MapPinned, ShoppingCart } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
-import Cookies from "js-cookie";
 import { useState } from "react";
+import { BiJoystick } from "react-icons/bi";
 import { FaBars } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
-import { cn } from "@/lib/utils";
-import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
-import { Link } from "@/i18n/routing";
-import { Heart, Layers, MapPinned, ShoppingCart } from "lucide-react";
-import { BiJoystick, BiPhoneCall } from "react-icons/bi";
 
 const ProfilenavLinks = [
   {
@@ -37,11 +37,6 @@ const ProfilenavLinks = [
     url: "/profile/added-devices",
     title: "profile-route.added-devices",
     icon: BiJoystick,
-  },
-  {
-    url: "/profile/contact-us",
-    title: "profile-route.contact-us",
-    icon: BiPhoneCall,
   },
 ];
 
