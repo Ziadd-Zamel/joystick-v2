@@ -7,7 +7,7 @@ export default async function SlidesAndLatestProducts() {
   const payload = await getHome();
   return (
     <>
-      <Slides data={payload?.data?.banners} />
+      <Slides />
       <LatestProducts products={payload?.data?.products} />
     </>
   );

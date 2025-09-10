@@ -9,8 +9,8 @@ export default function NoDataAnimation() {
         src="/assets/animations/empty.lottie"
         loop
         autoplay
-        width={200}
-        height={250}
+        width={150}
+        height={150}
       />
     </div>
   );
