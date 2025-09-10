@@ -5,7 +5,7 @@ const phoneRegex = /^(\+?\d{10,15})$/;
 const strongPasswordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
 
 export const useForgotPasswordSchema = () => {
-  const t = useTranslations();
+  const t = useTranslations("auth");
 
   return z.object({
     phone: z
@@ -20,7 +20,7 @@ export const useForgotPasswordSchema = () => {
 export type ForgotPasswordFields = z.infer<ReturnType<typeof useForgotPasswordSchema>>;
 
 export const useChangePasswordSchema = () => {
-  const t = useTranslations();
+  const t = useTranslations("auth");
 
   return z
     .object({
@@ -53,7 +53,7 @@ export const useLoginSchema = () => {
 export type LoginFields = z.infer<ReturnType<typeof useLoginSchema>>;
 
 export const useProfileSchema = () => {
-  const t = useTranslations();
+  const t = useTranslations("auth");
 
   return z.object({
     fullName: z.string().min(1, { message: t("firstname-required") }),

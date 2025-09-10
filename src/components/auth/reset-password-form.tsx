@@ -21,7 +21,13 @@ import { NewPasswordFields, useNewPasswordSchema } from "@/lib/schemas/auth.sche
 import { confirmNewPassword } from "@/lib/actions/auth.actions";
 import { PasswordInput } from "./password-input";
 
-export default function NewPasswordForm() {
+export default function NewPasswordForm({
+  onComplete,
+  phoneNumber,
+}: {
+  onComplete: () => void;
+  phoneNumber: string;
+}) {
   const t = useTranslations("auth");
   const schema = useNewPasswordSchema();
 
@@ -31,7 +37,7 @@ export default function NewPasswordForm() {
     mutationFn: confirmNewPassword,
     onSuccess: () => {
       toast.success(t("password-changed"));
-      localStorage.removeItem("phone");
+      onComplete();
     },
     onError: () => {
       toast.error(t("password-change-failed"));
@@ -53,49 +59,49 @@ export default function NewPasswordForm() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="w-[300px] md:min-w-[380px]">
-        <h2 className="mb-4 flex justify-center border-b-2 py-3 text-center text-lg font-medium">
+      <form
+        onSubmit={form.handleSubmit(onSubmit)}
+        className="mx-auto flex w-full max-w-lg flex-col items-center justify-center"
+      >
+        <h2 className="mb-6 flex w-full justify-center border-b-2 py-3 text-center text-2xl font-medium">
           {t("reset-password")}
         </h2>
+        <div className="w-full px-3 pb-4 sm:px-8">
+          <p className="mt-5 mb-3 w-full items-start font-medium">
+            {t("retrieve-repasword")} <span className="text-xs text-[#02A09B]"> {phoneNumber}</span>
+          </p>
+          <div className="w-full space-y-6">
+            {/* Password */}
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("password")}</FormLabel>
+                  <FormControl>
+                    <PasswordInput placeholder={t("enter-password")} {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-        <div className="space-y-4 p-5">
-          <h2 className="text-md text-center font-medium">{t("reset-password-instructions")}</h2>
-
-          {/* Password */}
-          <FormField
-            control={form.control}
-            name="password"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t("password")}</FormLabel>
-                <FormControl>
-                  <PasswordInput placeholder={t("enter-password")} {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          {/* Password Confirmation */}
-          <FormField
-            control={form.control}
-            name="password_confirmation"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>{t("confirm-password")}</FormLabel>
-                <FormControl>
-                  <PasswordInput placeholder={t("re-enter-password")} {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <Button
-            type="submit"
-            className="flex w-full items-center justify-center py-3"
-            disabled={mutation.isPending}
-          >
+            {/* Password Confirmation */}
+            <FormField
+              control={form.control}
+              name="password_confirmation"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>{t("confirm-password")}</FormLabel>
+                  <FormControl>
+                    <PasswordInput placeholder={t("re-enter-password")} {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <Button className="mt-6 w-full py-6" type="submit" disabled={mutation.isPending}>
             {mutation.isPending ? <VscLoading className="animate-spin text-lg" /> : t("confirm")}
           </Button>
         </div>

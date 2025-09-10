@@ -1,6 +1,8 @@
 "use client";
-import * as React from "react";
-import { GrFormPrevious } from "react-icons/gr";
+
+import { House } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+
 import {
   Breadcrumb,
   BreadcrumbItem,
@@ -9,113 +11,72 @@ import {
   BreadcrumbPage,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { usePathname } from "@/i18n/routing";
+import { Link, usePathname } from "@/i18n/navigation";
+import { cn } from "@/lib/utils";
 
-interface SegmentMapping {
-  [key: string]: string;
-}
-
-interface BreadcrumbProps {
-  maxWords?: number;
-  className?: string;
-}
-
-const segmentMapping: SegmentMapping = {
-  profile: "الملف الشخصي",
-  "control-panel": "لوحة التحكم",
-  "added-location": "العناوين المضافة",
-  "previous-requests": "الطلبات السابقة",
-  "contuct-us": "تواصل معنا",
-  favourite: "المفضلة",
-  maintenance: "صيانة",
-  "help-center": "مركز المساعدة",
-  store: "المتجر",
-  devices: "الأجهزه",
-  "shopping-cart": "عربة التسوق",
-  "confirm-request": "تأكيد الطلب",
-  "added-devices": " اضافة أجهزة",
-  "repair-request": "طلب صيانة",
-};
-
-const shouldSkipSegment = (segment: string): boolean => {
-  return segment === "profile" || segment === "store";
-};
-
-const limitWords = (text: string, maxWords = 4): string => {
-  return text.split(" ").slice(0, maxWords).join(" ");
-};
-
-export default function ProfileBreadCrumbs({ maxWords = 4, className = "" }: BreadcrumbProps) {
+export default function ProfileBreadCrumbs() {
+  // Hooks
   const pathname = usePathname();
-  const pathSegments: string[] = pathname.split("/").filter(Boolean);
+  const locale = useLocale();
+  const t = useTranslations("profile-route");
 
-  const breadcrumbItems: (React.ReactElement | null)[] = pathSegments.map(
-    (segment: string, index: number) => {
-      if (!isNaN(Number(segment))) return null;
+  // Helpers
+  const isDynamicSegment = (segment: string) =>
+    /^[0-9]+$/.test(segment) || /^[a-f0-9]{24}$/i.test(segment);
 
-      const decodedSegment: string = decodeURIComponent(segment);
+  // Get the segments
+  const pathSegments = pathname.split("/").filter((segment) => segment);
 
-      if (shouldSkipSegment(decodedSegment)) return null;
-
-      const translatedSegment: string = segmentMapping[decodedSegment] || decodedSegment;
-      const limitedWords: string = limitWords(translatedSegment, maxWords);
-      const href: string = "/" + pathSegments.slice(0, index + 1).join("/");
-      const isLast: boolean = index === pathSegments.length - 1;
-
-      return isLast ? (
-        <BreadcrumbItem key={index}>
-          <BreadcrumbPage className="text-foreground font-['Tajawal,sans-serif']">
-            {limitedWords}
-          </BreadcrumbPage>
-        </BreadcrumbItem>
-      ) : (
-        <BreadcrumbItem key={index}>
-          <BreadcrumbLink
-            href={href}
-            className="text-muted-foreground hover:text-foreground font-['Tajawal,sans-serif'] no-underline"
-          >
-            {limitedWords}
-          </BreadcrumbLink>
-        </BreadcrumbItem>
-      );
-    },
-  );
-
-  const filteredBreadcrumbItems: React.ReactElement[] = breadcrumbItems.filter(
-    (breadcrumb): breadcrumb is React.ReactElement => breadcrumb !== null,
-  );
+  // Build the breadcrumb items
+  const breadcrumbs = pathSegments.map((segment, index) => {
+    const href = "/" + pathSegments.slice(0, index + 1).join("/");
+    const labelKey = decodeURIComponent(segment);
+    return { labelKey, href };
+  });
 
   return (
-    <div className={`box-container mx-auto my-8 ${className}`}>
+    <div className="box-container mx-auto my-8">
       <div className="w-fit rounded-full bg-[#EAFEF1] p-4">
         <Breadcrumb>
           <BreadcrumbList>
+            {/* Home */}
             <BreadcrumbItem>
               <BreadcrumbLink
-                href="/"
+                asChild
                 className="text-muted-foreground hover:text-foreground no-underline"
               >
-                الرئيسية
+                <Link href="/">
+                  <House className="text-brand size-5" />
+                </Link>
               </BreadcrumbLink>
             </BreadcrumbItem>
 
-            {filteredBreadcrumbItems.length > 0 && (
-              <>
-                <BreadcrumbSeparator>
-                  <GrFormPrevious />
-                </BreadcrumbSeparator>
-                {filteredBreadcrumbItems.map((item: React.ReactElement, index: number) => (
-                  <React.Fragment key={index}>
-                    {item}
-                    {index < filteredBreadcrumbItems.length - 1 && (
-                      <BreadcrumbSeparator>
-                        <GrFormPrevious />
-                      </BreadcrumbSeparator>
+            {breadcrumbs.map((crumb, index) => {
+              const isLast = index === breadcrumbs.length - 1;
+              const isDynamic = isDynamicSegment(crumb.labelKey);
+
+              return (
+                <div key={crumb.href} className="flex items-center">
+                  <BreadcrumbSeparator
+                    className={cn(locale === "ar" ? "rotate-180" : "rotate-0")}
+                  />
+                  <BreadcrumbItem className="ps-2">
+                    {isLast ? (
+                      <BreadcrumbPage className="text-foreground font-['Tajawal,sans-serif']">
+                        {isDynamic ? crumb.labelKey : t(crumb.labelKey)}
+                      </BreadcrumbPage>
+                    ) : (
+                      <BreadcrumbLink
+                        asChild
+                        className="text-muted-foreground hover:text-foreground font-['Tajawal,sans-serif'] no-underline"
+                      >
+                        <p>{isDynamic ? crumb.labelKey : t(crumb.labelKey)}</p>
+                      </BreadcrumbLink>
                     )}
-                  </React.Fragment>
-                ))}
-              </>
-            )}
+                  </BreadcrumbItem>
+                </div>
+              );
+            })}
           </BreadcrumbList>
         </Breadcrumb>
       </div>

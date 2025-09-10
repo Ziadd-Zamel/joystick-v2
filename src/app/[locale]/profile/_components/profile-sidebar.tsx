@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import Image from "next/image";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Cookies from "js-cookie";
 import { useState } from "react";
@@ -9,12 +8,47 @@ import { FaBars } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
 import { cn } from "@/lib/utils";
 import { useLocale, useTranslations } from "next-intl";
+import { toast } from "sonner";
+import { Link } from "@/i18n/routing";
 
 interface ProfileLink {
   url: string;
   title: string;
   image: string;
 }
+
+const ProfilenavLinks: ProfileLink[] = [
+  {
+    url: "/profile/control-panel",
+    title: "profile-route.control-panel",
+    image: "/assets/icons/control-panel.svg",
+  },
+  {
+    url: "/profile/added-locations",
+    title: "profile-route.added-locations",
+    image: "/assets/icons/location.svg",
+  },
+  {
+    url: "/profile/previous-requests",
+    title: "profile-route.previous-requests",
+    image: "/assets/icons/ShoppingCartSimple.svg",
+  },
+  {
+    url: "/profile/favourite",
+    title: "profile-route.favourite",
+    image: "/assets/icons/favourites.svg",
+  },
+  {
+    url: "/profile/maintenance",
+    title: "profile-route.maintenance",
+    image: "/assets/icons/joy.svg",
+  },
+  {
+    url: "/profile/contact-us",
+    title: "profile-route.contact-us",
+    image: "/assets/icons/phone.svg",
+  },
+];
 
 const ProfileSideBar = () => {
   // Translation
@@ -28,43 +62,9 @@ const ProfileSideBar = () => {
   // Navigation
   const pathName = usePathname();
 
-  // Variables
-  const ProfilenavLinks: ProfileLink[] = [
-    {
-      url: "/profile/control-panel",
-      title: t("profile-route.control-panel"),
-      image: "/assets/icons/control-panel.svg",
-    },
-    {
-      url: "/profile/added-location",
-      title: t("profile-route.added-location"),
-      image: "/assets/icons/location.svg",
-    },
-    {
-      url: "/profile/previous-requests",
-      title: t("profile-route.previous-requests"),
-      image: "/assets/icons/ShoppingCartSimple.svg",
-    },
-    {
-      url: "/profile/favourite",
-      title: t("profile-route.favourite"),
-      image: "/assets/icons/favourites.svg",
-    },
-    {
-      url: "/profile/maintenance",
-      title: t("profile-route.maintenance"),
-      image: "/assets/icons/joy.svg",
-    },
-    {
-      url: "/profile/contact-us",
-      title: t("profile-route.contact-us"),
-      image: "/assets/icons/phone.svg",
-    },
-  ];
-
   const handleLogout = async () => {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    const token = Cookies.get("token");
+    const token = Cookies.get("auth_token");
 
     if (!token) {
       console.error("Unauthorized: No token found");
@@ -72,22 +72,22 @@ const ProfileSideBar = () => {
     }
 
     try {
-      const response = await fetch(`${apiUrl}user/logout`, {
+      const res = await fetch(`${apiUrl}user/logout`, {
         method: "POST",
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
 
-      if (response.ok) {
-        Cookies.remove("token");
-        window.location.reload();
-      } else {
-        console.error("فشل تسجيل الخروج");
+      if (!res.ok) {
+        throw new Error("Error Logging out");
       }
-    } catch (error) {
-      console.error("خطأ أثناء تسجيل الخروج:", error);
+
+      Cookies.remove("auth_token");
+      window.location.href = "/";
+    } catch (err) {
+      console.error("Error", err);
+      toast.error((err as Error).message);
     }
   };
 
@@ -144,7 +144,7 @@ const ProfileSideBar = () => {
                       }`}
                     />
                   )}
-                  <span>{link.title}</span>
+                  <span>{t(link.title)}</span>
                 </div>
               </Link>
             </li>
@@ -154,7 +154,7 @@ const ProfileSideBar = () => {
         <div className="hidden lg:flex lg:flex-col lg:justify-end" onClick={handleLogout}>
           <li className="lg:text-md hover:bg-main mb-4 flex w-full cursor-pointer items-center gap-2 p-2 py-4 text-lg font-semibold hover:text-white">
             <Image width={22} height={0} src={"/assets/icons/sign-out.svg"} alt="sign out" />
-            تسجيل الخروج
+            {t("profile-route.sign-out")}
           </li>
         </div>
 
@@ -163,12 +163,11 @@ const ProfileSideBar = () => {
           className="flex flex-col justify-end lg:hidden"
           onClick={() => {
             handleLogout();
-            setIsOpen(false); // Close sidebar on logout
           }}
         >
           <li className="hover:bg-main mb-4 flex w-full cursor-pointer items-center gap-2 p-2 py-4 text-lg font-semibold hover:text-white">
             <Image width={22} height={0} src={"/assets/icons/sign-out.svg"} alt="sign out" />
-            تسجيل الخروج
+            {t("sign-out")}
           </li>
         </div>
       </div>

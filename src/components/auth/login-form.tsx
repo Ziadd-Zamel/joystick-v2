@@ -18,9 +18,14 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { loginUser } from "@/lib/actions/auth.actions";
 import { useClientCookies } from "@/lib/utils/auth-cookies";
-import ForgotPasswordDialog from "./forget-password-flow";
 
-export default function LoginForm() {
+export default function LoginForm({
+  setOpen,
+  onForgotPassword,
+}: {
+  setOpen: (open: boolean) => void;
+  onForgotPassword?: () => void;
+}) {
   // Hooks
   const { login } = useClientCookies();
   const loginSchema = useLoginSchema();
@@ -36,8 +41,9 @@ export default function LoginForm() {
         description: "Welcome back!",
       });
 
-      // Save user data to cookies
       login(data.data);
+      setOpen(false);
+      window.location.reload();
     },
     onError: () => {
       toast.error("Login failed", {
@@ -107,7 +113,14 @@ export default function LoginForm() {
 
         {/**Action */}
         <div className="mt-3 flex w-full justify-end">
-          <ForgotPasswordDialog />
+          <Button
+            type="button"
+            onClick={onForgotPassword}
+            variant="link"
+            className="p-0 text-sm text-[#02A09B] hover:underline"
+          >
+            {t("forget-password")}
+          </Button>
         </div>
         <Button className="mt-10 w-full py-7" type="submit" disabled={loginMutation.isPending}>
           {loginMutation.isPending ? t("logging-in") : t("login")}
