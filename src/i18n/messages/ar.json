@@ -151,22 +151,6 @@
     "firstname-required": "الاسم الكامل مطلوب",
     "otp-length": "يجب أن يتكون رمز التحقق من 6 أرقام",
     "otp-numbers-only": "يجب أن يحتوي رمز التحقق على أرقام فقط",
-    "sign-out": "تسجيل الخروج"
-  },
-  "add-to-cart": "أضف الى العربة",
-  "available-quantity": "الكمية المتاحة:",
-  "colors": "الألوان",
-  "please-select-color-first": "الرجاء تحديد لون أولا",
-  "product-added": "تمت اضافت المنتج إلى السلة",
-  "unauthenticated-please-login-first": "أنت غير مسجل الدخول. يرجى تسجيل الدخول أولاً",
-  "Failed-add": "فشل في إضافة المنتج",
-  "my-account": "حسابي",
-  "log-out": "تسجيل الخروج",
-  "my-profile": "الحساب الشخصي",
-  "cart": {
-    "title": "سلة التسوق فارغة",
-    "description": "يبدو أنك لم تضف أي منتجات إلى سلة التسوق بعد. ابدأ التسوق الآن لملئها!",
-    "button": "متابعة التسوق",
     "sign-out": "تسجيل الخروج",
     "building-number": "رقم المبنى",
     "apartment-number": "رقم الشقة",
@@ -194,5 +178,21 @@
     "longitude-max-error": "لا يمكن أن يكون خط الطول أكبر من 180",
     "address-required-error": "العنوان مطلوب",
     "address-min-error": "يجب أن يكون العنوان 5 أحرف على الأقل"
+  },
+  "add-to-cart": "أضف الى العربة",
+  "available-quantity": "الكمية المتاحة:",
+  "colors": "الألوان",
+  "please-select-color-first": "الرجاء تحديد لون أولا",
+  "product-added": "تمت اضافت المنتج إلى السلة",
+  "unauthenticated-please-login-first": "أنت غير مسجل الدخول. يرجى تسجيل الدخول أولاً",
+  "Failed-add": "فشل في إضافة المنتج",
+  "my-account": "حسابي",
+  "log-out": "تسجيل الخروج",
+  "my-profile": "الحساب الشخصي",
+  "cart": {
+    "title": "سلة التسوق فارغة",
+    "description": "يبدو أنك لم تضف أي منتجات إلى سلة التسوق بعد. ابدأ التسوق الآن لملئها!",
+    "button": "متابعة التسوق",
+    "sign-out": "تسجيل الخروج"
   }
 }

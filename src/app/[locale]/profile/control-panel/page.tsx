@@ -6,8 +6,6 @@ import { getUserDetails } from "@/lib/actions/profile.actions";
 export default async function Page() {
   const userData = await getUserDetails();
 
-  console.log("userdata", userData);
-
   if (!userData) return <p className="font-xl text-center text-red-500"> User Not Found</p>;
 
   return (
