@@ -2,35 +2,33 @@
 
 import { getAuthToken } from "@/lib/utils/get-auth-token";
 import { getTranslations } from "next-intl/server";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, revalidateTag } from "next/cache";
+import { getToken } from "../utils/server-cookies";
 
-export async function addToCart(productId: number) {
-  const token = await getAuthToken();
+export async function addToCart(productId: number, selectedColor?: string, quantity: number = 1) {
+  const token = await getToken();
   const t = await getTranslations();
 
   if (!token) {
     return { status: false, message: t("unauthenticated-please-login-first"), data: null };
   }
 
-  // Add authorization header to the FormData by creating a new request
-  const response = await fetch(`${process.env.API}/client/addProductToCart`, {
+  const response = await fetch(`${process.env.API}carts`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-      Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjbGllbnRJZCI6NSwiY2xpZW50RnVsbE5hbWUiOiJtb3N0YWZhIiwiY2xpZW50Q2l0eSI6ImNhaXJvIiwiaWF0IjoxNzUwNTE4NjcyLCJleHAiOjE3NTkwNzIyNzJ9.4j_oGZbBrqljKCxcoG6IJzPJxv9gcCiI7IpjyhMIQ3M`,
+      Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ productId }),
+    body: JSON.stringify({ product_id: productId, quantity: quantity, color: selectedColor }),
   });
 
-  const result = await response.json();
-
   if (!response.ok) {
-    console.log("Result: ", result);
     const errorData = await response.json().catch(() => ({}));
-    throw new Error(errorData.message || "Failed to add the product.");
+    throw new Error(errorData.message || t("Failed-add"));
   }
 
-  // const result = await response.json();
+  revalidateTag("cart");
+  const result = await response.json();
   return result;
 }
 

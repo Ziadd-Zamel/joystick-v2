@@ -14,12 +14,18 @@ type AddToCartButtonProps = {
   className?: string;
   productId: number;
   isLogedin?: boolean;
+  quantity?: number;
+  selectedColor?: string;
+  requiresColor?: boolean;
 };
 
 export default function AddToCartButton({
   productId,
   className,
   isLogedin = false,
+  quantity = 1,
+  selectedColor,
+  requiresColor = false,
 }: AddToCartButtonProps) {
   // Translations
   const t = useTranslations();
@@ -29,7 +35,15 @@ export default function AddToCartButton({
 
   // Mutations
   const addProductToCart = useMutation({
-    mutationFn: (productId: number) => addToCart(productId),
+    mutationFn: ({
+      productId,
+      selectedColor,
+      quantity,
+    }: {
+      productId: number;
+      selectedColor?: string;
+      quantity: number;
+    }) => addToCart(productId, selectedColor, quantity),
     onSuccess: () => {
       toast.success(t("product-added"));
     },
@@ -41,12 +55,22 @@ export default function AddToCartButton({
   const handleClick = (e: React.MouseEvent) => {
     e.stopPropagation();
 
+    // Check if color is required and selected
+    if (requiresColor && (!selectedColor || selectedColor.trim() === "")) {
+      toast.error(t("please-select-color-first"));
+      return;
+    }
+
     if (!isLogedin) {
       // Open auth dialog if user is not logged in
       setAuthOpen(true);
     } else {
       // Add to cart if user is logged in
-      addProductToCart.mutate(productId);
+      addProductToCart.mutate({
+        productId,
+        selectedColor,
+        quantity,
+      });
     }
   };
 
@@ -55,12 +79,19 @@ export default function AddToCartButton({
       <Button
         onClick={handleClick}
         className={cn("flex w-[200px] items-center justify-center px-4 py-7 text-xl", className)}
+        disabled={addProductToCart.isPending}
       >
         {addProductToCart.isPending ? (
           <Loader2 size={32} className="animate-spin" />
         ) : (
           <>
-            <Image src={"/assets/icons/buttons.svg"} alt="Buttons Icon" width={20} height={0} />
+            <Image
+              src="/assets/icons/buttons.svg"
+              alt="Buttons Icon"
+              width={20}
+              height={20}
+              className="mr-2"
+            />
             {t("add-to-cart")}
           </>
         )}

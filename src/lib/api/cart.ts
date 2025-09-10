@@ -12,6 +12,9 @@ export async function getAllCart() {
       Authorization: `Bearer ${token}`,
       lang,
     },
+    next: {
+      tags: ["cart"],
+    },
   });
 
   if (!response.ok) {

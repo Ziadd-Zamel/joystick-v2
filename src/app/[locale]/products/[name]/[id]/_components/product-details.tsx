@@ -15,14 +15,18 @@ export default async function ProductDetails({ product }: { product: Product }) 
 
         {/* Product Information */}
         <div className="flex flex-col space-y-6">
-          <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-bold text-gray-900">{product.name}</h1>
-            <div className="bg-black">
-              <AddToFavoriteButton isFav={Boolean(product.is_favorite)} productId={product.id} />
+          <div className="relative flex w-full items-center justify-between">
+            <h1 className="max-w-[80%] text-2xl font-bold text-gray-900">{product.name}</h1>
+            <div className="absolute end-9 top-0">
+              <AddToFavoriteButton
+                className="start-0 size-8 shadow-lg"
+                isFav={Boolean(product.is_favorite)}
+                productId={product.id}
+              />
             </div>
           </div>
-          <div className="mt-10 space-y-8">
-            <p className="text-xl leading-relaxed text-gray-700">{product.description}</p>
+          <div className="mt-3 space-y-5">
+            <p className="text-xl leading-relaxed text-gray-700">{product.small_description}</p>
             <span className="text-primary text-3xl font-medium">{product.price}</span>
           </div>
 
