@@ -4,3 +4,11 @@ declare interface Review {
   created_at: string;
   updated_at: string;
 }
+
+declare interface Slide {
+  id: number;
+  img: string;
+  url: string;
+  created_at: string;
+  updated_at: string;
+}
