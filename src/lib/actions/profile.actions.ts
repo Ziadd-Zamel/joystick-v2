@@ -3,6 +3,7 @@
 import { cookies } from "next/headers";
 import { ProfileEmailFormValues, ProfilePasswordFormValues } from "../schemas/profile.schema";
 import { UserAddressFormValues } from "@/app/[locale]/profile/added-locations/_components/add-new-address-dialog";
+import { getLocale } from "next-intl/server";
 
 export const getUserDetails = async () => {
   const cookieStore = await cookies();
@@ -276,6 +277,39 @@ export const deleteAddress = async (addressId: number) => {
     if (!res.ok) {
       const errorData = await res.json();
       throw new Error(errorData.message || "Failed to delete address");
+    }
+
+    const payload = await res.json();
+
+    return payload;
+  } catch (err) {
+    throw err;
+  }
+};
+
+// Prev Orders
+export const getPrevOrders = async (type: string) => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("auth_token")?.value;
+
+  const locale = await getLocale();
+
+  if (!token) {
+    throw new Error("Unauthorized: No token found");
+  }
+
+  // type == 'store' || 'repair'
+  try {
+    const res = await fetch(`${process.env.API}History/GetAll?type=${type}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+        lang: locale || "ar",
+      },
+    });
+
+    if (!res.ok) {
+      const errorData = await res.json();
+      throw new Error(errorData.message || "Failed to get history");
     }
 
     const payload = await res.json();
