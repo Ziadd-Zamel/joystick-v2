@@ -4,6 +4,7 @@ import Providers from "@/components/providers";
 import NotFound from "./not-found";
 import { Tajawal, Montserrat } from "next/font/google";
 import Navbar from "@/components/layout/header";
+import Footer from "@/components/layout/footer";
 
 // Arabic font
 const tajawal = Tajawal({
@@ -38,6 +39,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
           <div className="flex min-h-screen flex-col overflow-x-hidden">
             <Navbar />
             <div className="flex-1">{children}</div>
+            <Footer />
           </div>
         </Providers>
       </body>

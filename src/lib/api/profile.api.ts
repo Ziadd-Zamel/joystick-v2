@@ -1,5 +1,5 @@
 import Cookies from "js-cookie";
-import { ProfileEmailFormValues, ProfilePasswordFormValues } from "../schemas/profile.schema";
+import { ProfilePasswordFormValues } from "../schemas/profile.schema";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 

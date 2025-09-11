@@ -5,7 +5,6 @@ import OurAdvantagesSkeleton from "./our-advantages/advantages-skeleton";
 import SlidesAndLatestProducts from "./slides-latest-products";
 import OurProductsSection from "./our-products";
 import Testimonials from "./customers-reviews";
-import Footer from "@/components/layout/footer";
 
 export default function HomePage() {
   return (
@@ -17,7 +16,6 @@ export default function HomePage() {
       <SlidesAndLatestProducts />
       <OurProductsSection />
       <Testimonials />
-      <Footer />
     </>
   );
 }
