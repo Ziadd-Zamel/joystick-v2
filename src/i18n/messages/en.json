@@ -1,10 +1,6 @@
 {
-  "nav": {
-    "home": "Home",
-    "about": "About Us",
-    "maintenance": "Maintenance",
-    "videos": "Videos"
-  },
+  "home": "Home",
+  "about": "About Us",
   "no-features-available": "No features available.",
   "failed-to-fetch-advantages": "Failed to fetch advantages",
   "failed-to-fetch-data": "Failed to fetch data.",

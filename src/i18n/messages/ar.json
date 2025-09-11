@@ -1,10 +1,6 @@
 {
-  "nav": {
-    "home": "الرئيسية",
-    "about": "من نحن",
-    "maintenance": "طلب صيانة",
-    "videos": "فيديوهات"
-  },
+  "home": "الرئيسية",
+  "about": "من نحن",
   "no-features-available": "لا توجد مميزات متاحة.",
   "failed-to-fetch-advantages": "فشل في جلب المزايا",
   "failed-to-fetch-data": "فشل في جلب البيانات.",

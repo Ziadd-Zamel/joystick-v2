@@ -12,7 +12,7 @@ export const navLinks = [
 ];
 export default function NavLinks({ categories }: { categories: Category[] }) {
   // Translation
-  const t = useTranslations("nav");
+  const t = useTranslations();
   const pathName = usePathname();
 
   return (
