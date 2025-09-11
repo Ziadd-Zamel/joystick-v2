@@ -444,3 +444,21 @@ export const deleteDevice = async (deviceId: string | number) => {
     throw err;
   }
 };
+
+export const getAllAvilableDays = async () => {
+  try {
+    const res = await fetch(`${process.env.API}user/available-days/get-all`, {
+      method: "GET",
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch Devices");
+    }
+
+    const payload = await res.json();
+
+    return payload;
+  } catch (err) {
+    throw err;
+  }
+};

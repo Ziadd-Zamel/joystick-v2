@@ -1,7 +1,7 @@
 import DeleteItemDialog from "@/components/common/delete-item-diallog";
+import { Link } from "@/i18n/routing";
 import { deleteDevice, getAddedDevices } from "@/lib/actions/profile.actions";
 import Image from "next/image";
-import Link from "next/link";
 import { HiOutlineWrenchScrewdriver } from "react-icons/hi2";
 
 export type Device = {
@@ -59,7 +59,7 @@ export default async function AddedDevicesList() {
 
             {/* Request Maintencnce */}
             <Link
-              href="#"
+              href={`/profile/added-devices/repair-request/${device.id}`}
               className="text-main flex items-center gap-2 font-medium underline-offset-2"
             >
               <HiOutlineWrenchScrewdriver className="size-5" />

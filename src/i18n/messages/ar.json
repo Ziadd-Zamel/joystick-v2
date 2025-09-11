@@ -96,6 +96,7 @@
     "password-change-failed": "فشل في تغيير كلمة المرور. يرجى المحاولة مرة أخرى."
   },
   "profile-route": {
+    "repair-request": "طلب صيانة",
     "profile": "الملف الشخصي",
     "main": "الملف الشخصي",
     "control-panel": "لوحة التحكم",

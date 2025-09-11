@@ -1,0 +1,52 @@
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { fetchUserAddresses } from "@/lib/actions/profile.actions";
+import { useQuery } from "@tanstack/react-query";
+import { UseFormReturn } from "react-hook-form";
+import { Address } from "../../../added-locations/_components/added-address-list";
+import { RepairRequeseFormValues } from "./repair-request-form";
+
+export default function SelectUserAddress({
+  form,
+}: {
+  form: UseFormReturn<RepairRequeseFormValues>;
+}) {
+  const { data: userAddresses, isLoading } = useQuery<Address[]>({
+    queryKey: ["user-address"],
+    queryFn: fetchUserAddresses,
+  });
+
+  return (
+    <FormField
+      control={form.control}
+      name="address"
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel className="m-0">Address</FormLabel>
+          <Select onValueChange={field.onChange} defaultValue={field.value}>
+            <FormControl>
+              <SelectTrigger className="!h-12 w-full rounded-sm border-[#F0EEF0]">
+                <SelectValue placeholder="Address" />
+              </SelectTrigger>
+            </FormControl>
+            <SelectContent>
+              {userAddresses?.map((userAddress) => (
+                <SelectItem key={userAddress.id} value={userAddress.id + ""}>
+                  {userAddress.grand_address}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  );
+}

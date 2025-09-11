@@ -99,6 +99,7 @@
     "password-change-failed": "Failed to change password. Please try again."
   },
   "profile-route": {
+    "repair-request": "Repair Request",
     "profile": "Profile",
     "main": "Profile",
     "control-panel": "Control Panel",
