@@ -2,13 +2,11 @@
 
 import { useRouter } from "@/i18n/routing";
 import { toggleFavouriteProduct } from "@/lib/actions/cart.actions";
+import { cn } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
 import { Heart, HeartPlus, Loader2 } from "lucide-react";
-import Image from "next/image";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
-import { cn } from "@/lib/utils";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
 
 type Props = {
   productId: number;
@@ -25,7 +23,7 @@ export default function AddToFavoriteButton({ productId, className, isFav = fals
     mutationFn: toggleFavouriteProduct,
     onSuccess: (data) => {
       toast.success(data.message);
-      // router.refresh();
+      router.refresh();
     },
     onError: (error) => {
       toast.error(error.message);
