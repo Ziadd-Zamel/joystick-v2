@@ -30,8 +30,8 @@ import AddLatLongMap from "./add-lat-long-map";
 import { addNewAddress, updateAddress } from "@/lib/actions/profile.actions";
 import { useRouter } from "@/i18n/navigation";
 import { useState } from "react";
-import { Address } from "./added-address-list";
 import { useTranslations } from "next-intl";
+import { Address } from "./added-address-list";
 
 export const userAddressSchema = (t: TZodIntel) =>
   z.object({
@@ -101,7 +101,6 @@ export default function AddNewAddressDialog({
   });
 
   async function onSubmit(values: UserAddressFormValues) {
-    console.log(values);
     try {
       if (address) {
         const data = await updateAddress(values, address.id);
