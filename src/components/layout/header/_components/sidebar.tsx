@@ -44,7 +44,7 @@ export default function Sidebar({ categories }: { categories: Category[] }) {
           className="flex items-center justify-center text-zinc-800"
         >
           <Menu size={26} />
-          <span className="sr-only">{t("navbar.openMenu")}</span>
+          <span className="sr-only">opeb menu</span>
         </Button>
       </SheetTrigger>
       <SheetContent

@@ -33,7 +33,7 @@ export default async function PrevOrdersMaintenanceTable() {
   return (
     <div className="overflow-hidden rounded-md border">
       <Table className="text-base">
-        <TableHeader className="bg-zinc-50">
+        <TableHeader className="bg-main/5 h-12">
           <TableRow>
             <TableHead className="text-center">{t("order-number")}</TableHead>
             <TableHead className="text-center">{t("order-type")}</TableHead>

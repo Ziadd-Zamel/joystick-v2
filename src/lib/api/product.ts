@@ -1,13 +1,16 @@
-import { getLocale } from "next-intl/server";
+import { getLocaleAssets } from "../utils/index";
+import { getToken } from "../utils/server-cookies";
 
 export async function getProductById(id: string) {
-  const lang = await getLocale();
+  const token = await getToken();
+  const { locale } = await getLocaleAssets();
 
   try {
     const response = await fetch(`${process.env.API}products/${id}`, {
       headers: {
         "Content-Type": "application/json",
-        lang,
+        Authorization: `Bearer ${token}`,
+        lang: locale,
       },
     });
 

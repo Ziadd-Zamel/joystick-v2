@@ -1,5 +1,5 @@
 "use server";
-import { getTranslations } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { getToken } from "../utils/server-cookies";
 
@@ -8,10 +8,10 @@ export async function addToCart(productId: number, selectedColor?: string, quant
   const t = await getTranslations();
 
   if (!token) {
-    return { 
-      status: false, 
-      message: t("unauthenticated-please-login-first"), 
-      data: null 
+    return {
+      status: false,
+      message: t("unauthenticated-please-login-first"),
+      data: null,
     };
   }
 
@@ -22,16 +22,16 @@ export async function addToCart(productId: number, selectedColor?: string, quant
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      body: JSON.stringify({ 
-        product_id: productId, 
-        quantity: quantity, 
-        color: selectedColor 
+      body: JSON.stringify({
+        product_id: productId,
+        quantity: quantity,
+        color: selectedColor,
       }),
     });
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({
-        message: `HTTP ${response.status}: ${response.statusText}`
+        message: `HTTP ${response.status}: ${response.statusText}`,
       }));
       throw new Error(errorData.message || t("Failed-add"));
     }
@@ -44,7 +44,7 @@ export async function addToCart(productId: number, selectedColor?: string, quant
     return {
       status: false,
       message: error instanceof Error ? error.message : t("Failed-add"),
-      data: null
+      data: null,
     };
   }
 }
@@ -57,7 +57,7 @@ export async function decreaseQuantity(productId: string, cartId: string) {
     return {
       status: false,
       message: t("unauthenticated-please-login-first"),
-      data: null
+      data: null,
     };
   }
 
@@ -76,7 +76,7 @@ export async function decreaseQuantity(productId: string, cartId: string) {
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({
-        message: `HTTP ${response.status}: ${response.statusText}`
+        message: `HTTP ${response.status}: ${response.statusText}`,
       }));
       throw new Error(errorData.message || t("failed-to-decrease-quantity"));
     }
@@ -90,7 +90,7 @@ export async function decreaseQuantity(productId: string, cartId: string) {
     return {
       status: false,
       message: error instanceof Error ? error.message : t("failed-to-decrease-quantity"),
-      data: null
+      data: null,
     };
   }
 }
@@ -103,7 +103,7 @@ export async function increaseQuantity(productId: string, cartId: string) {
     return {
       status: false,
       message: t("unauthenticated-please-login-first"),
-      data: null
+      data: null,
     };
   }
 
@@ -122,7 +122,7 @@ export async function increaseQuantity(productId: string, cartId: string) {
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({
-        message: `HTTP ${response.status}: ${response.statusText}`
+        message: `HTTP ${response.status}: ${response.statusText}`,
       }));
       throw new Error(errorData.message || t("failed-to-increase-quantity"));
     }
@@ -136,7 +136,7 @@ export async function increaseQuantity(productId: string, cartId: string) {
     return {
       status: false,
       message: error instanceof Error ? error.message : t("failed-to-increase-quantity"),
-      data: null
+      data: null,
     };
   }
 }
@@ -149,7 +149,7 @@ export async function deleteFromCart(productId: string) {
     return {
       status: false,
       message: t("unauthenticated-please-login-first"),
-      data: null
+      data: null,
     };
   }
 
@@ -165,7 +165,7 @@ export async function deleteFromCart(productId: string) {
 
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({
-        message: `HTTP ${response.status}: ${response.statusText}`
+        message: `HTTP ${response.status}: ${response.statusText}`,
       }));
       throw new Error(errorData.message || t("failed-to-delete-from-cart"));
     }
@@ -180,7 +180,38 @@ export async function deleteFromCart(productId: string) {
     return {
       status: false,
       message: error instanceof Error ? error.message : t("failed-to-delete-from-cart"),
-      data: null
+      data: null,
     };
+  }
+}
+
+export async function toggleFavouriteProduct(productId: string | number) {
+  const token = await getToken();
+  const locale = await getLocale();
+  const t = await getTranslations();
+
+  if (!token) {
+    throw new Error(t("unauthenticated-please-login-first"));
+  }
+
+  try {
+    const res = await fetch(`${process.env.API}favorite/${productId}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        lang: locale || "ar",
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to toggle favorite");
+    }
+
+    const payload = await res.json();
+    revalidatePath("/");
+
+    return payload;
+  } catch (err) {
+    throw err;
   }
 }

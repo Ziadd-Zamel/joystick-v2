@@ -34,10 +34,10 @@ const Footer = () => {
 
   // Variables
   const navLinks = [
-    { url: "/", title: t("nav.home") },
-    { url: "/about", title: t("nav.about") },
-    { url: "/profile/maintenance", title: t("nav.maintenance") },
-    { url: "/videos", title: t("nav.videos") },
+    { url: "/", title: t("home") },
+    { url: "/about", title: t("about") },
+    { url: "/profile/maintenance", title: t("maintenance") },
+    { url: "/videos", title: t("videos") },
   ];
 
   const otherLinks = [

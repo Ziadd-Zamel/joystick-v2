@@ -1,4 +1,5 @@
 import { getLocale, getTranslations } from "next-intl/server";
+import { getToken } from "../utils/server-cookies";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -34,8 +35,11 @@ export const getAdvantageText = async () => {
 export const getHome = async () => {
   const t = await getTranslations();
   const lang = await getLocale();
+  const token = await getToken();
 
-  const response = await fetch(`${apiUrl}HomePage`, { headers: { lang } });
+  const response = await fetch(`${apiUrl}HomePage`, {
+    headers: { lang, Authorization: `Bearer ${token}` },
+  });
 
   if (!response.ok) {
     throw new Error(t("failed-to-fetch-data"));

@@ -1,7 +1,5 @@
 import AddToFavoriteButton from "@/components/common/add-to-favorite-btn";
-import { Button } from "@/components/ui/button";
 import { getUserFavourites } from "@/lib/actions/profile.actions";
-import { useTranslations } from "next-intl";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import Link from "next/link";
@@ -20,16 +18,16 @@ type Product = {
   product_code: string;
   description: string;
   small_description: string;
-  price: string; // if you want numeric operations, make it number
-  quantity: string; // if integer, can be number instead
+  price: string;
+  quantity: string;
   main_image: string;
   images: string[];
   product_colors: ProductColor[];
   status: "active" | "inactive";
   is_favorite: 0 | 1;
   tags: string[];
-  created_at: string; // ISO timestamp
-  updated_at: string; // ISO timestamp
+  created_at: string;
+  updated_at: string;
 };
 
 export default async function FavouritProductsList() {
@@ -37,8 +35,6 @@ export default async function FavouritProductsList() {
 
   const payload = await getUserFavourites();
   const products: Product[] = payload.data.data;
-  console.log(payload);
-  console.log(products);
 
   if (!products.length)
     return (
@@ -55,7 +51,14 @@ export default async function FavouritProductsList() {
           className="flex flex-col items-center gap-4 rounded-md p-3 shadow-md md:flex-row"
         >
           <div className="relative aspect-video h-40 overflow-hidden rounded-lg bg-white shadow md:aspect-square md:w-1/5">
-            <Image src={product.main_image} alt={product.name} fill className="object-cover" />
+            <Image
+              src={product.main_image}
+              alt={product.name}
+              fill
+              loading="lazy"
+              sizes="34vw"
+              className="object-cover"
+            />
           </div>
 
           <div className="flex-1 space-y-2">
@@ -68,9 +71,9 @@ export default async function FavouritProductsList() {
               {t("format-currency", { value: product.price })}
             </p>
           </div>
-          <div className="py- flex flex-col justify-between gap-2 self-stretch">
+          <div className="flex flex-col justify-between gap-2 self-stretch py-3">
             {/* Remove from cart button */}
-            <div className="relative rounded-lg border p-1">
+            <div className="relative w-9">
               <AddToFavoriteButton
                 productId={product.id}
                 isFav={Boolean(product.is_favorite)}
@@ -88,6 +91,7 @@ export default async function FavouritProductsList() {
                 alt="add Icon"
                 width={25}
                 height={25}
+                loading="lazy"
                 src={"/assets/icons/add-to-cart-icon.svg"}
               />
             </Link>
