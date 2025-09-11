@@ -1,52 +1,42 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link } from "@/i18n/routing";
+import { cn } from "@/lib/utils";
 import Cookies from "js-cookie";
+import { Heart, Layers, MapPinned, ShoppingCart } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { BiJoystick } from "react-icons/bi";
 import { FaBars } from "react-icons/fa";
 import { MdClose } from "react-icons/md";
-import { cn } from "@/lib/utils";
-import { useLocale, useTranslations } from "next-intl";
 import { toast } from "sonner";
 
-interface ProfileLink {
-  url: string;
-  title: string;
-  image: string;
-}
-
-const ProfilenavLinks: ProfileLink[] = [
+const ProfilenavLinks = [
   {
     url: "/profile/control-panel",
     title: "profile-route.control-panel",
-    image: "/assets/icons/control-panel.svg",
+    icon: Layers,
   },
   {
-    url: "/profile/added-location",
-    title: "profile-route.added-location",
-    image: "/assets/icons/location.svg",
+    url: "/profile/added-locations",
+    title: "profile-route.added-locations",
+    icon: MapPinned,
   },
   {
-    url: "/profile/previous-requests",
-    title: "profile-route.previous-requests",
-    image: "/assets/icons/ShoppingCartSimple.svg",
+    url: "/profile/previous-orders",
+    title: "profile-route.previous-orders",
+    icon: ShoppingCart,
   },
   {
     url: "/profile/favourite",
     title: "profile-route.favourite",
-    image: "/assets/icons/favourites.svg",
+    icon: Heart,
   },
   {
-    url: "/profile/maintenance",
-    title: "profile-route.maintenance",
-    image: "/assets/icons/joy.svg",
-  },
-  {
-    url: "/profile/contact-us",
-    title: "profile-route.contact-us",
-    image: "/assets/icons/phone.svg",
+    url: "/profile/added-devices",
+    title: "profile-route.added-devices",
+    icon: BiJoystick,
   },
 ];
 
@@ -98,7 +88,7 @@ const ProfileSideBar = () => {
   return (
     <div className="relative">
       {/* Hamburger Icon for Mobile */}
-      <div className="flex items-center justify-between border-b border-gray-300 bg-white p-4 lg:hidden">
+      <div className="flex items-center justify-between border-b bg-white p-4 lg:hidden">
         <button type="button" onClick={toggleSidebar} aria-label="Toggle Sidebar">
           <FaBars size={24} />
         </button>
@@ -107,7 +97,7 @@ const ProfileSideBar = () => {
       {/* Sidebar */}
       <div
         dir={direction}
-        className={`flex w-[90%] flex-col rounded-sm border-[1px] border-solid border-gray-300 bg-white shadow-sm transition-transform duration-300 lg:h-screen lg:w-64 lg:justify-between ${
+        className={`flex w-[90%] flex-col rounded-sm border-[1px] border-solid bg-white px-2 transition-transform duration-300 lg:h-screen lg:w-64 lg:justify-between ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } fixed top-0 left-0 z-50 h-full lg:static lg:translate-x-0`}
       >
@@ -123,27 +113,17 @@ const ProfileSideBar = () => {
           <MdClose size={24} />
         </button>
 
-        <ul className="hide-scrollbar mt-12 flex flex-grow flex-col gap-5 space-x-reverse overflow-x-auto border-t text-xl whitespace-nowrap lg:mt-4 lg:flex lg:gap-0 lg:space-y-4 lg:overflow-hidden lg:border-none lg:whitespace-normal">
-          {ProfilenavLinks.map((link: any, index: number) => (
+        <ul className="hide-scrollbar mt-12 flex flex-grow flex-col gap-5 space-y-0.5 space-x-reverse overflow-x-auto border-t text-xl whitespace-nowrap lg:mt-4 lg:flex lg:gap-1 lg:space-y-4 lg:overflow-hidden lg:border-none lg:whitespace-normal">
+          {ProfilenavLinks.map((link, index) => (
             <li
               key={index}
-              className={`lg:text-md lg:hover:bg-main mb-0 cursor-pointer px-4 py-3 text-lg duration-200 lg:w-full lg:hover:text-white ${
+              className={`lg:text-md mb-0 cursor-pointer rounded-md px-4 py-3 text-lg duration-200 lg:w-full ${
                 pathName.includes(link.url) ? "lg:bg-main text-main lg:text-white" : "text-zinc-800"
               }`}
             >
               <Link href={link.url} className={""} onClick={() => setIsOpen(false)}>
                 <div className="flex items-center gap-2">
-                  {link.image && (
-                    <Image
-                      src={link.image}
-                      alt={link.title}
-                      width={22}
-                      height={22}
-                      className={`transition duration-200 ${
-                        pathName === link.url ? "icon-white" : ""
-                      }`}
-                    />
-                  )}
+                  {link.icon && <link.icon className="!size-5" />}
                   <span>{t(link.title)}</span>
                 </div>
               </Link>
@@ -167,7 +147,7 @@ const ProfileSideBar = () => {
         >
           <li className="hover:bg-main mb-4 flex w-full cursor-pointer items-center gap-2 p-2 py-4 text-lg font-semibold hover:text-white">
             <Image width={22} height={0} src={"/assets/icons/sign-out.svg"} alt="sign out" />
-            {t("sign-out")}
+            {t("profile-route.sign-out")}
           </li>
         </div>
       </div>

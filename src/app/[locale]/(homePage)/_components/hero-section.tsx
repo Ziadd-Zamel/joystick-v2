@@ -1,14 +1,17 @@
+import { getHeroImage } from "@/lib/api/home.api";
 import Image from "next/image";
 
-export default function HeroSection() {
+export default async function HeroSection() {
+  const payload = await getHeroImage();
+
   return (
-    <section className="box-container relative mx-auto w-full p-4 py-6">
+    <section className="box-container 2xl:max-h-[] relative mx-auto h-screen max-h-[280px] w-full overflow-hidden rounded-3xl p-4 py-6 sm:max-h-[500px] lg:max-h-[650px]">
       <Image
-        src={"/assets/Images/hero-bg.svg"}
-        alt="Joy stick background"
+        src={payload.img || "/assets/Images/hero-bg.svg"}
+        alt="Joystick background"
         width={700}
         height={0}
-        className="w-full object-cover"
+        className="h-full w-full rounded-3xl"
         priority
       />
     </section>
