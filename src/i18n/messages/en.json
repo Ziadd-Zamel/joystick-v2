@@ -168,6 +168,22 @@
   "cart": {
     "title": "Your cart is empty",
     "description": "Looks like you haven't added any items to your cart yet. Start shopping to fill it up!",
-    "button": "Continue Shopping"
+    "button": "Continue Shopping",
+    "decreaseSuccess": "Quantity decreased successfully",
+    "decreaseError": "Failed to decrease quantity",
+    "increaseSuccess": "Quantity increased successfully",
+    "increaseError": "Failed to increase quantity",
+    "deleteSuccess": "Product removed from cart successfully",
+    "deleteError": "Failed to remove product from cart",
+    "discount-code": "Discount Code",
+    "placeholder": "Enter discount code",
+    "apply": "Apply",
+    "price": "Price",
+    "currency": "جنيه",
+    "discountedPrice": "Price after discount",
+    "checkout": "Proceed to Checkout",
+    "shipping": "Shipping",
+    "total": "Total",
+    "summary": "Summary"
   }
 }
