@@ -199,6 +199,22 @@
   "cart": {
     "title": "سلة التسوق فارغة",
     "description": "يبدو أنك لم تضف أي منتجات إلى سلة التسوق بعد. ابدأ التسوق الآن لملئها!",
+    "decreaseSuccess": "تم تقليل الكمية بنجاح",
+    "decreaseError": "فشل في تقليل الكمية",
+    "increaseSuccess": "تم زيادة الكمية بنجاح",
+    "increaseError": "فشل في زيادة الكمية",
+    "deleteSuccess": "تمت إزالة المنتج من السلة بنجاح",
+    "deleteError": "فشل في إزالة المنتج من السلة",
+    "discount-code": "كود الخصم",
+    "placeholder": "ادخل كود الخصم",
+    "apply": "تطبيق",
+    "price": "السعر",
+    "currency": "EGP",
+    "discountedPrice": "السعر بعد الخصم",
+    "checkout": "استكمال عملية الشراء",
+    "shipping": "الشحن",
+    "total": "الإجمالي",
+    "summary": "ملخص السلة",
     "button": "متابعة التسوق",
     "sign-out": "تسجيل الخروج"
   }
