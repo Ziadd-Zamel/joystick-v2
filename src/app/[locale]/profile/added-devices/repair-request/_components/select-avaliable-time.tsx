@@ -1,5 +1,4 @@
 import { UseFormReturn } from "react-hook-form";
-import { RepairRequeseFormValues } from "./repair-request-form";
 import {
   Select,
   SelectContent,
@@ -10,6 +9,8 @@ import {
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 import { useQuery } from "@tanstack/react-query";
 import { getAvaliableTime } from "@/lib/actions/profile.actions";
+import { useTranslations } from "next-intl";
+import { RepairRequeseFormValues } from "@/lib/schemas/profile.schema";
 
 export type AvailableTime = {
   id: number;
@@ -25,6 +26,7 @@ export default function SelectAvaliableTime({
 }: {
   form: UseFormReturn<RepairRequeseFormValues>;
 }) {
+  const t = useTranslations("profile-route");
   const watchedDayId = form.watch("availableDayId");
 
   const {
@@ -45,7 +47,7 @@ export default function SelectAvaliableTime({
       name="availableTimeId"
       render={({ field }) => (
         <FormItem>
-          <FormLabel>Available Time</FormLabel>
+          <FormLabel className="m-0">{t("available-time")}</FormLabel>
           <Select
             disabled={isLoading || isFetching || !avaliableTime?.length}
             onValueChange={field.onChange}
@@ -53,7 +55,7 @@ export default function SelectAvaliableTime({
           >
             <FormControl>
               <SelectTrigger className="!h-12 w-full rounded-sm border-[#F0EEF0]">
-                <SelectValue placeholder="Available Time" />
+                <SelectValue placeholder={t("available-time")} />
               </SelectTrigger>
             </FormControl>
             <SelectContent>

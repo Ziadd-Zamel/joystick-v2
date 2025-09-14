@@ -11,37 +11,25 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { useRouter } from "@/i18n/routing";
 import { sendRepairRequest } from "@/lib/actions/profile.actions";
+import { RepairRequeseFormValues, repairRequestSchema } from "@/lib/schemas/profile.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslations } from "next-intl";
 import { useParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import { z } from "zod";
 import JoystickViewer from "./joystick-viewer";
 import SelectAvaliableTime from "./select-avaliable-time";
 import SelectAvilableDay from "./select-avilable-day";
 import SelectUserAddress from "./select-user-address";
 
-export const formSchema = z.object({
-  deviceId: z.any(),
-  addressId: z.string().min(1, "Address is Required"),
-  availableDay: z.date("Day is required"),
-  availableDayId: z.string().min(1, "Day is Required"),
-  availableTimeId: z.string().min(1, "Time is Required"),
-  extraNotes: z.string().max(500, "Notes can't be more than 500 chars").optional(),
-  problemsParts: z
-    .array(z.number(), "Problem parts is required")
-    .min(1, "At least one part is required"),
-});
-
-export type RepairRequeseFormValues = z.infer<typeof formSchema>;
-
 export default function RepairRequestForm() {
+  const t = useTranslations("profile-route");
   const router = useRouter();
   const params = useParams();
   const { deviceId } = params;
 
   const form = useForm<RepairRequeseFormValues>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(repairRequestSchema(t)),
     defaultValues: {
       deviceId,
       addressId: "",
@@ -115,14 +103,14 @@ export default function RepairRequestForm() {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="mb-4 flex flex-col items-start">
-                  Extra Notes
+                  {t("extra-notes-label")}
                   <span className="text-sm font-normal text-zinc-600">
-                    Add any Extra details about tht problem
+                    {t("extra-notes-description")}
                   </span>
                 </FormLabel>
                 <FormControl>
                   <Textarea
-                    placeholder="Put your notes here Max 500 chars"
+                    placeholder={t("extra-notes-placeholder")}
                     className="min-h-[120px]"
                     {...field}
                   />
@@ -134,7 +122,7 @@ export default function RepairRequestForm() {
         </div>
 
         <Button type="submit" disabled={form.formState.isSubmitting}>
-          Submit
+          {t("submit")}
         </Button>
       </form>
     </Form>

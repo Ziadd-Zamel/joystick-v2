@@ -59,5 +59,37 @@ export const userAddressSchema = (t: TZodIntel) =>
 
     address: z.string(t("address-required-error")).min(5, t("address-min-error")),
   });
-
 export type UserAddressFormValues = z.infer<ReturnType<typeof userAddressSchema>>;
+
+// Devices
+export const addDeviceFormSchema = (t: TZodIntel) =>
+  z.object({
+    deviceName: z
+      .string()
+      .min(1, t("device-name-required"))
+      .min(2, t("device-name-min"))
+      .max(100, t("device-name-max"))
+      .trim(),
+    serialNumber: z
+      .string()
+      .min(1, t("serial-number-required"))
+      .min(3, t("serial-number-min"))
+      .max(50, t("serial-number-max")),
+    deviceStatus: z.enum(["new", "old", "used"]),
+    purchaseDate: z.date(t("purchase-date-required")),
+  });
+export type AddDeviceFormValues = z.infer<ReturnType<typeof addDeviceFormSchema>>;
+
+export const repairRequestSchema = (t: TZodIntel) =>
+  z.object({
+    deviceId: z.any(),
+    addressId: z.string().min(1, "Address is Required"),
+    availableDay: z.date("Day is required"),
+    availableDayId: z.string().min(1, "Day is Required"),
+    availableTimeId: z.string().min(1, "Time is Required"),
+    extraNotes: z.string().max(500, "Notes can't be more than 500 chars").optional(),
+    problemsParts: z
+      .array(z.number(), "Problem parts is required")
+      .min(1, "At least one part is required"),
+  });
+export type RepairRequeseFormValues = z.infer<ReturnType<typeof repairRequestSchema>>;

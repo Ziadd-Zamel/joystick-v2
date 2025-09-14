@@ -22,6 +22,7 @@ import { LuTriangle } from "react-icons/lu";
 import { FaRegSquare } from "react-icons/fa";
 import React from "react";
 import { PartDialog } from "./part-dialog";
+import { useTranslations } from "next-intl";
 
 type Part3D = {
   id: number;
@@ -64,6 +65,7 @@ interface SceneProps {
 }
 
 export default function JoystickViewer({ selectedParts = [], togglePart }: JoystickViewerProps) {
+  const t = useTranslations("profile-route");
   const canvasRef = useRef<HTMLDivElement>(null);
   const sceneRef = useRef<SceneRef>(null);
 
@@ -74,37 +76,25 @@ export default function JoystickViewer({ selectedParts = [], togglePart }: Joyst
 
   // Define the parts
   const parts3D: Part3D[] = [
-    { id: 1, key: "right-analog", name: "Right Analog", is3D: true },
-    { id: 2, key: "left-analog", name: "Left Analog", is3D: true },
-    { id: 3, key: "R1", name: "R1", is3D: true },
-    { id: 4, key: "R2", name: "R2", is3D: true },
-    { id: 5, key: "L1", name: "L1", is3D: true },
-    { id: 6, key: "L2", name: "L2", is3D: true },
-    { id: 7, key: "d-pad", name: "D-Pad", is3D: true },
-    { id: 8, key: "buttons", name: "Action Buttons", is3D: true },
-    { id: 9, key: "microphone", name: "Microphone", is3D: true },
-    { id: 10, key: "speakers", name: "Speakers", is3D: true },
-    { id: 11, key: "ps-button", name: "PS Button", is3D: true },
-    { id: 12, key: "socket", name: "Charging Port", is3D: true },
-    { id: 13, key: "aux", name: "AUX", is3D: true },
-    {
-      id: 14,
-      key: "analog-right",
-      name: "Right Internal Analog",
-      is3D: false,
-      images: [],
-    },
-    {
-      id: 15,
-      key: "analog-left",
-      name: "Left Internal Analog",
-      is3D: false,
-      images: [],
-    },
+    { id: 1, key: "right-analog", name: t("right-analog"), is3D: true },
+    { id: 2, key: "left-analog", name: t("left-analog"), is3D: true },
+    { id: 3, key: "r1", name: t("r1"), is3D: true },
+    { id: 4, key: "r2", name: t("r2"), is3D: true },
+    { id: 5, key: "l1", name: t("l1"), is3D: true },
+    { id: 6, key: "l2", name: t("l2"), is3D: true },
+    { id: 7, key: "d-pad", name: t("d-pad"), is3D: true },
+    { id: 8, key: "buttons", name: t("buttons"), is3D: true },
+    { id: 9, key: "microphone", name: t("microphone"), is3D: true },
+    { id: 10, key: "speakers", name: t("speakers"), is3D: true },
+    { id: 11, key: "ps-button", name: t("ps-button"), is3D: true },
+    { id: 12, key: "socket", name: t("socket"), is3D: true },
+    { id: 13, key: "aux", name: t("aux"), is3D: true },
+    { id: 14, key: "analog-right", name: t("analog-right"), is3D: false, images: [] },
+    { id: 15, key: "analog-left", name: t("analog-left"), is3D: false, images: [] },
     {
       id: 16,
       key: "battery",
-      name: "Battery",
+      name: t("battery"),
       is3D: false,
       images: ["/assets/images/parts/battery.png"],
     },

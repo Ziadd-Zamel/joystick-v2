@@ -34,33 +34,15 @@ import { addDevice } from "@/lib/actions/profile.actions";
 import Image from "next/image";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
-
-export const formSchema = (t: TZodIntel) =>
-  z.object({
-    deviceName: z
-      .string()
-      .min(1, "Device name is required")
-      .min(2, "Device name must be at least 2 characters")
-      .max(100, "Device name cannot exceed 100 characters")
-      .trim(),
-    serialNumber: z
-      .string()
-      .min(1, "Serial number is required")
-      .min(3, "Serial number must be at least 3 characters")
-      .max(50, "Serial number cannot exceed 50 characters"),
-    deviceStatus: z.enum(["new", "old", "used"]),
-    purchaseDate: z.date("Purchase Date is Required"),
-  });
-
-export type AddDeviceFormValues = z.infer<ReturnType<typeof formSchema>>;
+import { addDeviceFormSchema, AddDeviceFormValues } from "@/lib/schemas/profile.schema";
 
 export default function AddDeviceDialog() {
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const t = useTranslations();
+  const t = useTranslations("profile-route");
 
   const form = useForm<AddDeviceFormValues>({
-    resolver: zodResolver(formSchema(t)),
+    resolver: zodResolver(addDeviceFormSchema(t)),
     defaultValues: {
       deviceName: "",
       serialNumber: "",
@@ -96,51 +78,52 @@ export default function AddDeviceDialog() {
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="flex w-full flex-col gap-5">
+            {/* Device Name */}
             <FormField
               control={form.control}
               name="deviceName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Device Name</FormLabel>
+                  <FormLabel>{t("device-name")}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Device Name" type="text" {...field} />
+                    <Input placeholder={t("device-name")} type="text" {...field} />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
             />
 
+            {/* Serial Number */}
             <FormField
               control={form.control}
               name="serialNumber"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Serial Number</FormLabel>
+                  <FormLabel>{t("serial-number")}</FormLabel>
                   <FormControl>
-                    <Input placeholder="Serial Number" type="text" {...field} />
+                    <Input placeholder={t("serial-number")} type="text" {...field} />
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
             />
 
+            {/* Device Status */}
             <FormField
               control={form.control}
               name="deviceStatus"
               render={({ field }) => (
                 <FormItem className="space-y-3">
-                  <FormLabel>Device Status</FormLabel>
+                  <FormLabel>{t("device-status")}</FormLabel>
                   <FormControl>
                     <RadioGroup
                       onValueChange={field.onChange}
                       className="flex items-center gap-4 rtl:flex-row-reverse"
                     >
                       {[
-                        ["New", "new"],
-                        ["Old", "old"],
-                        ["Used", "used"],
+                        [t("device-status-new"), "new"],
+                        [t("device-status-old"), "old"],
+                        [t("device-status-used"), "used"],
                       ].map((option, index) => (
                         <FormItem className="flex items-center space-y-0 space-x-2" key={index}>
                           <FormControl>
@@ -151,18 +134,18 @@ export default function AddDeviceDialog() {
                       ))}
                     </RadioGroup>
                   </FormControl>
-
                   <FormMessage />
                 </FormItem>
               )}
             />
 
+            {/* Purchase Date */}
             <FormField
               control={form.control}
               name="purchaseDate"
               render={({ field }) => (
                 <FormItem className="flex flex-col">
-                  <FormLabel>Purchase Date</FormLabel>
+                  <FormLabel>{t("purchase-date")}</FormLabel>
                   <Popover>
                     <PopoverTrigger asChild>
                       <FormControl>
@@ -170,11 +153,14 @@ export default function AddDeviceDialog() {
                           variant={"outline"}
                           className={cn(
                             "h-12 !rounded-sm border-[#F0EEF0] pl-3 text-left font-normal",
-
                             !field.value && "text-muted-foreground",
                           )}
                         >
-                          {field.value ? format(field.value, "PPP") : <span>Pick a date</span>}
+                          {field.value ? (
+                            format(field.value, "PPP")
+                          ) : (
+                            <span>{t("purchase-date-placeholder")}</span>
+                          )}
                           <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                         </Button>
                       </FormControl>
@@ -189,14 +175,15 @@ export default function AddDeviceDialog() {
                       />
                     </PopoverContent>
                   </Popover>
-
                   <FormMessage />
                 </FormItem>
               )}
             />
+
+            {/* Submit */}
             <Button type="submit" className="self-start px-2">
               <Image
-                alt="add Icon"
+                alt={t("submit-button")}
                 width={25}
                 height={25}
                 src={"/assets/icons/add-to-cart-icon.svg"}

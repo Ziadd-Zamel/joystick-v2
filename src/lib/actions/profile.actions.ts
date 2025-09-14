@@ -1,14 +1,14 @@
 "use server";
 
-import { AddDeviceFormValues } from "@/app/[locale]/profile/added-devices/_components/add-device-dialog";
 import { getLocale } from "next-intl/server";
 import { cookies } from "next/headers";
 import {
+  AddDeviceFormValues,
   ProfileEmailFormValues,
   ProfilePasswordFormValues,
+  RepairRequeseFormValues,
   UserAddressFormValues,
 } from "../schemas/profile.schema";
-import { RepairRequeseFormValues } from "@/app/[locale]/profile/added-devices/repair-request/_components/repair-request-form";
 
 export const getUserDetails = async () => {
   const cookieStore = await cookies();
@@ -497,6 +497,7 @@ export const getAvaliableTime = async (dayId: string) => {
 export const sendRepairRequest = async (values: RepairRequeseFormValues) => {
   const cookieStore = await cookies();
   const token = cookieStore.get("auth_token")?.value;
+  const locale = await getLocale();
   if (!token) {
     throw new Error("User not authenticated");
   }
@@ -507,6 +508,7 @@ export const sendRepairRequest = async (values: RepairRequeseFormValues) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
+        lang: locale || "ar",
       },
       body: JSON.stringify({
         address_id: values.addressId,

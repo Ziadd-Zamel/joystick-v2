@@ -1,5 +1,4 @@
 import { UseFormReturn } from "react-hook-form";
-import { RepairRequeseFormValues } from "./repair-request-form";
 
 import { Button } from "@/components/ui/button";
 import { Calendar } from "@/components/ui/calendar";
@@ -11,6 +10,8 @@ import { Calendar as CalendarIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { getAllAvaliableDays } from "@/lib/actions/profile.actions";
 import { useEffect } from "react";
+import { useTranslations } from "next-intl";
+import { RepairRequeseFormValues } from "@/lib/schemas/profile.schema";
 
 export type DateDayes = {
   id: number;
@@ -24,7 +25,8 @@ export default function SelectAvilableDay({
 }: {
   form: UseFormReturn<RepairRequeseFormValues>;
 }) {
-  const { data, isLoading } = useQuery({
+  const t = useTranslations("profile-route");
+  const { data, isLoading, isFetching } = useQuery({
     queryKey: ["avilable-days"],
     queryFn: getAllAvaliableDays,
   });
@@ -49,9 +51,9 @@ export default function SelectAvilableDay({
       name="availableDay"
       render={({ field }) => (
         <FormItem className="flex flex-col">
-          <FormLabel className="m-0">Available Dayes</FormLabel>
+          <FormLabel className="m-0">{t("available-days")}</FormLabel>
           <Popover>
-            <PopoverTrigger asChild>
+            <PopoverTrigger disabled={isLoading || isFetching} asChild>
               <FormControl>
                 <Button
                   variant={"outline"}
@@ -61,7 +63,7 @@ export default function SelectAvilableDay({
                     !field.value && "text-muted-foreground",
                   )}
                 >
-                  {field.value ? format(field.value, "PPP") : <span>Available Dayes</span>}
+                  {field.value ? format(field.value, "PPP") : <span>{t("available-days")}</span>}
                   <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
                 </Button>
               </FormControl>

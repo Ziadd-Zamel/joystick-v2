@@ -1,8 +1,8 @@
 import AddToFavoriteButton from "@/components/common/add-to-favorite-btn";
+import { Link } from "@/i18n/routing";
 import { getUserFavourites } from "@/lib/actions/profile.actions";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
-import Link from "next/link";
 
 type ProductColor = {
   id: number;
@@ -35,6 +35,7 @@ export default async function FavouritProductsList() {
 
   const payload = await getUserFavourites();
   const products: Product[] = payload.data.data;
+  console.log(products);
 
   if (!products.length)
     return (
@@ -84,7 +85,7 @@ export default async function FavouritProductsList() {
             {/* Add to cart button */}
 
             <Link
-              href={"#"}
+              href={`/products/${encodeURIComponent(product.name.split(" ")[0])}/${product.id}`}
               className="bg-main flex shrink-0 items-center justify-center rounded-lg p-1 py-2"
             >
               <Image
