@@ -1,9 +1,11 @@
 "use server";
 
-import { cookies } from "next/headers";
-import { ProfileEmailFormValues, ProfilePasswordFormValues } from "../schemas/profile.schema";
+import { AddDeviceFormValues } from "@/app/[locale]/profile/added-devices/_components/add-device-dialog";
 import { UserAddressFormValues } from "@/app/[locale]/profile/added-locations/_components/add-new-address-dialog";
 import { getLocale } from "next-intl/server";
+import { cookies } from "next/headers";
+import { ProfileEmailFormValues, ProfilePasswordFormValues } from "../schemas/profile.schema";
+import { RepairRequeseFormValues } from "@/app/[locale]/profile/added-devices/repair-request/_components/repair-request-form";
 
 export const getUserDetails = async () => {
   const cookieStore = await cookies();
@@ -313,6 +315,207 @@ export const getPrevOrders = async (type: string) => {
     }
 
     const payload = await res.json();
+
+    return payload;
+  } catch (err) {
+    throw err;
+  }
+};
+
+// Favorites
+export const getUserFavourites = async () => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("auth_token")?.value;
+  const locale = await getLocale();
+
+  if (!token) {
+    throw new Error("Unauthorized: No token found");
+  }
+
+  try {
+    const res = await fetch(`${process.env.API}products/favorited`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        lang: locale || "ar",
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch favourites");
+    }
+
+    const payload = await res.json();
+
+    return payload;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Devices
+export const getAddedDevices = async () => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("auth_token")?.value;
+  const locale = await getLocale();
+
+  try {
+    const res = await fetch(`${process.env.API}devices/all`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        lang: locale || "ar",
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch Devices");
+    }
+
+    const payload = await res.json();
+
+    return payload;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const addDevice = async (device: AddDeviceFormValues) => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("auth_token")?.value;
+  const locale = await getLocale();
+
+  if (!token) {
+    throw new Error("User not authenticated");
+  }
+
+  try {
+    const res = await fetch(`${process.env.API}devices/add`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        lang: locale || "ar",
+      },
+      body: JSON.stringify({
+        device_name: device.deviceName,
+        serial_number: device.serialNumber,
+        purchase_date: new Date(device.purchaseDate).toLocaleDateString("en-CA"),
+        status: device.deviceStatus,
+      }),
+    });
+
+    const payload = await res.json();
+
+    if (!res.ok) {
+      throw new Error(payload.message || "Error adding your device");
+    }
+
+    return payload;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const deleteDevice = async (deviceId: string | number) => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("auth_token")?.value;
+  const locale = await getLocale();
+  if (!token) {
+    throw new Error("User not authenticated");
+  }
+
+  try {
+    const res = await fetch(`${process.env.API}devices/delete/${deviceId}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        lang: locale || "ar",
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to delete device");
+    }
+
+    const payload = await res.json();
+
+    return payload;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const getAllAvaliableDays = async () => {
+  try {
+    const res = await fetch(`${process.env.API}user/available-days/get-all`, {
+      method: "GET",
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch Dates");
+    }
+
+    const payload = await res.json();
+
+    return payload;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const getAvaliableTime = async (dayId: string) => {
+  try {
+    const res = await fetch(`${process.env.API}available-times/get/${dayId}`, {
+      method: "GET",
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch Times");
+    }
+
+    const payload = await res.json();
+
+    return payload;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const sendRepairRequest = async (values: RepairRequeseFormValues) => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("auth_token")?.value;
+  if (!token) {
+    throw new Error("User not authenticated");
+  }
+
+  try {
+    const res = await fetch(`${process.env.API}repair-requests/store`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        address_id: values.addressId,
+        day_id: values.availableDayId,
+        available_time_id: values.availableTimeId,
+        type: "personal",
+        devices: [
+          {
+            device_id: values.deviceId,
+            Problems_Parts: values.problemsParts,
+            notes: values.extraNotes,
+          },
+        ],
+      }),
+    });
+
+    const payload = await res.json();
+
+    if (!res.ok) {
+      throw new Error(payload.message || "Error adding your device");
+    }
 
     return payload;
   } catch (err) {

@@ -1,14 +1,16 @@
 import { getAllCart } from "@/lib/api/cart";
 import CartEmptyState from "./_components/cart-empty-state";
+import CartPage from "./_components/cart-page";
 
 export default async function Page() {
+  // Fetch cart items
   const cartItems = await getAllCart();
-  const items = 0;
-  console.log(cartItems.data.data.length);
+
   // Check if cart is empty
-  if (!items) {
+  if (!cartItems.data.data.length) {
     return <CartEmptyState />;
   }
 
-  return <div></div>;
+  // Render cart page with items
+  return <CartPage CartItems={cartItems.data.data} />;
 }

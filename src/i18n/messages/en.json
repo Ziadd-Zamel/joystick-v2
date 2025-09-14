@@ -1,10 +1,6 @@
 {
-  "nav": {
-    "home": "Home",
-    "about": "About Us",
-    "maintenance": "Maintenance",
-    "videos": "Videos"
-  },
+  "home": "Home",
+  "about": "About Us",
   "no-features-available": "No features available.",
   "failed-to-fetch-advantages": "Failed to fetch advantages",
   "failed-to-fetch-data": "Failed to fetch data.",
@@ -29,6 +25,12 @@
   "return-policy": "Return Policy",
   "videos": "Videos",
   "categories": "Categories",
+  "delete-confirm-title": "Are you absolutely sure?",
+  "delete-confirm-description": "This action cannot be undone. This will permanently delete your {itemName} and remove it from our servers.",
+  "cancel": "Cancel",
+  "continue": "Continue",
+  "address": "Address",
+  "device": "Device",
   "auth": {
     "phone": "Phone Number",
     "phone-placeholder": "Your Phone number",
@@ -97,12 +99,13 @@
     "password-change-failed": "Failed to change password. Please try again."
   },
   "profile-route": {
+    "repair-request": "Repair Request",
     "profile": "Profile",
     "main": "Profile",
     "control-panel": "Control Panel",
     "added-locations": "Added Locations",
     "previous-orders": "Previous Orders",
-    "favourite": "Favourites",
+    "favourites": "Favourites",
     "added-devices": "Added Devices",
     "contact-us": "Contact Us",
     "help-center": "Help Center",
@@ -163,10 +166,6 @@
     "longitude": "Longitude",
     "address": "Address",
     "favorite-address": "Favorite address",
-    "delete-confirm-title": "Are you absolutely sure?",
-    "delete-confirm-description": "This action cannot be undone. This will permanently delete your address and remove it from our servers.",
-    "cancel": "Cancel",
-    "continue": "Continue",
     "building-number-error": "Building number must be a valid positive number",
     "apartment-number-error": "Apartment number must be a valid positive number",
     "floor-number-error": "Floor number must must be a valid positive number",
@@ -184,7 +183,8 @@
     "status": "Status",
     "order-date": "Order Date",
     "full-price": "Full Price",
-    "maintenance": "Maintenance"
+    "maintenance": "Maintenance",
+    "format-currency": "{value, number, currency-float}"
   },
   "add-to-cart": "Add to cart",
   "available-quantity": "Available quantity:",
@@ -200,6 +200,23 @@
     "title": "Your cart is empty",
     "description": "Looks like you haven't added any items to your cart yet. Start shopping to fill it up!",
     "button": "Continue Shopping",
+    "decreaseSuccess": "Quantity decreased successfully",
+    "decreaseError": "Failed to decrease quantity",
+    "increaseSuccess": "Quantity increased successfully",
+    "increaseError": "Failed to increase quantity",
+    "deleteSuccess": "Product removed from cart successfully",
+    "deleteError": "Failed to remove product from cart",
+    "discount-code": "Discount Code",
+    "placeholder": "Enter discount code",
+    "apply": "Apply",
+    "price": "Price",
+    "currency": "EGP",
+    "discountedPrice": "Price after discount",
+    "checkout": "Proceed to Checkout",
+    "shipping": "Shipping",
+    "total": "Total",
+    "summary": "Summary",
     "sign-out": "Sign Out"
-  }
+  },
+  "currency": "EGP"
 }

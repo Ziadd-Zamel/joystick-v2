@@ -1,13 +1,12 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { Button } from "../ui/button";
+import { useRouter } from "@/i18n/routing";
+import { toggleFavouriteProduct } from "@/lib/actions/cart.actions";
 import { cn } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
-import { addToCart } from "@/lib/actions/cart.actions";
+import { Heart, HeartPlus, Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { Loader2 } from "lucide-react";
-import Image from "next/image";
+import { Button } from "../ui/button";
 
 type Props = {
   productId: number;
@@ -17,13 +16,14 @@ type Props = {
 
 export default function AddToFavoriteButton({ productId, className, isFav = false }: Props) {
   // Translations
-  const t = useTranslations();
+  const router = useRouter();
 
   // Mutations
-  const addProductToCart = useMutation({
-    mutationFn: (id: number) => addToCart(id),
-    onSuccess: () => {
-      toast.success(t("product-added"));
+  const addProductToFavourites = useMutation({
+    mutationFn: toggleFavouriteProduct,
+    onSuccess: (data) => {
+      toast.success(data.message);
+      router.refresh();
     },
     onError: (error) => {
       toast.error(error.message);
@@ -34,25 +34,22 @@ export default function AddToFavoriteButton({ productId, className, isFav = fals
     <Button
       onClick={(e) => {
         e.stopPropagation();
-        addProductToCart.mutate(productId);
+        addProductToFavourites.mutate(productId);
       }}
       className={cn(
-        "flex-center center absolute top-2 left-2 z-30 cursor-pointer bg-white p-1.5 hover:scale-[1.05] hover:bg-white",
+        "flex-center center absolute top-2 left-2 z-30 cursor-pointer bg-white !px-2 !py-2 shadow-sm hover:scale-[1.05] hover:bg-white",
         className,
       )}
     >
-      {addProductToCart.isPending ? (
-        <Loader2 size={18} className="animate-spin" />
+      {addProductToFavourites.isPending ? (
+        <Loader2 className="text-main size-6 animate-spin" />
       ) : (
         <>
-          <Image
-            src={isFav ? "/assets/icons/heart-fill.svg" : "/assets/icons/heart-line.svg"}
-            alt="Favorite Icon"
-            width={24}
-            height={24}
-            loading="lazy"
-            className="transition duration-200 ease-in-out"
-          />
+          {isFav ? (
+            <Heart className="size-6 fill-red-500 stroke-red-500" />
+          ) : (
+            <HeartPlus className="size-6 text-zinc-900" />
+          )}
         </>
       )}
     </Button>

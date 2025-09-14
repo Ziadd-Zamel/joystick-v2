@@ -2,9 +2,8 @@
 import { Link } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
 import Cookies from "js-cookie";
-import { Heart, Layers, MapPinned, ShoppingCart } from "lucide-react";
+import { Heart, Layers, LogOut, MapPinned, ShoppingCart } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
-import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { BiJoystick } from "react-icons/bi";
@@ -29,8 +28,8 @@ const ProfilenavLinks = [
     icon: ShoppingCart,
   },
   {
-    url: "/profile/favourite",
-    title: "profile-route.favourite",
+    url: "/profile/favourites",
+    title: "profile-route.favourites",
     icon: Heart,
   },
   {
@@ -97,7 +96,7 @@ const ProfileSideBar = () => {
       {/* Sidebar */}
       <div
         dir={direction}
-        className={`flex w-[90%] flex-col rounded-sm border-[1px] border-solid bg-white px-2 transition-transform duration-300 lg:h-screen lg:w-64 lg:justify-between ${
+        className={`flex w-[90%] flex-col rounded-md border-[1px] border-solid bg-white px-2 transition-transform duration-300 lg:h-screen lg:w-64 lg:justify-between ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } fixed top-0 left-0 z-50 h-full lg:static lg:translate-x-0`}
       >
@@ -131,9 +130,12 @@ const ProfileSideBar = () => {
           ))}
         </ul>
 
-        <div className="hidden lg:flex lg:flex-col lg:justify-end" onClick={handleLogout}>
-          <li className="lg:text-md hover:bg-main mb-4 flex w-full cursor-pointer items-center gap-2 p-2 py-4 text-lg font-semibold hover:text-white">
-            <Image width={22} height={0} src={"/assets/icons/sign-out.svg"} alt="sign out" />
+        <div
+          className="hidden cursor-pointer lg:flex lg:flex-col lg:justify-end"
+          onClick={handleLogout}
+        >
+          <li className="lg:text-md cursor-pointe mb-4 flex w-full items-center gap-2 rounded-lg p-2 py-4 text-lg font-medium text-red-500 transition-all duration-300 hover:bg-red-500 hover:text-white">
+            <LogOut className="size-6" />
             {t("profile-route.sign-out")}
           </li>
         </div>
@@ -145,8 +147,9 @@ const ProfileSideBar = () => {
             handleLogout();
           }}
         >
-          <li className="hover:bg-main mb-4 flex w-full cursor-pointer items-center gap-2 p-2 py-4 text-lg font-semibold hover:text-white">
-            <Image width={22} height={0} src={"/assets/icons/sign-out.svg"} alt="sign out" />
+          <li className="mb-4 flex w-full cursor-pointer items-center gap-2 p-2 py-4 text-lg font-semibold text-red-500 hover:bg-red-500 hover:text-white">
+            <LogOut className="size-6" />
+
             {t("profile-route.sign-out")}
           </li>
         </div>
