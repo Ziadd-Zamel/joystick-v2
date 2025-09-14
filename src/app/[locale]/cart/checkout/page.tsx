@@ -1,6 +1,6 @@
 import { getAllCart } from "@/lib/api/cart";
-import CartEmptyState from "./_components/cart-empty-state";
-import CartPage from "./_components/cart-page";
+import CartEmptyState from "../_components/cart-empty-state";
+import CheckoutPage from "./_components/checkout-page";
 
 export default async function Page() {
   // Fetch cart items
@@ -11,6 +11,5 @@ export default async function Page() {
     return <CartEmptyState />;
   }
 
-  // Render cart page with items
-  return <CartPage CartItems={cartItems.data.data} />;
+  return <CheckoutPage CartItems={cartItems.data.data} />;
 }

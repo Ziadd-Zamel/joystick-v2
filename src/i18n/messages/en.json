@@ -210,12 +210,13 @@
     "placeholder": "Enter discount code",
     "apply": "Apply",
     "price": "Price",
-    "currency": "جنيه",
+    "currency": "EGP",
     "discountedPrice": "Price after discount",
     "checkout": "Proceed to Checkout",
     "shipping": "Shipping",
     "total": "Total",
     "summary": "Summary",
     "sign-out": "Sign Out"
-  }
+  },
+  "currency": "EGP"
 }

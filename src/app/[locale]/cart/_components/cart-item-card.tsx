@@ -39,7 +39,9 @@ export default function CartItemCard({ item }: { item: Cart }) {
           <div className="mt-3 flex w-full items-center justify-between sm:mt-auto">
             <span className="line-clamp-1 text-base font-semibold sm:text-lg">
               {item.product.price}
+              <span className="ms-1 text-sm">{t("currency")}</span>
             </span>
+
             <MutationQuantitySelector
               cartId={item.id}
               productId={item.product.id.toString()}
