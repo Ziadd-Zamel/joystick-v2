@@ -83,7 +83,7 @@ export default function MutationQuantitySelector({
   const isLoading = increaseQuantityMutation.isPending || decreaseQuantityMutation.isPending;
 
   return (
-    <div className={cn("flex flex-col gap-2", className)}>
+    <div className={cn("flex flex-col items-end gap-2", className)}>
       <div
         className={cn(
           "flex items-center",
@@ -110,7 +110,7 @@ export default function MutationQuantitySelector({
           <Minus className="h-4 w-4 text-white" />
         </Button>
 
-        <div className="flex w-[30px] items-center justify-center text-xl font-semibold">
+        <div className="flex h-6 w-[30px] items-center justify-center text-xl font-semibold">
           {isLoading ? (
             <div className="h-5 w-5 animate-spin rounded-full border-2 border-gray-300 border-t-[#02A09B]" />
           ) : (
@@ -139,7 +139,7 @@ export default function MutationQuantitySelector({
       </div>
 
       {showAvailableText && (
-        <p className="text-sm text-gray-600">
+        <p className="text-xs text-gray-600 rtl:text-sm">
           {selectedColor ? `${availableText} ${availableQuantity || maxQuantity}` : selectColorText}
         </p>
       )}
