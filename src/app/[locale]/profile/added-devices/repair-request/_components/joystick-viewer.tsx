@@ -1,7 +1,16 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import { useRef, useEffect, useCallback, useState, Suspense } from "react";
-import { Canvas, useThree } from "@react-three/fiber";
+import {
+  useRef,
+  useEffect,
+  useCallback,
+  useState,
+  Suspense,
+  forwardRef,
+  useImperativeHandle,
+} from "react";
+import { Canvas, useThree, ThreeEvent } from "@react-three/fiber";
 import { OrbitControls, useGLTF } from "@react-three/drei";
 import * as THREE from "three";
 import gsap from "gsap";
@@ -12,59 +21,99 @@ import { FaRegCircle } from "react-icons/fa6";
 import { LuTriangle } from "react-icons/lu";
 import { FaRegSquare } from "react-icons/fa";
 import React from "react";
-import { PartDialog } from "./ImageDialog";
+import { PartDialog } from "./part-dialog";
 
-export default function JoystickViewer({ selectedParts = [], togglePart = () => {} }) {
-  const canvasRef = useRef(null);
-  const sceneRef = useRef(null);
+type Part3D = {
+  id: number;
+  key: string;
+  name: string;
+  is3D: boolean;
+  images?: string[];
+};
+
+type CameraConfig = {
+  position: [number, number, number];
+  target: [number, number, number];
+};
+
+type PartToMeshMap = {
+  [key: number]: string | string[];
+};
+
+type MeshToPartIdMap = {
+  [meshName: string]: number;
+};
+
+type PartCameraPositions = {
+  [partId: number]: CameraConfig;
+};
+
+interface JoystickViewerProps {
+  selectedParts?: number[];
+  togglePart: (id: number) => void;
+}
+
+interface SceneRef {
+  moveCameraToPartPosition: (partId: number) => void;
+}
+
+interface SceneProps {
+  selectedParts: number[];
+  togglePart: (id: number) => void;
+  canvasRef: React.RefObject<HTMLDivElement>;
+}
+
+export default function JoystickViewer({ selectedParts = [], togglePart }: JoystickViewerProps) {
+  const canvasRef = useRef<HTMLDivElement>(null);
+  const sceneRef = useRef<SceneRef>(null);
 
   // Prevent scroll events from propagating outside the canvas
-  const handleCanvasWheel = useCallback((e) => {
+  const handleCanvasWheel = useCallback((e: React.WheelEvent) => {
     e.stopPropagation();
   }, []);
 
   // Define the parts
-  const parts3D = [
-    { id: 1, key: "right-analog", name: "أنالوج خارجي يمين", is3D: true },
-    { id: 2, key: "left-analog", name: "أنالوج خارجي شمال", is3D: true },
+  const parts3D: Part3D[] = [
+    { id: 1, key: "right-analog", name: "Right Analog", is3D: true },
+    { id: 2, key: "left-analog", name: "Left Analog", is3D: true },
     { id: 3, key: "R1", name: "R1", is3D: true },
     { id: 4, key: "R2", name: "R2", is3D: true },
     { id: 5, key: "L1", name: "L1", is3D: true },
     { id: 6, key: "L2", name: "L2", is3D: true },
-    { id: 7, key: "d-pad", name: "أسهم", is3D: true },
-    { id: 8, key: "buttons", name: "Action buttons", is3D: true },
-    { id: 9, key: "microphone", name: "الميكروفون", is3D: true },
-    { id: 10, key: "speakers", name: "السماعات", is3D: true },
-    { id: 11, key: "ps-button", name: "PS button", is3D: true },
-    { id: 12, key: "socket", name: "منفذ الشحن", is3D: true },
+    { id: 7, key: "d-pad", name: "D-Pad", is3D: true },
+    { id: 8, key: "buttons", name: "Action Buttons", is3D: true },
+    { id: 9, key: "microphone", name: "Microphone", is3D: true },
+    { id: 10, key: "speakers", name: "Speakers", is3D: true },
+    { id: 11, key: "ps-button", name: "PS Button", is3D: true },
+    { id: 12, key: "socket", name: "Charging Port", is3D: true },
     { id: 13, key: "aux", name: "AUX", is3D: true },
     {
       id: 14,
       key: "analog-right",
-      name: "انالوج داخلي يمين",
+      name: "Right Internal Analog",
       is3D: false,
       images: [],
     },
     {
       id: 15,
       key: "analog-left",
-      name: "انالوج داخلي شمال",
+      name: "Left Internal Analog",
       is3D: false,
       images: [],
     },
     {
       id: 16,
       key: "battery",
-      name: "البطارية",
+      name: "Battery",
       is3D: false,
       images: ["/assets/images/parts/battery.png"],
     },
   ];
 
-  const handlePartClick = (part) => {
+  const handlePartClick = (part: Part3D) => {
     togglePart(part.id);
     // Move camera using the Scene component's method
-    if (sceneRef.current && sceneRef.current.moveCameraToPartPosition) {
+    if (sceneRef.current?.moveCameraToPartPosition) {
       sceneRef.current.moveCameraToPartPosition(part.id);
     }
   };
@@ -82,7 +131,7 @@ export default function JoystickViewer({ selectedParts = [], togglePart = () => 
               className="flex items-center gap-1 px-4 py-2"
             >
               {part.name === "action-buttons" ? <ActionsButtons /> : part.name}
-              {selectedParts.includes(part.id) && <Check size={16} />}
+              {selectedParts?.includes(part.id) && <Check size={16} />}
             </Button>
           ) : (
             <PartDialog key={part.id} images={part.images || []}>
@@ -112,9 +161,9 @@ export default function JoystickViewer({ selectedParts = [], togglePart = () => 
           <Suspense fallback={<LoadingFallback />}>
             <Scene
               ref={sceneRef}
-              selectedParts={selectedParts.filter((id) => id <= 21)}
+              selectedParts={selectedParts.filter((id) => +id <= 21)}
               togglePart={togglePart}
-              canvasRef={canvasRef}
+              canvasRef={canvasRef as any}
             />
           </Suspense>
         </Canvas>
@@ -134,13 +183,16 @@ function LoadingFallback() {
 }
 
 // Separate the scene into its own component to better manage the Three.js context
-const Scene = React.forwardRef(({ selectedParts, togglePart, canvasRef }, ref) => {
-  const controlsRef = useRef(null);
-  const { scene, error } = useGLTF("/models/joystick.gltf");
+const Scene = forwardRef<SceneRef, SceneProps>(({ selectedParts, togglePart, canvasRef }, ref) => {
+  const controlsRef = useRef<any>(null);
+  const { scene, error } = useGLTF("/models/joystick.gltf") as {
+    scene: THREE.Group;
+    error?: Error;
+  };
   const three = useThree();
   const { camera, gl } = three;
-  const [isControlsEnabled, setIsControlsEnabled] = useState(true);
-  const [isSceneReady, setIsSceneReady] = useState(false);
+  const [isControlsEnabled, setIsControlsEnabled] = useState<boolean>(true);
+  const [isSceneReady, setIsSceneReady] = useState<boolean>(false);
 
   // Handle GLTF loading error
   useEffect(() => {
@@ -153,7 +205,7 @@ const Scene = React.forwardRef(({ selectedParts, togglePart, canvasRef }, ref) =
   }, [scene, error]);
 
   // Only map parts that actually exist in the 3D model
-  const partToMeshMap = {
+  const partToMeshMap: PartToMeshMap = {
     1: "Cap_1", // أنالوج يمين
     2: "Cap_2", // أنالوج شمال
     3: "R", // R1
@@ -166,14 +218,17 @@ const Scene = React.forwardRef(({ selectedParts, togglePart, canvasRef }, ref) =
     // Parts 10-16 don't exist in the model, so they're not included here
   };
 
-  const meshToPartIdMap = Object.entries(partToMeshMap).reduce((acc, [id, meshName]) => {
-    const names = Array.isArray(meshName) ? meshName : [meshName];
-    names.forEach((name) => (acc[name] = Number(id)));
-    return acc;
-  }, {});
+  const meshToPartIdMap: MeshToPartIdMap = Object.entries(partToMeshMap).reduce(
+    (acc, [id, meshName]) => {
+      const names = Array.isArray(meshName) ? meshName : [meshName];
+      names.forEach((name) => (acc[name] = Number(id)));
+      return acc;
+    },
+    {} as MeshToPartIdMap,
+  );
 
   // Camera positions for all parts (both 3D and non-3D)
-  const partCameraPositions = {
+  const partCameraPositions: PartCameraPositions = {
     1: { position: [2.004, 1.5, 0.517], target: [1.08, 1.706, -0.707] }, // أنالوج يمين
     2: { position: [1.988, 1.848, 0.655], target: [0.506, 1.41, 0.73] }, // أنالوج شمال
     3: { position: [1.264, 3.011, -1.221], target: [1.152, -0.252, -0.521] }, // R1
@@ -194,13 +249,13 @@ const Scene = React.forwardRef(({ selectedParts, togglePart, canvasRef }, ref) =
   };
 
   // Function to check if a part exists in the 3D model
-  const partExistsInModel = (partId) => {
+  const partExistsInModel = (partId: number): boolean => {
     return partToMeshMap.hasOwnProperty(partId);
   };
 
   // Function to move camera to a part's position
   const moveCameraToPosition = useCallback(
-    (partId) => {
+    (partId: number) => {
       // Check if all required objects are available
       if (!camera || !controlsRef.current || !isSceneReady) {
         console.warn("Camera, controls, or scene not ready yet");
@@ -254,11 +309,17 @@ const Scene = React.forwardRef(({ selectedParts, togglePart, canvasRef }, ref) =
 
     try {
       scene.traverse((child) => {
-        if (child.isMesh && child.material) {
+        if (child instanceof THREE.Mesh && child.material) {
           if (!(child.material instanceof THREE.MeshStandardMaterial)) {
             child.material = new THREE.MeshStandardMaterial({
-              color: child.material.color || 0xffffff,
-              map: child.material.map || null,
+              color:
+                child.material instanceof THREE.Material && "color" in child.material
+                  ? (child.material as any).color || 0xffffff
+                  : 0xffffff,
+              map:
+                child.material instanceof THREE.Material && "map" in child.material
+                  ? (child.material as any).map || null
+                  : null,
               emissive: 0x000000,
               emissiveIntensity: 0,
             });
@@ -283,7 +344,7 @@ const Scene = React.forwardRef(({ selectedParts, togglePart, canvasRef }, ref) =
 
     try {
       scene.traverse((child) => {
-        if (child.isMesh && child.material) {
+        if (child instanceof THREE.Mesh && child.material instanceof THREE.MeshStandardMaterial) {
           const isSelected = selectedParts.some((partId) => {
             // Only check for highlighting if the part exists in the model
             if (!partExistsInModel(partId)) return false;
@@ -304,7 +365,7 @@ const Scene = React.forwardRef(({ selectedParts, togglePart, canvasRef }, ref) =
 
   // Handle clicks on 3D model
   const handleClick = useCallback(
-    (event) => {
+    (event: ThreeEvent<MouseEvent>) => {
       if (!gl || !camera || !scene || !isSceneReady) return;
 
       try {
@@ -340,8 +401,8 @@ const Scene = React.forwardRef(({ selectedParts, togglePart, canvasRef }, ref) =
     if (!canvasRef.current) return;
     const canvas = canvasRef.current;
 
-    const handleMouseDown = (event) => {
-      if (!canvas.contains(event.target)) {
+    const handleMouseDown = (event: MouseEvent) => {
+      if (!canvas.contains(event.target as Node)) {
         setIsControlsEnabled(false);
       } else {
         setIsControlsEnabled(true);
@@ -362,7 +423,7 @@ const Scene = React.forwardRef(({ selectedParts, togglePart, canvasRef }, ref) =
   }, [canvasRef]);
 
   // Expose camera movement method to parent
-  React.useImperativeHandle(ref, () => ({
+  useImperativeHandle(ref, () => ({
     moveCameraToPartPosition: moveCameraToPosition,
   }));
 

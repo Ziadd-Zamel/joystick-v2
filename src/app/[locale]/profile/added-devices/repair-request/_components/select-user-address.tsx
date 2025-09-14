@@ -25,7 +25,7 @@ export default function SelectUserAddress({
   return (
     <FormField
       control={form.control}
-      name="address"
+      name="addressId"
       render={({ field }) => (
         <FormItem>
           <FormLabel className="m-0">Address</FormLabel>

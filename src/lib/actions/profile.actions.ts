@@ -5,6 +5,7 @@ import { UserAddressFormValues } from "@/app/[locale]/profile/added-locations/_c
 import { getLocale } from "next-intl/server";
 import { cookies } from "next/headers";
 import { ProfileEmailFormValues, ProfilePasswordFormValues } from "../schemas/profile.schema";
+import { RepairRequeseFormValues } from "@/app/[locale]/profile/added-devices/repair-request/_components/repair-request-form";
 
 export const getUserDetails = async () => {
   const cookieStore = await cookies();
@@ -474,6 +475,47 @@ export const getAvaliableTime = async (dayId: string) => {
     }
 
     const payload = await res.json();
+
+    return payload;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const sendRepairRequest = async (values: RepairRequeseFormValues) => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("auth_token")?.value;
+  if (!token) {
+    throw new Error("User not authenticated");
+  }
+
+  try {
+    const res = await fetch(`${process.env.API}repair-requests/store`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        address_id: values.addressId,
+        day_id: values.availableDayId,
+        available_time_id: values.availableTimeId,
+        type: "personal",
+        devices: [
+          {
+            device_id: values.deviceId,
+            Problems_Parts: values.problemsParts,
+            notes: values.extraNotes,
+          },
+        ],
+      }),
+    });
+
+    const payload = await res.json();
+
+    if (!res.ok) {
+      throw new Error(payload.message || "Error adding your device");
+    }
 
     return payload;
   } catch (err) {
