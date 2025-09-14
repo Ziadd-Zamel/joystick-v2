@@ -96,7 +96,7 @@ const ProfileSideBar = () => {
       {/* Sidebar */}
       <div
         dir={direction}
-        className={`flex w-[90%] flex-col rounded-sm border-[1px] border-solid bg-white px-2 transition-transform duration-300 lg:h-screen lg:w-64 lg:justify-between ${
+        className={`flex w-[90%] flex-col rounded-md border-[1px] border-solid bg-white px-2 transition-transform duration-300 lg:h-screen lg:w-64 lg:justify-between ${
           isOpen ? "translate-x-0" : "-translate-x-full"
         } fixed top-0 left-0 z-50 h-full lg:static lg:translate-x-0`}
       >

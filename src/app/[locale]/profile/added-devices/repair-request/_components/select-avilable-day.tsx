@@ -9,7 +9,15 @@ import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { getAllAvilableDays } from "@/lib/actions/profile.actions";
+import { getAllAvaliableDays } from "@/lib/actions/profile.actions";
+import { useEffect } from "react";
+
+export type DateDayes = {
+  id: number;
+  date: string;
+  created_at: string;
+  updated_at: string;
+};
 
 export default function SelectAvilableDay({
   form,
@@ -18,17 +26,27 @@ export default function SelectAvilableDay({
 }) {
   const { data, isLoading } = useQuery({
     queryKey: ["avilable-days"],
-    queryFn: getAllAvilableDays,
+    queryFn: getAllAvaliableDays,
   });
 
-  const days = data.data;
+  const days: DateDayes[] = data?.data;
 
-  console.log("days", days);
+  const dayDate = form.watch("availableDay");
+
+  useEffect(() => {
+    if (dayDate && days?.length) {
+      const formatted = dayDate.toISOString().split("T")[0];
+      const day = days.find((d) => d.date === formatted);
+      if (day) {
+        form.setValue("availableDayId", day.id + "");
+      }
+    }
+  }, [dayDate, days, form]);
 
   return (
     <FormField
       control={form.control}
-      name="availableDayes"
+      name="availableDay"
       render={({ field }) => (
         <FormItem className="flex flex-col">
           <FormLabel className="m-0">Available Dayes</FormLabel>
@@ -50,7 +68,10 @@ export default function SelectAvilableDay({
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
               <Calendar
-                // disabled={(date) => date > new Date() || date < new Date("1900-01-01")}
+                disabled={(date) => {
+                  const formatted = date.toISOString().split("T")[0];
+                  return !days.some((day) => day.date === formatted);
+                }}
                 mode="single"
                 selected={field.value}
                 onSelect={field.onChange}

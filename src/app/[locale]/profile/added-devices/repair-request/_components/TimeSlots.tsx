@@ -1,19 +1,10 @@
-/* eslint-disable react/prop-types */
 "use client";
 
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Clock } from "lucide-react";
 
-export default function TimeSlots({
-  times,
-  isLoading,
-  error,
-  value,
-  onChange,
-  validationError,
-}) {
-
+export default function TimeSlots({ times, isLoading, error, value, onChange, validationError }) {
   // Format time from "HH:MM:SS" to "HH:MM"
   const formatTime = (timeString) => {
     try {
@@ -35,7 +26,7 @@ export default function TimeSlots({
     return (
       <div className="space-y-2">
         <Label>الوقت المتاح</Label>
-        <div className="flex items-center justify-center h-20 bg-gray-50 rounded-md">
+        <div className="flex h-20 items-center justify-center rounded-md bg-gray-50">
           <p className="text-gray-500">جاري تحميل الأوقات المتاحة...</p>
         </div>
       </div>
@@ -46,7 +37,7 @@ export default function TimeSlots({
     return (
       <div className="space-y-2">
         <Label>الوقت المتاح</Label>
-        <div className="flex items-center justify-center h-20 bg-red-50 rounded-md">
+        <div className="flex h-20 items-center justify-center rounded-md bg-red-50">
           <p className="text-red-500">حدث خطأ أثناء تحميل الأوقات المتاحة</p>
         </div>
       </div>
@@ -57,10 +48,8 @@ export default function TimeSlots({
     return (
       <div className="space-y-2">
         <Label>الوقت المتاح</Label>
-        <div className="flex items-center justify-center h-20 bg-gray-50 rounded-md">
-          <p className="text-gray-500">
-            لا يوجد اوقات متاحة هذا اليوم.
-          </p>
+        <div className="flex h-20 items-center justify-center rounded-md bg-gray-50">
+          <p className="text-gray-500">لا يوجد اوقات متاحة هذا اليوم.</p>
         </div>
       </div>
     );
@@ -70,10 +59,8 @@ export default function TimeSlots({
     return (
       <div className="space-y-2">
         <Label>الوقت المتاح</Label>
-        <div className="flex items-center justify-center h-20 bg-gray-50 rounded-md">
-          <p className="text-gray-500">
-            يرجى اختيار تاريخ أولاً لعرض الأوقات المتاحة
-          </p>
+        <div className="flex h-20 items-center justify-center rounded-md bg-gray-50">
+          <p className="text-gray-500">يرجى اختيار تاريخ أولاً لعرض الأوقات المتاحة</p>
         </div>
       </div>
     );
@@ -82,13 +69,13 @@ export default function TimeSlots({
   return (
     <div className="space-y-2">
       <Label>الوقت المتاح</Label>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
         {times.map((time) => (
           <Button
             key={time.id}
             type="button"
             variant={value === time.id.toString() ? "default" : "outline"}
-            className="flex items-center gap-2 h-auto py-3"
+            className="flex h-auto items-center gap-2 py-3"
             onClick={() => onChange(time.id.toString())}
           >
             <Clock className="h-4 w-4" />
@@ -96,9 +83,7 @@ export default function TimeSlots({
           </Button>
         ))}
       </div>
-      {validationError && (
-        <p className="text-red-500 text-sm">{validationError}</p>
-      )}
+      {validationError && <p className="text-sm text-red-500">{validationError}</p>}
     </div>
   );
 }

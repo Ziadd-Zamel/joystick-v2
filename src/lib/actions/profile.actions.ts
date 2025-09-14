@@ -445,14 +445,32 @@ export const deleteDevice = async (deviceId: string | number) => {
   }
 };
 
-export const getAllAvilableDays = async () => {
+export const getAllAvaliableDays = async () => {
   try {
     const res = await fetch(`${process.env.API}user/available-days/get-all`, {
       method: "GET",
     });
 
     if (!res.ok) {
-      throw new Error("Failed to fetch Devices");
+      throw new Error("Failed to fetch Dates");
+    }
+
+    const payload = await res.json();
+
+    return payload;
+  } catch (err) {
+    throw err;
+  }
+};
+
+export const getAvaliableTime = async (dayId: string) => {
+  try {
+    const res = await fetch(`${process.env.API}available-times/get/${dayId}`, {
+      method: "GET",
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch Times");
     }
 
     const payload = await res.json();
