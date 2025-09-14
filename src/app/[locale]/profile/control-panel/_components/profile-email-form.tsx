@@ -20,7 +20,7 @@ export default function ProfileEmailForm() {
   const t = useTranslations("profile-route");
 
   const form = useForm<ProfileEmailFormValues>({
-    resolver: zodResolver(profileEmailSchema),
+    resolver: zodResolver(profileEmailSchema(t)),
     defaultValues: {
       email: "",
     },

@@ -96,6 +96,15 @@
     "password-change-failed": "فشل في تغيير كلمة المرور. يرجى المحاولة مرة أخرى."
   },
   "profile-route": {
+    "name-required": "الاسم مطلوب",
+    "phone-required": "رقم الهاتف مطلوب",
+    "phone-start": "يجب أن يبدأ رقم الهاتف بـ 01",
+    "phone-third-digit": "يجب أن يكون الرقم الثالث 0 أو 1 أو 2 أو 5",
+    "phone-length": "يجب أن يحتوي رقم الهاتف على 11 رقمًا بالضبط",
+    "email-required": "البريد الإلكتروني مطلوب",
+    "old-password-required": "كلمة المرور القديمة مطلوبة",
+    "password-min-length": "يجب أن تكون كلمة المرور 8 أحرف على الأقل",
+    "passwords-dont-match": "كلمات المرور غير متطابقة",
     "repair-request": "طلب صيانة",
     "profile": "الملف الشخصي",
     "main": "الملف الشخصي",

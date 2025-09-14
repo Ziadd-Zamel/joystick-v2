@@ -99,6 +99,15 @@
     "password-change-failed": "Failed to change password. Please try again."
   },
   "profile-route": {
+    "name-required": "Name is required",
+    "phone-required": "Phone Number is required",
+    "phone-start": "Phone number must start with 01",
+    "phone-third-digit": "The third digit must be 0, 1, 2, or 5",
+    "phone-length": "Phone number must have 11 digits in total",
+    "email-required": "Email is required",
+    "old-password-required": "Old password is required",
+    "password-min-length": "Password must be at least 8 characters",
+    "passwords-dont-match": "Passwords don’t match",
     "repair-request": "Repair Request",
     "profile": "Profile",
     "main": "Profile",
