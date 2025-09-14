@@ -2,13 +2,12 @@ import { getLocale, getTranslations } from "next-intl/server";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
 
-export const getAllReviews = async () => {
+export const getAllVideos = async () => {
   const t = await getTranslations();
   const lang = await getLocale();
 
-  const response = await fetch(`${apiUrl}reviews/get`, {
+  const response = await fetch(`${apiUrl}videos-youtube`, {
     headers: {
-      "Content-Type": "application/json",
       lang,
     },
   });
@@ -18,5 +17,5 @@ export const getAllReviews = async () => {
   }
 
   const data = await response.json();
-  return data.data.data;
+  return data.data;
 };

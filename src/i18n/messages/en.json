@@ -218,5 +218,8 @@
     "summary": "Summary",
     "sign-out": "Sign Out"
   },
-  "currency": "EGP"
+  "currency": "EGP",
+  "explanatory_videos": "Explanatory Videos",
+  "no_videos_found": "No Videos Found",
+  "loading": "Loading"
 }
