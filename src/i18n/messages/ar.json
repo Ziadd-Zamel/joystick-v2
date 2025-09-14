@@ -174,7 +174,7 @@
     "address": "العنوان",
     "favorite-address": "العنوان المفضل",
     "building-number-error": "يجب أن يكون رقم المبنى رقمًا صحيحًا موجبًا",
-    "apartment-number-error": "يجب أن يكون رقم الشقة رقمًا صالحًا رقمًا صحيحًا موجبًا",
+    "apartment-number-error": "يجب أن يكون رقم الشقة رقمًا صحيحًا موجبًا",
     "floor-number-error": "يجب أن يكون رقم الطابق رقمًا صحيحًا موجبًا",
     "address-type-error": "يجب أن يكون نوع العنوان إما منزل أو عمل",
     "latitude-number-error": "يجب أن يكون خط العرض رقمًا",

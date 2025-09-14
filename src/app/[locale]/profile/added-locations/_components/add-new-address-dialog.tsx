@@ -23,46 +23,15 @@ import { Input } from "@/components/ui/input";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import z from "zod";
 
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import AddLatLongMap from "./add-lat-long-map";
-import { addNewAddress, updateAddress } from "@/lib/actions/profile.actions";
 import { useRouter } from "@/i18n/navigation";
-import { useState } from "react";
+import { addNewAddress, updateAddress } from "@/lib/actions/profile.actions";
+import { UserAddressFormValues, userAddressSchema } from "@/lib/schemas/profile.schema";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
+import AddLatLongMap from "./add-lat-long-map";
 import { Address } from "./added-address-list";
-
-export const userAddressSchema = (t: TZodIntel) =>
-  z.object({
-    buildingNumber: z.string().refine((val) => !isNaN(Number(val)) && Number(val) > 0, {
-      message: t("building-number-error"),
-    }),
-
-    apartmentNumber: z.string().refine((val) => !isNaN(Number(val)) && Number(val) > 0, {
-      message: t("apartment-number-error"),
-    }),
-
-    floorNumber: z.string().refine((val) => !isNaN(Number(val)) && Number(val) > 0, {
-      message: t("floor-number-error"),
-    }),
-
-    addressType: z.enum(["Home", "Work"]),
-
-    latitude: z
-      .number(t("latitude-number-error"))
-      .min(-90, t("latitude-min-error"))
-      .max(90, t("latitude-max-error")),
-
-    longitude: z
-      .number(t("longitude-number-error"))
-      .min(-180, t("longitude-min-error"))
-      .max(180, t("longitude-max-error")),
-
-    address: z.string(t("address-required-error")).min(5, t("address-min-error")),
-  });
-
-export type UserAddressFormValues = z.infer<ReturnType<typeof userAddressSchema>>;
 
 export default function AddNewAddressDialog({
   children,

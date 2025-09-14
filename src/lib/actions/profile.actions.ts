@@ -1,10 +1,13 @@
 "use server";
 
 import { AddDeviceFormValues } from "@/app/[locale]/profile/added-devices/_components/add-device-dialog";
-import { UserAddressFormValues } from "@/app/[locale]/profile/added-locations/_components/add-new-address-dialog";
 import { getLocale } from "next-intl/server";
 import { cookies } from "next/headers";
-import { ProfileEmailFormValues, ProfilePasswordFormValues } from "../schemas/profile.schema";
+import {
+  ProfileEmailFormValues,
+  ProfilePasswordFormValues,
+  UserAddressFormValues,
+} from "../schemas/profile.schema";
 import { RepairRequeseFormValues } from "@/app/[locale]/profile/added-devices/repair-request/_components/repair-request-form";
 
 export const getUserDetails = async () => {
@@ -151,6 +154,7 @@ export const updateUserPhone = async (phone: string | undefined) => {
 export const fetchUserAddresses = async () => {
   const cookieStore = await cookies();
   const token = cookieStore.get("auth_token")?.value;
+  const locale = await getLocale();
 
   if (!token) {
     throw new Error("Unauthorized: No token found");
@@ -161,6 +165,7 @@ export const fetchUserAddresses = async () => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
+        lang: locale || "ar",
       },
     });
 
@@ -180,6 +185,7 @@ export const fetchUserAddresses = async () => {
 export const addNewAddress = async (values: UserAddressFormValues) => {
   const cookieStore = await cookies();
   const token = cookieStore.get("auth_token")?.value;
+  const locale = await getLocale();
 
   if (!token) {
     throw new Error("Unauthorized: No token found");
@@ -194,6 +200,7 @@ export const addNewAddress = async (values: UserAddressFormValues) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
+        lang: locale || "ar",
       },
       body: JSON.stringify({
         building_number: values.buildingNumber,
@@ -222,6 +229,7 @@ export const addNewAddress = async (values: UserAddressFormValues) => {
 export const updateAddress = async (values: UserAddressFormValues, addressId: number) => {
   const cookieStore = await cookies();
   const token = cookieStore.get("auth_token")?.value;
+  const locale = await getLocale();
 
   if (!token) {
     throw new Error("Unauthorized: No token found");
@@ -233,6 +241,7 @@ export const updateAddress = async (values: UserAddressFormValues, addressId: nu
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
+        lang: locale || "ar",
       },
       body: JSON.stringify({
         building_number: values.buildingNumber,
@@ -262,6 +271,7 @@ export const updateAddress = async (values: UserAddressFormValues, addressId: nu
 export const deleteAddress = async (addressId: number) => {
   const cookieStore = await cookies();
   const token = cookieStore.get("auth_token")?.value;
+  const locale = await getLocale();
 
   if (!token) {
     throw new Error("Unauthorized: No token found");
@@ -273,6 +283,7 @@ export const deleteAddress = async (addressId: number) => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
+        lang: locale || "ar",
       },
     });
 
