@@ -216,5 +216,8 @@
     "button": "متابعة التسوق",
     "sign-out": "تسجيل الخروج"
   },
-  "currency": "جنيه "
+  "currency": "جنيه ",
+  "explanatory_videos": "فيديوهات توضيحية",
+  "no_videos_found": "لم يتم العثور على مقاطع فيديو",
+  "loading": "جاري التحميل"
 }
