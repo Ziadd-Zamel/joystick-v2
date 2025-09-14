@@ -10,7 +10,7 @@ import Cookies from "js-cookie";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
 import { getStaticInfo } from "@/lib/api/info.api";
-import { FaFacebookF, FaInstagram, FaTiktok } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaTiktok, FaYoutube } from "react-icons/fa";
 import { useTranslations } from "next-intl";
 
 const Footer = () => {
@@ -83,6 +83,17 @@ const Footer = () => {
             </Link>
             <p className="text-sm leading-relaxed text-gray-200">{t("maintenance-service-text")}</p>
             <div className="flex items-center gap-4">
+              {/* Youtube */}
+              <Link
+                href={contactInfo?.youtube || "https://www.youtube.com/@joystickrepair"}
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-white/10 transition-colors hover:bg-white/20"
+                aria-label="Instagram"
+              >
+                <div className="relative flex h-5 w-5 items-center justify-center">
+                  <FaYoutube size={20} />
+                </div>
+              </Link>
+
               {/* Instagram */}
               <Link
                 href={contactInfo?.instagram || "https://www.instagram.com/joystick.eg/"}

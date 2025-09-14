@@ -74,7 +74,7 @@ export default function Sidebar({ categories }: { categories: Category[] }) {
                     }`}
                   >
                     <IconComponent className="h-5 w-5" />
-                    <span>{t(link.title)}</span>
+                    <span>{t(`nav.${link.title}`)}</span>
                   </Link>
                 );
               })}
