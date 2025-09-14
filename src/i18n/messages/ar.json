@@ -181,7 +181,6 @@
     "status": "الحالة",
     "order-date": "تاريخ الطلب",
     "full-price": "السعر الكامل",
-
     "maintenance": "الصيانة",
     "format-currency": "{value, number, currency-float}"
   },
@@ -208,7 +207,7 @@
     "placeholder": "ادخل كود الخصم",
     "apply": "تطبيق",
     "price": "السعر",
-    "currency": "EGP",
+    "currency": "جنيه ",
     "discountedPrice": "السعر بعد الخصم",
     "checkout": "استكمال عملية الشراء",
     "shipping": "الشحن",
@@ -216,5 +215,6 @@
     "summary": "ملخص السلة",
     "button": "متابعة التسوق",
     "sign-out": "تسجيل الخروج"
-  }
+  },
+  "currency": "جنيه "
 }

@@ -23,7 +23,7 @@ export default function DiscountSection({ cartItems = [], shipping }: DiscountSe
       </CardHeader>
       <CardContent>
         {/* Price */}
-        <div className="my-2 flex justify-between text-lg font-semibold text-[#A6A798]">
+        <div className="my-3 flex justify-between text-lg font-medium text-[#8A8B7A]">
           <span>{t("price")}</span>
           <span>
             {totalPrice} {t("currency")}
@@ -31,7 +31,7 @@ export default function DiscountSection({ cartItems = [], shipping }: DiscountSe
         </div>
 
         {/* Shipping */}
-        <div className="my-2 flex justify-between text-lg font-semibold text-[#A6A798]">
+        <div className="my-3 flex justify-between text-lg font-medium text-[#8A8B7A]">
           <span>{t("shipping")}</span>
           <span>
             {shipping.toFixed(1)} {t("currency")}
@@ -39,7 +39,7 @@ export default function DiscountSection({ cartItems = [], shipping }: DiscountSe
         </div>
 
         {/* Total */}
-        <div className="my-2 flex justify-between text-lg font-semibold text-[#A6A798]">
+        <div className="my-3 flex justify-between text-lg font-medium text-[#8A8B7A]">
           <span>{t("total")}</span>
           <span>
             {finalTotal} {t("currency")}
@@ -47,10 +47,10 @@ export default function DiscountSection({ cartItems = [], shipping }: DiscountSe
         </div>
 
         {/* Checkout Button */}
-        <Link href={"/cart/checkout"} className="">
+        <Link href={"/cart/checkout"}>
           <Button
             type="button"
-            className="w-full bg-[#028b85] py-6 text-white hover:bg-[#028b85]"
+            className="mt-10 w-full bg-[#028b85] py-6 text-white hover:bg-[#028b85]"
             disabled={cartItems.length === 0}
           >
             {t("checkout")}
