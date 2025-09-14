@@ -58,7 +58,7 @@ export default function RepairRequestForm() {
       const payload = await sendRepairRequest(values);
       toast.success(payload.message);
 
-      router.push("/profile/previous-orders");
+      router.push("/profile/previous-orders/?orderType=repair");
     } catch (err) {
       toast.error((err as Error).message);
     }

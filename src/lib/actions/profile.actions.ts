@@ -151,6 +151,7 @@ export const updateUserPhone = async (phone: string | undefined) => {
   }
 };
 
+// User Addresses
 export const fetchUserAddresses = async () => {
   const cookieStore = await cookies();
   const token = cookieStore.get("auth_token")?.value;
