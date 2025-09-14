@@ -1,7 +1,5 @@
 import { useTranslations } from "next-intl";
 import AddDeviceDialog from "./_components/add-device-dialog";
-import { History } from "lucide-react";
-import Link from "next/link";
 import AddedDevicesList from "./_components/added-devices-list";
 
 export default function Page() {
@@ -13,9 +11,9 @@ export default function Page() {
         <h2 className="flex-1 text-lg font-medium">{t("added-devices")}</h2>
         {/* Add new device dialog */}
 
-        <Link href="#">
+        {/* <Link href="#">
           <History className="text-main size-7" />
-        </Link>
+        </Link> */}
 
         <AddDeviceDialog />
       </header>
