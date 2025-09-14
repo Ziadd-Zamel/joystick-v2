@@ -1,10 +1,6 @@
 {
-  "nav": {
-    "home": "الرئيسية",
-    "about": "من نحن",
-    "maintenance": "طلب صيانة",
-    "videos": "فيديوهات"
-  },
+  "home": "الرئيسية",
+  "about": "من نحن",
   "no-features-available": "لا توجد مميزات متاحة.",
   "failed-to-fetch-advantages": "فشل في جلب المزايا",
   "failed-to-fetch-data": "فشل في جلب البيانات.",
@@ -99,7 +95,7 @@
     "control-panel": "لوحة التحكم",
     "added-locations": "العناوين المضافة",
     "previous-orders": "الطلبات السابقة",
-    "favourite": "المفضلة",
+    "favourites": "المفضلة",
     "added-devices": "الأجهزة المضافة",
     "contact-us": "تواصل معنا",
     "help-center": "مركز المساعدة",
@@ -182,7 +178,8 @@
     "status": "الحالة",
     "order-date": "تاريخ الطلب",
     "full-price": "السعر الكامل",
-    "maintenance": "الصيانة"
+    "maintenance": "الصيانة",
+    "format-currency": "{value, number, currency-float}"
   },
   "add-to-cart": "أضف الى العربة",
   "available-quantity": "الكمية المتاحة:",

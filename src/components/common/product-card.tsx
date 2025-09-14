@@ -25,7 +25,7 @@ export const ProductCard = ({ product }: CardProps) => {
     <Card className="my-4 flex h-fit shrink-0 cursor-grab flex-col rounded-lg bg-white p-4 shadow-[0_0_15px_-5px_rgba(0,0,0,0.1)]">
       <CardContent className="relative h-full px-0">
         {/* Fav Button */}
-        <AddToFavoriteButton productId={1} isFav={Boolean(product.is_favorite)} />
+        <AddToFavoriteButton productId={product.id} isFav={Boolean(product.is_favorite)} />
 
         {/* Product Image */}
         <div className="group relative flex aspect-square cursor-pointer items-center justify-center rounded-lg bg-[#F2FAFA]">

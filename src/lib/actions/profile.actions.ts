@@ -319,3 +319,34 @@ export const getPrevOrders = async (type: string) => {
     throw err;
   }
 };
+
+// Favorites
+export const getUserFavourites = async () => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("auth_token")?.value;
+  const locale = await getLocale();
+
+  if (!token) {
+    throw new Error("Unauthorized: No token found");
+  }
+
+  try {
+    const res = await fetch(`${process.env.API}products/favorited`, {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        lang: locale || "ar",
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch favourites");
+    }
+
+    const payload = await res.json();
+
+    return payload;
+  } catch (error) {
+    throw error;
+  }
+};

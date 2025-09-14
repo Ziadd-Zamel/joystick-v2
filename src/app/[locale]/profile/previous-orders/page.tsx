@@ -2,8 +2,9 @@ import { cn } from "@/lib/utils";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useTranslations } from "next-intl";
-import PrevOrdersTable from "./prev-orders-store-table";
-import PrevOrdersMaintenanceTable from "./prev-orders-maintenance-table";
+import PrevOrdersTable from "./_components/prev-orders-store-table";
+import PrevOrdersMaintenanceTable from "./_components/prev-orders-maintenance-table";
+import { Suspense } from "react";
 
 export default function Page() {
   const t = useTranslations("profile-route");
@@ -37,11 +38,15 @@ export default function Page() {
           </TabsList>
 
           <TabsContent value="store" className="pt-6">
-            <PrevOrdersTable />
+            <Suspense fallback={"Loading ...."}>
+              <PrevOrdersTable />
+            </Suspense>
           </TabsContent>
 
           <TabsContent value="repair" className="pt-6">
-            <PrevOrdersMaintenanceTable />
+            <Suspense fallback={"Loading ....."}>
+              <PrevOrdersMaintenanceTable />
+            </Suspense>
           </TabsContent>
         </Tabs>
       </div>

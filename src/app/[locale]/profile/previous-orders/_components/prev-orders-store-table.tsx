@@ -9,34 +9,34 @@ import {
 import { getPrevOrders } from "@/lib/actions/profile.actions";
 import { getTranslations } from "next-intl/server";
 
-type Device = {
+type Product = {
   id: number;
   name: string;
-  model: string;
-  serial_number?: string;
+  quantity: number;
+  price: number;
 };
 
-type Repair = {
+type Order = {
   id: number;
-  code: string;
+  order_number: string;
   created_at: string;
-  devices: Device[];
-  status: "pending" | "in_progress" | "completed" | "cancelled";
+  products: Product[];
+  status: "pending" | "completed" | "cancelled" | "shipped";
+  total_price: string;
 };
 
-export default async function PrevOrdersMaintenanceTable() {
+export default async function PrevOrdersTable() {
   const t = await getTranslations("profile-route");
-
-  const payload = await getPrevOrders("repair");
-  const orderData: Repair[] = payload.data.data;
+  const payload = await getPrevOrders("store");
+  const orderData: Order[] = payload.data.data;
 
   return (
     <div className="overflow-hidden rounded-md border">
       <Table className="text-base">
-        <TableHeader className="bg-zinc-50">
+        <TableHeader className="bg-main/5 h-12">
           <TableRow>
             <TableHead className="text-center">{t("order-number")}</TableHead>
-            <TableHead className="text-center">{t("order-type")}</TableHead>
+            <TableHead className="text-center">{t("full-price")}</TableHead>
             <TableHead className="text-center">{t("status")}</TableHead>
             <TableHead className="text-center">{t("order-date")}</TableHead>
           </TableRow>
@@ -44,8 +44,8 @@ export default async function PrevOrdersMaintenanceTable() {
         <TableBody className="text-sm font-medium text-zinc-700">
           {orderData.map((order) => (
             <TableRow key={order.id}>
-              <TableCell className="text-center">{order.code}</TableCell>
-              <TableCell className="text-center">Maintenance</TableCell>
+              <TableCell className="text-center">{order.order_number}</TableCell>
+              <TableCell className="text-center">{order.total_price}</TableCell>
               <TableCell className="text-center">{order.status}</TableCell>
               <TableCell className="text-center">{order.created_at}</TableCell>
             </TableRow>
