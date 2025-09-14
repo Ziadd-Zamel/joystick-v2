@@ -5,6 +5,7 @@ import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
 import PrevOrdersMaintenanceTable from "./_components/prev-orders-maintenance-table";
 import PrevOrdersTable from "./_components/prev-orders-store-table";
+import PrevOrderSkeleton from "./_components/prev-order-skeleton";
 
 export default async function Page({ searchParams }: RouteProps) {
   const { orderType } = await searchParams;
@@ -39,13 +40,13 @@ export default async function Page({ searchParams }: RouteProps) {
           </TabsList>
 
           <TabsContent value="store" className="pt-6">
-            <Suspense fallback={"Loading ...."}>
+            <Suspense fallback={<PrevOrderSkeleton />}>
               <PrevOrdersTable />
             </Suspense>
           </TabsContent>
 
           <TabsContent value="repair" className="pt-6">
-            <Suspense fallback={"Loading ....."}>
+            <Suspense fallback={<PrevOrderSkeleton />}>
               <PrevOrdersMaintenanceTable />
             </Suspense>
           </TabsContent>

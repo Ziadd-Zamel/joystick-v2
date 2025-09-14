@@ -59,7 +59,7 @@ export default async function AddedDevicesList() {
 
           {/* Actions */}
           <div className="flex flex-col items-end justify-between gap-2 self-stretch py-3">
-            <DeleteItemDialog action={deleteDevice.bind(null, device.id)} itemName={t("remove")} />
+            <DeleteItemDialog action={deleteDevice.bind(null, device.id)} itemName="device" />
 
             <Link
               href={`/profile/added-devices/repair-request/${device.id}`}

@@ -30,12 +30,11 @@ type Product = {
   updated_at: string;
 };
 
-export default async function FavouritProductsList() {
+export default async function FavouriteProductsList() {
   const t = await getTranslations("profile-route");
 
   const payload = await getUserFavourites();
   const products: Product[] = payload.data.data;
-  console.log(products);
 
   if (!products.length)
     return (

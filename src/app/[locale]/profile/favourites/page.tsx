@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import React, { Suspense } from "react";
-import FavouritProductsList from "./_components/favourit-products-list";
+import FavouriteProductsList from "./_components/favourite-products-list";
+import FavouriteSkeleton from "./_components/favourite-skeleton";
 
 export default function Page() {
   const t = useTranslations("profile-route");
@@ -11,8 +12,8 @@ export default function Page() {
 
       <div className="p-5">
         {/* Tabs instead of query params */}
-        <Suspense fallback={"Loading"}>
-          <FavouritProductsList />
+        <Suspense fallback={<FavouriteSkeleton />}>
+          <FavouriteProductsList />
         </Suspense>
       </div>
     </div>

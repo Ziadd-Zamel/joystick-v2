@@ -1,6 +1,8 @@
 import { useTranslations } from "next-intl";
 import AddDeviceDialog from "./_components/add-device-dialog";
 import AddedDevicesList from "./_components/added-devices-list";
+import { Suspense } from "react";
+import AddedDevicesSkeleton from "./_components/added-devices-skeleton";
 
 export default function Page() {
   const t = useTranslations("profile-route");
@@ -19,7 +21,9 @@ export default function Page() {
       </header>
 
       <div className="p-5">
-        <AddedDevicesList />
+        <Suspense fallback={<AddedDevicesSkeleton />}>
+          <AddedDevicesList />
+        </Suspense>
       </div>
     </div>
   );
