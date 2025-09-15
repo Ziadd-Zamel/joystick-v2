@@ -308,6 +308,9 @@
     "processing": "Processing"
   },
   "currency": "EGP",
+  "explanatory_videos": "Explanatory Videos",
+  "no_videos_found": "No Videos Found",
+  "loading": "Loading",
   "failed-to-pay": "Failed to process the payment",
   "product-details": "Product Details",
   "related-products": "Related products"

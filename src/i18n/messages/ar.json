@@ -306,6 +306,9 @@
     "processing": "جارٍ المعالجة..."
   },
   "currency": "جنيه ",
+  "explanatory_videos": "فيديوهات توضيحية",
+  "no_videos_found": "لم يتم العثور على مقاطع فيديو",
+  "loading": "جاري التحميل",
   "failed-to-pay": "فشل في معالجة الدفع",
   "product-details": "تفاصيل المنتج",
   "related-products": "منتجات ذات صلة",
