@@ -7,12 +7,12 @@ import Sidebar from "./_components/sidebar";
 import ShoppingCartButton from "./_components/shoping-cart-button";
 import AuthDialog from "./_components/auth-dialog";
 import { UserDropdown } from "./_components/user-menu";
-import NotificationDropdown from "./_components/notification-dropdown";
 
 import { getAllCategories } from "@/lib/api/categories.api";
 import { isUserLoggedin } from "@/lib/utils/server-cookies";
 import { CgProfile } from "react-icons/cg";
 import { ShoppingCart } from "lucide-react";
+import NotificationsDropdown from "./_components/notifications-dropdown";
 
 export default async function Navbar() {
   // Fetch all categories
@@ -65,7 +65,7 @@ export default async function Navbar() {
             )}
 
             {/* Notifications dropdown - only shown when logged in */}
-            {isLogedIn && <NotificationDropdown />}
+            {isLogedIn && <NotificationsDropdown />}
 
             {/* Authentication dialog - only shown when not logged in */}
             {!isLogedIn && <AuthDialog />}
