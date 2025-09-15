@@ -1,5 +1,4 @@
 "use client";
-
 import { House } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 
@@ -27,12 +26,36 @@ export default function ProfileBreadCrumbs() {
   // Get the segments
   const pathSegments = pathname.split("/").filter((segment) => segment);
 
-  // Build the breadcrumb items
-  const breadcrumbs = pathSegments.map((segment, index) => {
-    const href = "/" + pathSegments.slice(0, index + 1).join("/");
-    const labelKey = decodeURIComponent(segment);
-    return { labelKey, href };
-  });
+  // Build the breadcrumb items, filtering out numeric segments at the end
+  const breadcrumbs = pathSegments
+    .map((segment, index) => {
+      const href = "/" + pathSegments.slice(0, index + 1).join("/");
+      const labelKey = decodeURIComponent(segment);
+      return { labelKey, href, index };
+    })
+    .filter((crumb, index, array) => {
+      // If this is the last item and it's a number, exclude it
+      if (index === array.length - 1 && isDynamicSegment(crumb.labelKey)) {
+        return false;
+      }
+      return true;
+    });
+
+  // Helper function to get display label
+  const getDisplayLabel = (labelKey: string) => {
+    if (isDynamicSegment(labelKey)) {
+      return labelKey;
+    }
+
+    // If it's a translation key like "profile-route.Silicone", extract the last part
+    if (labelKey.includes(".")) {
+      const parts = labelKey.split(".");
+      return parts[parts.length - 1];
+    }
+
+    // Try to get translation, fallback to the key itself
+    return t(labelKey);
+  };
 
   return (
     <div className="box-container mx-auto my-8">
@@ -53,7 +76,7 @@ export default function ProfileBreadCrumbs() {
 
             {breadcrumbs.map((crumb, index) => {
               const isLast = index === breadcrumbs.length - 1;
-              const isDynamic = isDynamicSegment(crumb.labelKey);
+              const displayLabel = getDisplayLabel(crumb.labelKey);
 
               return (
                 <div key={crumb.href} className="flex items-center">
@@ -63,14 +86,14 @@ export default function ProfileBreadCrumbs() {
                   <BreadcrumbItem className="ps-2">
                     {isLast ? (
                       <BreadcrumbPage className="text-foreground font-['Tajawal,sans-serif']">
-                        {isDynamic ? crumb.labelKey : t(crumb.labelKey)}
+                        {displayLabel}
                       </BreadcrumbPage>
                     ) : (
                       <BreadcrumbLink
                         asChild
                         className="text-muted-foreground hover:text-foreground font-['Tajawal,sans-serif'] no-underline"
                       >
-                        <p>{isDynamic ? crumb.labelKey : t(crumb.labelKey)}</p>
+                        <Link href={crumb.href}>{displayLabel}</Link>
                       </BreadcrumbLink>
                     )}
                   </BreadcrumbItem>

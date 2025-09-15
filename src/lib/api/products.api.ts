@@ -1,14 +1,16 @@
 import { getLocale, getTranslations } from "next-intl/server";
+import { getToken } from "../utils/server-cookies";
 
 const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
 
 export const getAllProducts = async () => {
   const t = await getTranslations();
   const lang = await getLocale();
-
+  const token = await getToken();
   const response = await fetch(`${apiUrl}products`, {
     headers: {
       "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
       lang,
     },
   });

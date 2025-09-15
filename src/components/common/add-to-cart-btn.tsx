@@ -78,7 +78,10 @@ export default function AddToCartButton({
     <>
       <Button
         onClick={handleClick}
-        className={cn("flex w-[200px] items-center justify-center px-4 py-7 text-xl", className)}
+        className={cn(
+          "flex items-center justify-center px-4 py-5 text-base sm:w-[200px] sm:py-7 sm:text-xl",
+          className,
+        )}
         disabled={addProductToCart.isPending}
       >
         {addProductToCart.isPending ? (

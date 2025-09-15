@@ -26,7 +26,10 @@
   "delete-confirm-description": "هذا الإجراء لا يمكن التراجع عنه. سيؤدي إلى حذف {itemName} نهائيًا وإزالته من خوادمنا.",
   "cancel": "إلغاء",
   "continue": "متابعة",
-  "address": "العنوان",
+  "address": {
+    "address": "العنوان",
+    "change": "تغيير"
+  },
   "device": "الجهاز",
   "auth": {
     "phone": "رقم الهاتف",
@@ -96,6 +99,7 @@
     "password-change-failed": "فشل في تغيير كلمة المرور. يرجى المحاولة مرة أخرى."
   },
   "profile-route": {
+    "products": "المنتجات",
     "address-id-required": "العنوان مطلوب",
     "available-day-required": "اليوم مطلوب",
     "available-day-id-required": "اليوم مطلوب",
@@ -302,9 +306,10 @@
     "processing": "جارٍ المعالجة..."
   },
   "currency": "جنيه ",
-  "address": {
-    "address": "العنوان",
-    "change": "تغيير"
-  },
-  "failed-to-pay": "فشل في معالجة الدفع"
+  "failed-to-pay": "فشل في معالجة الدفع",
+  "product-details": "تفاصيل المنتج",
+  "related-products": "منتجات ذات صلة",
+  "copy-right-after": "| Copyright © 2025",
+  "copy-right-company": "evyX LTD",
+  "copy-right-before": "All rights reserved to"
 }

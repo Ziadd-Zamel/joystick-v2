@@ -29,7 +29,10 @@
   "delete-confirm-description": "This action cannot be undone. This will permanently delete your {itemName} and remove it from our servers.",
   "cancel": "Cancel",
   "continue": "Continue",
-  "address": "Address",
+  "address": {
+    "address": "Address",
+    "change": "Change"
+  },
   "device": "Device",
   "auth": {
     "phone": "Phone Number",
@@ -99,6 +102,7 @@
     "password-change-failed": "Failed to change password. Please try again."
   },
   "profile-route": {
+    "products": "Products",
     "address-id-required": "Address is required",
     "available-day-required": "Day is required",
     "available-day-id-required": "Day is required",
@@ -304,9 +308,7 @@
     "processing": "Processing"
   },
   "currency": "EGP",
-  "address": {
-    "address": "Address",
-    "change": "Change"
-  },
-  "failed-to-pay": "Failed to process the payment"
+  "failed-to-pay": "Failed to process the payment",
+  "product-details": "Product Details",
+  "related-products": "Related products"
 }

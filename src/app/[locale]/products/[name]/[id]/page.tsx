@@ -1,6 +1,6 @@
-import React from "react";
+import React, { Suspense } from "react";
 import ProductDetails from "./_components/product-details";
-import { getProductById } from "@/lib/api/product";
+import ProductDetailsSkeleton from "./_components/product-details-skeleton";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -8,11 +8,12 @@ interface Props {
 
 export default async function page({ params }: Props) {
   const { id } = await params;
-  const product = await getProductById(id);
 
   return (
-    <div className="flex-center h-screen">
-      <ProductDetails product={product} />
+    <div className="min-h-screen">
+      <Suspense fallback={<ProductDetailsSkeleton />}>
+        <ProductDetails id={id} />
+      </Suspense>
     </div>
   );
 }
