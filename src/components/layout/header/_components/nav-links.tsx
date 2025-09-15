@@ -1,14 +1,15 @@
 "use client";
 import { useTranslations } from "next-intl";
-import Link from "next/link";
-import { usePathname } from "@/i18n/routing";
+import { Link, usePathname } from "@/i18n/routing";
 import CategoriesMenu from "./categories-menu";
 
 export const navLinks = [
   { url: "/", title: "home" },
   { url: "/about", title: "about" },
-  { url: "/profile/maintenance", title: "maintenance" },
+  { url: "/contact", title: "contact" },
+  // { url: "/profile/added-devices", title: "maintenance" },
   { url: "/videos", title: "videos" },
+  { url: "/store", title: "store" },
 ];
 export default function NavLinks({ categories }: { categories: Category[] }) {
   // Translation
@@ -20,7 +21,7 @@ export default function NavLinks({ categories }: { categories: Category[] }) {
       {navLinks.map((link, index) => {
         return (
           <Link
-            className={`hover:text-main text-md xl:ltr:text-md cursor-pointer items-center px-2 text-center font-medium whitespace-nowrap transition-all duration-300 hover:-translate-y-0.5 hover:scale-110 xl:text-lg rtl:font-bold ${
+            className={`hover:text-main cursor-pointer items-center px-2 text-center font-medium whitespace-nowrap transition-all duration-300 hover:-translate-y-0.5 hover:scale-110 xl:ltr:text-base rtl:font-bold xl:rtl:text-lg ${
               pathName === link.url ? "text-main" : ""
             } `}
             key={index}
