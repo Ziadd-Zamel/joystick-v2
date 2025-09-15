@@ -1,7 +1,12 @@
-export default function CheckoutPage({ CartItems }: { CartItems: Cart[] }) {
-  return (
-    <div className="box-container flex flex-col items-start justify-between gap-5 py-20 lg:flex-row">
-      <div>asdas</div>
-    </div>
-  );
+import { getAllCart } from "@/lib/api/cart";
+import CheckoutContent from "./checkout-content";
+import CartEmptyState from "../../_components/cart-empty-state";
+
+export default async function CheckoutPage({ userAddresses }: { userAddresses: Address[] }) {
+  const cartItems = await getAllCart();
+
+  if (!cartItems.data.data.length) {
+    return <CartEmptyState />;
+  }
+  return <CheckoutContent userAddresses={userAddresses} CartItems={cartItems.data.data} />;
 }

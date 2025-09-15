@@ -149,7 +149,7 @@ export const updateUserPhone = async (phone: string | undefined) => {
 export const fetchUserAddresses = async () => {
   const cookieStore = await cookies();
   const token = cookieStore.get("auth_token")?.value;
-
+  const locale = await getLocale();
   if (!token) {
     throw new Error("Unauthorized: No token found");
   }
@@ -159,6 +159,7 @@ export const fetchUserAddresses = async () => {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
+        lang: locale || "ar",
       },
     });
 

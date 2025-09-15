@@ -213,7 +213,40 @@
     "shipping": "Shipping",
     "total": "Total",
     "summary": "Summary",
-    "sign-out": "Sign Out"
+    "sign-out": "Sign Out",
+    "first-name": "First Name",
+    "last-name": "Last Name",
+    "phone": "Phone Number",
+    "first-name-placeholder": "Enter first name",
+    "last-name-placeholder": "Enter last name",
+    "title-placeholder": "Enter title",
+    "phone-placeholder": "Enter phone number",
+    "save": "Save",
+    "first-name-required": "First name is required",
+    "last-name-required": "Last name is required",
+    "title-required": "Title is required",
+    "phone-required": "Phone number is required",
+    "address": "Address",
+    "coupon-applied": "Coupon Applied Successfully!",
+    "coupon-removed": "Coupon removed successfully",
+    "enter-discount-code": "Enter discount code",
+    "applying": "جاري التطبيق",
+    "remove": "Remove",
+    "coupon-applied-successfully": "Coupon applied successfully",
+    "discount": "Discount",
+    "cash-on-delivery": "Cash on delivry",
+    "payment-method": "Payment method",
+    "pay": "Pay",
+    "failed-to-decrease-quantity": "Failed to decrease the quantity",
+    "failed-to-increase-quantity": "Failed to increase the quantity",
+    "failed-to-delete-from-cart": "Failed to remove the item from the cart",
+    "payment-success": "Payment completed successfully",
+    "processing": "Processing"
   },
-  "currency": "EGP"
+  "currency": "EGP",
+  "address": {
+    "address": "Address",
+    "change": "Change"
+  },
+  "failed-to-pay": "Failed to process the payment"
 }

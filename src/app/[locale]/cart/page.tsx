@@ -1,16 +1,11 @@
-import { getAllCart } from "@/lib/api/cart";
-import CartEmptyState from "./_components/cart-empty-state";
+import { Suspense } from "react";
 import CartPage from "./_components/cart-page";
+import CartPageSkeleton from "./_components/cart-page-skeleton";
 
 export default async function Page() {
-  // Fetch cart items
-  const cartItems = await getAllCart();
-
-  // Check if cart is empty
-  if (!cartItems.data.data.length) {
-    return <CartEmptyState />;
-  }
-
-  // Render cart page with items
-  return <CartPage CartItems={cartItems.data.data} />;
+  return (
+    <Suspense fallback={<CartPageSkeleton />}>
+      <CartPage />
+    </Suspense>
+  );
 }

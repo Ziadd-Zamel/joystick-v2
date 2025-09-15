@@ -211,7 +211,40 @@
     "total": "الإجمالي",
     "summary": "ملخص السلة",
     "button": "متابعة التسوق",
-    "sign-out": "تسجيل الخروج"
+    "sign-out": "تسجيل الخروج",
+    "first-name": "الاسم الاول",
+    "last-name": "الاسم الثاني",
+    "phone": "رقم الهاتف",
+    "first-name-placeholder": "أدخل الاسم الأول",
+    "last-name-placeholder": "أدخل الاسم الثاني",
+    "title-placeholder": "أدخل العنوان",
+    "phone-placeholder": "أدخل رقم الهاتف",
+    "save": "حفظ",
+    "first-name-required": "الاسم الأول مطلوب",
+    "last-name-required": "الاسم الثاني مطلوب",
+    "title-required": "العنوان مطلوب",
+    "phone-required": "رقم الهاتف مطلوب",
+    "address": "العنوان",
+    "coupon-applied": "تم تطبيق الكوبون بنجاح!",
+    "coupon-removed": "تم إزالة الكوبون بنجاح",
+    "enter-discount-code": "أدخل كود الخصم",
+    "applying": "Applying...",
+    "remove": "إزالة",
+    "coupon-applied-successfully": "تم تطبيق الكوبون بنجاح",
+    "discount": "الخصم",
+    "cash-on-delivery": "الدفع عند الاستلام",
+    "payment-method": "اختر طريقة الدفع",
+    "pay": "ادفع",
+    "failed-to-decrease-quantity": "فشل في تقليل الكمية",
+    "failed-to-increase-quantity": "فشل في زيادة الكمية",
+    "failed-to-delete-from-cart": "فشل في إزالة العنصر من السلة",
+    "payment-success": "تم الدفع بنجاح",
+    "processing": "جارٍ المعالجة..."
   },
-  "currency": "جنيه "
+  "currency": "جنيه ",
+  "address": {
+    "address": "العنوان",
+    "change": "تغيير"
+  },
+  "failed-to-pay": "فشل في معالجة الدفع"
 }
