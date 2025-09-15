@@ -1,4 +1,7 @@
 {
+  "products": "Products",
+  "store": "Store",
+  "contact": "Contact Us",
   "home": "Home",
   "about": "About Us",
   "no-features-available": "No features available.",
