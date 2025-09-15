@@ -201,7 +201,7 @@ const Footer = () => {
           <p className="text-center text-sm text-gray-200">
             {t.rich("copy-right", {
               year: new Date(),
-              span: (chunk) => (
+              span: () => (
                 <Link
                   href="https://evyx.net/"
                   className="text-white underline transition-colors hover:text-gray-200"

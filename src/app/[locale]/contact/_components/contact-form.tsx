@@ -25,7 +25,7 @@ export default function ContactForm({ onSuccess }: { onSuccess?: () => void }) {
   const locale = useLocale();
 
   // Translations
-  const t = useTranslations("contact");
+  const t = useTranslations("contact-route");
 
   // Mutation
   const contactMutation = useMutation({

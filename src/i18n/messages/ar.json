@@ -317,7 +317,7 @@
   "related-products": "منتجات ذات صلة",
   "copy-right": "جميع الحقوق محفوظة لـ <span> evyX LTD </span> | حقوق الطبع والنشر © {year, date, year-only}",
   "copy-right-before": "All rights reserved to",
-  "contact": {
+  "contact-route": {
     "contact-us": "تواصل معنا",
     "name": "الاسم",
     "name-placeholder": "أدخل اسمك",

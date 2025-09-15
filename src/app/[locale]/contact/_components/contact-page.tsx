@@ -7,7 +7,7 @@ import { BsInstagram, BsYoutube } from "react-icons/bs";
 import Link from "next/link";
 
 export default async function ContactPage() {
-  const t = await getTranslations("contact");
+  const t = await getTranslations("contact-route");
   const data = await getStaticInfo("get-site-data");
 
   return (

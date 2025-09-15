@@ -3,7 +3,7 @@ import { z } from "zod";
 import { useTranslations } from "next-intl";
 
 export const useContactSchema = () => {
-  const t = useTranslations("contact");
+  const t = useTranslations("contact-route");
 
   return z.object({
     name: z.string().min(1, { message: t("name-required") }),
