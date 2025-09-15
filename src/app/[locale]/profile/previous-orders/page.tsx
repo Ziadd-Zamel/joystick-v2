@@ -1,13 +1,15 @@
 import { cn } from "@/lib/utils";
 
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useTranslations } from "next-intl";
-import PrevOrdersTable from "./_components/prev-orders-store-table";
-import PrevOrdersMaintenanceTable from "./_components/prev-orders-maintenance-table";
+import { getTranslations } from "next-intl/server";
 import { Suspense } from "react";
+import PrevOrdersMaintenanceTable from "./_components/prev-orders-maintenance-table";
+import PrevOrdersTable from "./_components/prev-orders-store-table";
+import PrevOrderSkeleton from "./_components/prev-order-skeleton";
 
-export default function Page() {
-  const t = useTranslations("profile-route");
+export default async function Page({ searchParams }: RouteProps) {
+  const { orderType } = await searchParams;
+  const t = await getTranslations("profile-route");
 
   return (
     <div className="h-full rounded-md border border-zinc-200 bg-white">
@@ -15,7 +17,7 @@ export default function Page() {
 
       <div className="p-5">
         {/* Tabs instead of query params */}
-        <Tabs defaultValue="store" className="w-full">
+        <Tabs defaultValue={(orderType as string) || "store"} className="w-full">
           <TabsList className="flex w-full gap-5 rounded-none border-b bg-transparent text-base font-medium text-zinc-900 !shadow-none">
             <TabsTrigger
               value="store"
@@ -38,13 +40,13 @@ export default function Page() {
           </TabsList>
 
           <TabsContent value="store" className="pt-6">
-            <Suspense fallback={"Loading ...."}>
+            <Suspense fallback={<PrevOrderSkeleton />}>
               <PrevOrdersTable />
             </Suspense>
           </TabsContent>
 
           <TabsContent value="repair" className="pt-6">
-            <Suspense fallback={"Loading ....."}>
+            <Suspense fallback={<PrevOrderSkeleton />}>
               <PrevOrdersMaintenanceTable />
             </Suspense>
           </TabsContent>

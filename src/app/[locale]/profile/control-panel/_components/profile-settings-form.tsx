@@ -14,15 +14,27 @@ import { updateProfile, updateUserPhone } from "@/lib/actions/profile.actions";
 import { ProfileSettingFormValues, profileSettingsSchema } from "@/lib/schemas/profile.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import OtpForm from "@/components/auth/otp-form";
 
 export default function ProfileSettingsForm({ userData }: { userData: User }) {
+  const [openOTPDialog, setOpenOTPDialog] = useState(false);
+
   const t = useTranslations("profile-route");
   const router = useRouter();
 
   const form = useForm<ProfileSettingFormValues>({
-    resolver: zodResolver(profileSettingsSchema),
+    resolver: zodResolver(profileSettingsSchema(t)),
     defaultValues: {
       name: userData.username,
       phoneNumber: userData.phone,
@@ -39,6 +51,7 @@ export default function ProfileSettingsForm({ userData }: { userData: User }) {
       if (values.phoneNumber !== userData.phone) {
         const phoneData = await updateUserPhone(values.phoneNumber);
         toast.success(phoneData.message);
+        setOpenOTPDialog(true);
       }
     } catch (err) {
       console.log(err);
@@ -96,6 +109,24 @@ export default function ProfileSettingsForm({ userData }: { userData: User }) {
           </Button>
         </form>
       </Form>
+
+      <Dialog open={openOTPDialog} onOpenChange={setOpenOTPDialog}>
+        <DialogTrigger className="sr-only">Open</DialogTrigger>
+        <DialogContent className="bg-white">
+          <DialogHeader className="sr-only">
+            <DialogTitle>Are you absolutely sure?</DialogTitle>
+            <DialogDescription>
+              This action cannot be undone. This will permanently delete your account and remove
+              your data from our servers.
+            </DialogDescription>
+          </DialogHeader>
+
+          <OtpForm
+            phoneNumber={form.getValues("phoneNumber") || ""}
+            onNext={() => setOpenOTPDialog(false)}
+          />
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }

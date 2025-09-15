@@ -1,7 +1,9 @@
-import { fetchUserAddresses } from "@/lib/actions/profile.actions";
+"use server";
+
+import { deleteAddress, fetchUserAddresses } from "@/lib/actions/profile.actions";
 import { FaPen } from "react-icons/fa";
 import AddNewAddressDialog from "./add-new-address-dialog";
-import DeleteAddressDialog from "./delete-address-diallog";
+import DeleteItemDialog from "@/components/common/delete-item-diallog";
 
 export type Address = {
   id: number;
@@ -47,7 +49,10 @@ export default async function AddedAddressesList() {
                 </AddNewAddressDialog>
 
                 {/* Delete dialog */}
-                <DeleteAddressDialog addressId={address.id} />
+                <DeleteItemDialog
+                  action={deleteAddress.bind(null, address.id)}
+                  itemName="address"
+                />
               </div>
             </div>
             <div className="flex justify-between">

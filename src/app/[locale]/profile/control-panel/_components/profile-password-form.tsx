@@ -20,7 +20,7 @@ export default function ProfilePasswordForm() {
   const t = useTranslations("profile-route");
 
   const form = useForm<ProfilePasswordFormValues>({
-    resolver: zodResolver(profilePasswordSchema),
+    resolver: zodResolver(profilePasswordSchema(t)),
     defaultValues: {
       oldPassword: "",
       newPassword: "",
