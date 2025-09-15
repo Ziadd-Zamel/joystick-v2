@@ -1,20 +1,38 @@
 "use client";
-import { useState } from "react";
-import { Menu, Home, Info, Wrench, Video, Grid3X3, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "@/components/ui/sheet";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
-import { useLocale } from "next-intl";
-import { useTranslations } from "next-intl";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { Link } from "@/i18n/navigation";
 import { usePathname } from "@/i18n/routing";
+import {
+  ChevronDown,
+  ChevronUp,
+  Grid3X3,
+  Handbag,
+  Headset,
+  Home,
+  Info,
+  Menu,
+  Video,
+} from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
+import { useState } from "react";
 
 // Nav links
 const navLinks = [
   { url: "/", title: "home", icon: Home },
   { url: "/about", title: "about", icon: Info },
-  { url: "/profile/maintenance", title: "maintenance", icon: Wrench },
+  { url: "/contact", title: "contact", icon: Headset },
+  { url: "/store", title: "store", icon: Handbag },
+  // { url: "/profile/maintenance", title: "maintenance", icon: Wrench },
   { url: "/videos", title: "videos", icon: Video },
 ];
 
@@ -47,6 +65,7 @@ export default function Sidebar({ categories }: { categories: Category[] }) {
           <span className="sr-only">opeb menu</span>
         </Button>
       </SheetTrigger>
+
       <SheetContent
         side={local === "ar" ? "right" : "left"}
         className="w-[320px] border-l border-gray-200 bg-white p-0"
@@ -54,6 +73,8 @@ export default function Sidebar({ categories }: { categories: Category[] }) {
         <div className="flex h-full flex-col">
           <SheetHeader className="flex items-center justify-center border-b border-gray-100 p-6 pb-4">
             <Image src={"/assets/icons/logo.svg"} alt="Main-Logo" width={200} height={0} />
+            <SheetTitle className="sr-only" />
+            <SheetDescription className="sr-only" />
           </SheetHeader>
 
           {/* Navigation Links */}
@@ -74,7 +95,7 @@ export default function Sidebar({ categories }: { categories: Category[] }) {
                     }`}
                   >
                     <IconComponent className="h-5 w-5" />
-                    <span>{t(`nav.${link.title}`)}</span>
+                    <span>{t(`${link.title}`)}</span>
                   </Link>
                 );
               })}

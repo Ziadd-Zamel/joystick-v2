@@ -15,7 +15,7 @@ export default function CategoriesMenu({ categories }: { categories: Category[] 
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger className="text-md cursor-pointer font-medium xl:text-xl xl:ltr:text-lg rtl:font-bold">
+          <NavigationMenuTrigger className="cursor-pointer text-base font-medium rtl:font-bold xl:rtl:text-xl">
             {t("categories")}
           </NavigationMenuTrigger>
           <NavigationMenuContent className="md:left-1/2 md:-translate-x-1/2 rtl:flex-row-reverse">
