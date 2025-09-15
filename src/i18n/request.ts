@@ -33,6 +33,10 @@ export const getFormats = (locale: (typeof routing.locales)[number]): Formats =>
       //^ --- SHORT YEAR FORMATS (year: '2-digit') ---
 
       //~ 09/06/25
+      "year-only": {
+        year: "numeric",
+        numberingSystem: locale === "ar" ? "arab" : "latn",
+      },
       "short-numeric-date": {
         day: "2-digit",
         month: "2-digit",

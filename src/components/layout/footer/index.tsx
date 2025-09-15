@@ -199,14 +199,17 @@ const Footer = () => {
       <div className="border-t border-white/10">
         <div className="container mx-auto px-4 py-6 2xl:max-w-[80%]">
           <p className="text-center text-sm text-gray-200">
-            {t("copy-right-before")}{" "}
-            <Link
-              href="https://evyx.net/"
-              className="text-white underline transition-colors hover:text-gray-200"
-            >
-              {t("copy-right-company")}
-            </Link>
-            {t("copy-right-after")} {new Date().getFullYear()}
+            {t.rich("copy-right", {
+              year: new Date(),
+              span: (chunk) => (
+                <Link
+                  href="https://evyx.net/"
+                  className="text-white underline transition-colors hover:text-gray-200"
+                >
+                  evyX LTD
+                </Link>
+              ),
+            })}
           </p>
         </div>
       </div>
