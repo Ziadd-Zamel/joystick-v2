@@ -11,7 +11,7 @@ export default function Page() {
   return (
     <div className="h-full rounded-md border border-zinc-200 bg-white">
       <header className="flex items-center justify-between border-b border-zinc-200 p-4">
-        <h2 className="text-lg font-medium">{t("favorite-address")}</h2>
+        <h2 className="text-lg font-medium">{t("added-locations")}</h2>
         {/* Add new address dialog */}
         <AddNewAddressDialog>
           <Image alt="add Icon" width={25} height={25} src={"/assets/icons/add-address.svg"} />

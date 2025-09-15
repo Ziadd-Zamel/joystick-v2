@@ -1,8 +1,8 @@
 import AddToFavoriteButton from "@/components/common/add-to-favorite-btn";
+import { Link } from "@/i18n/routing";
 import { getUserFavourites } from "@/lib/actions/profile.actions";
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
-import Link from "next/link";
 
 type ProductColor = {
   id: number;
@@ -30,7 +30,7 @@ type Product = {
   updated_at: string;
 };
 
-export default async function FavouritProductsList() {
+export default async function FavouriteProductsList() {
   const t = await getTranslations("profile-route");
 
   const payload = await getUserFavourites();
@@ -84,7 +84,7 @@ export default async function FavouritProductsList() {
             {/* Add to cart button */}
 
             <Link
-              href={"#"}
+              href={`/products/${encodeURIComponent(product.name.split(" ")[0])}/${product.id}`}
               className="bg-main flex shrink-0 items-center justify-center rounded-lg p-1 py-2"
             >
               <Image
