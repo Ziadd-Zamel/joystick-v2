@@ -84,7 +84,7 @@ export default async function FavouriteProductsList() {
             {/* Add to cart button */}
 
             <Link
-              href={`/products/${encodeURIComponent(product.name.split(" ")[0])}/${product.id}`}
+              href={`/store/${encodeURIComponent(product.name.split(" ")[0])}/${product.id}`}
               className="bg-main flex shrink-0 items-center justify-center rounded-lg p-1 py-2"
             >
               <Image

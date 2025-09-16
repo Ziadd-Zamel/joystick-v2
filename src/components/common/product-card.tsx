@@ -18,7 +18,7 @@ export const ProductCard = ({ product }: CardProps) => {
   const router = useRouter();
 
   const navigateToProductDetails = () => {
-    router.push(`/products/${encodeURIComponent(product.name.split(" ")[0])}/${product.id}`);
+    router.push(`/store/${encodeURIComponent(product.name.split(" ")[0])}/${product.id}`);
   };
 
   return (

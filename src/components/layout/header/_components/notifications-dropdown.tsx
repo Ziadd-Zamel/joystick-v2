@@ -44,6 +44,7 @@ export default function NotificationsDropdown() {
     refetchInterval: 6 * 10 * 1000,
   });
 
+  // Mutations mark as read
   const { mutate, isPending } = useMutation({
     mutationFn: markNotificationAsRead,
     onSuccess: (data) => {
@@ -67,6 +68,7 @@ export default function NotificationsDropdown() {
         <Button variant={"ghost"} className="relative !p-1">
           <IoMdNotificationsOutline className="text-primary size-7" />
 
+          {/* NO Read notifications number */}
           <span className="absolute -end-1.5 -top-1 flex size-5 items-center justify-center rounded-full bg-[#EB5757] text-xs text-white">
             {data?.pages[0].data.pagination.total_items || 0}
           </span>
@@ -76,11 +78,13 @@ export default function NotificationsDropdown() {
         <DropdownMenuLabel>Your Notifications</DropdownMenuLabel>
         <DropdownMenuSeparator className="" />
         <div id="scrollableDiv" className="max-h-[400px] space-y-1 overflow-y-auto">
+          {/* Skeleton */}
           {isLoading &&
             Array.from({ length: 3 }).map((_, i) => (
               <Skeleton key={i} className="h-22 w-full"></Skeleton>
             ))}
 
+          {/* Inifnite scroll notificatoins */}
           {allNotifications.length !== 0 ? (
             <InfiniteScroll
               dataLength={allNotifications.length}
@@ -98,6 +102,7 @@ export default function NotificationsDropdown() {
               <div className="space-y-1">
                 {allNotifications?.map((notification) => (
                   <React.Fragment key={notification.id}>
+                    {/* Repair request notifications card design */}
                     {notification.type === "RepairRequestNotification" && (
                       <div
                         className={cn(
@@ -150,6 +155,7 @@ export default function NotificationsDropdown() {
                       </div>
                     )}
 
+                    {/* Custom notifications card design */}
                     {notification.type === "CustomNotification" && (
                       <div
                         className={cn(

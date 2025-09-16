@@ -36,7 +36,11 @@ export default function ProductsScrollspyWrapper({
         </Scrollspy>
       </div>
       <div className="w-full">
-        <ScrollArea className="-me-5 h-screen grow p-5 pe-10 pt-0" viewportRef={parentRef}>
+        <ScrollArea
+          id="scrollableDiv2"
+          className="-me-5 h-screen grow overflow-y-auto p-5 pe-10 pt-0"
+          viewportRef={parentRef}
+        >
           {children}
         </ScrollArea>
       </div>
