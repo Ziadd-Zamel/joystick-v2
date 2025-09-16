@@ -345,5 +345,16 @@
     "error-description": "An unexpected error occurred. Please try again.",
     "visit-us": "Visit us and enjoy a unique experience",
     "contact-info": "Contact Information"
+  },
+  "category-route": {
+    "search-by-name": "Search by name",
+    "search-products": "Search products",
+    "brands": " Brands",
+    "categories": "Categories",
+    "average-prices": "Average prices",
+    "clear-all": "Clear all",
+    "apply": "Apply",
+    "to": "To",
+    "from": "From"
   }
 }
