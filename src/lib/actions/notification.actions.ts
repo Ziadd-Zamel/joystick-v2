@@ -30,6 +30,7 @@ export type NotificationResponse = {
   message: string;
   data: {
     data: Notification[];
+    unread_count: number;
     pagination: {
       page: number;
       total_pages: number;

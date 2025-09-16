@@ -49,7 +49,7 @@ export const getAllProducts = async ({ pageParam = 0 }) => {
   const token = await getToken();
 
   try {
-    const response = await fetch(`${process.env.API}products?limit=16&page=${pageParam}`, {
+    const response = await fetch(`${process.env.API}products?limit=10&page=${pageParam}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

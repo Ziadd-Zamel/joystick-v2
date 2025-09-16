@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 import { useInfiniteQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { intlFormatDistance } from "date-fns";
 import { CheckCheck, Loader2 } from "lucide-react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import React, { useState } from "react";
 import { HiOutlineWrenchScrewdriver } from "react-icons/hi2";
 import { IoMdNotificationsOutline } from "react-icons/io";
@@ -30,6 +30,7 @@ export default function NotificationsDropdown() {
 
   // Translations
   const locale = useLocale();
+  const t = useTranslations();
 
   // Inifnite query all notifications
   const { data, fetchNextPage, hasNextPage, isLoading } = useInfiniteQuery({
@@ -70,12 +71,12 @@ export default function NotificationsDropdown() {
 
           {/* NO Read notifications number */}
           <span className="absolute -end-1.5 -top-1 flex size-5 items-center justify-center rounded-full bg-[#EB5757] text-xs text-white">
-            {data?.pages[0].data.pagination.total_items || 0}
+            {data?.pages[0].data.unread_count || 0}
           </span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="mx-5 w-sm rounded-sm p-1">
-        <DropdownMenuLabel>Your Notifications</DropdownMenuLabel>
+        <DropdownMenuLabel>{t("your-notifications")}</DropdownMenuLabel>
         <DropdownMenuSeparator className="" />
         <div id="scrollableDiv" className="max-h-[400px] space-y-1 overflow-y-auto">
           {/* Skeleton */}
@@ -114,10 +115,10 @@ export default function NotificationsDropdown() {
                       >
                         <p className="text-main mb-1 flex items-center gap-2 font-medium">
                           <HiOutlineWrenchScrewdriver className="size-4" />
-                          Repair Requrest
+                          {t("repair-request")}
                         </p>
                         <p className="font-medium">
-                          Code:{" "}
+                          {t("code")}:{" "}
                           <Link
                             href={`/profile/previous-orders/?orderType=repair`}
                             className="text-blue-600 underline-offset-2 hover:underline"
@@ -167,7 +168,7 @@ export default function NotificationsDropdown() {
                       >
                         <p className="text-main mb-1 flex items-center gap-2 font-medium">
                           <MdOutlineNotificationsActive className="size-5" />
-                          Custome Notification
+                          {t("custom-notification")}
                         </p>
                         <p className="font-medium">{notification.data.title}</p>
                         <p className="mb-1 leading-4">{notification.data.body}</p>
@@ -203,7 +204,9 @@ export default function NotificationsDropdown() {
               </div>
             </InfiniteScroll>
           ) : (
-            <p className="font-lg text-center font-medium text-red-500">No Notifications Found</p>
+            <p className="font-lg text-center font-medium text-red-500">
+              {t("no-notifications-found")}
+            </p>
           )}
         </div>
       </DropdownMenuContent>

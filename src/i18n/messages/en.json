@@ -1,4 +1,9 @@
 {
+  "no-notifications-found": "No Notifications Found",
+  "custom-notification": "Custom Notification",
+  "code": "Code:",
+  "repair-request": "Repair Request",
+  "your-notifications": "Your Notifications",
   "products": "Products",
   "store": "Store",
   "contact": "Contact Us",

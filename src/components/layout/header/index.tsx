@@ -23,7 +23,7 @@ export default async function Navbar() {
 
   return (
     <>
-      <header className="p-4 shadow-md shadow-[#EEEEEE80]">
+      <header className="fixed start-0 end-0 top-0 z-50 bg-white p-4 shadow-md shadow-[#EEEEEE80]">
         <div className="box-container flex items-center justify-between">
           {/* Mobile sidebar - only visible on mobile devices */}
           <Sidebar categories={categories} />
