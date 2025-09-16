@@ -70,9 +70,11 @@ export default function NotificationsDropdown() {
           <IoMdNotificationsOutline className="text-primary size-7" />
 
           {/* NO Read notifications number */}
-          <span className="absolute -end-1.5 -top-1 flex size-5 items-center justify-center rounded-full bg-[#EB5757] text-xs text-white">
-            {data?.pages[0].data.unread_count || 0}
-          </span>
+          {data?.pages[0].data.unread_count !== 0 && (
+            <span className="absolute -end-1.5 -top-1 flex size-5 items-center justify-center rounded-full bg-[#EB5757] text-xs text-white">
+              {data?.pages[0].data.unread_count}
+            </span>
+          )}
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent className="mx-5 w-sm rounded-sm p-1">
