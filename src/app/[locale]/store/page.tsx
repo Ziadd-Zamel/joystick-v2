@@ -5,7 +5,7 @@ export default async function page() {
   const categories: Category[] = await getAllCategories();
 
   return (
-    <section className="mt-10 p-4 sm:p-6 md:p-8">
+    <section className="sm:p-6 md:p-8">
       <div className="container mx-auto">
         <ProductsScrollspyWrapper categories={categories} />
       </div>

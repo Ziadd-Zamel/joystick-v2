@@ -51,7 +51,7 @@ export default async function LocaleLayout({ children, params }: LayoutProps) {
         <Providers>
           <div className="flex min-h-screen flex-col overflow-x-hidden">
             <Navbar />
-            <div className="flex-1">{children}</div>
+            <div className="flex-1 pt-20">{children}</div>
             <Footer />
           </div>
         </Providers>
