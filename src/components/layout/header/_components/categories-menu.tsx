@@ -26,7 +26,7 @@ export default function CategoriesMenu({ categories }: { categories: Category[] 
               {categories.map((category, index) => (
                 <Link
                   key={index}
-                  href={`/store/${category.name}`}
+                  href={`/categories/${category.name}/${category.id}`}
                   className="hover:text-main w-full rounded-md px-4 py-2 text-right text-sm font-medium text-gray-900 transition-colors"
                 >
                   {category.name}

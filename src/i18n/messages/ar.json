@@ -341,5 +341,16 @@
     "error-description": "حدث خطأ غير متوقع. يرجى المحاولة مرة أخرى.",
     "visit-us": "زورونا واستمتعوا بتجربة مميزة",
     "contact-info": "معلومات التواصل"
+  },
+  "category-route": {
+    "search-by-name": "البحث بالاسم",
+    "search-products": "ابحث عن المنتجات",
+    "brands": " العلامات التجارية",
+    "categories": "الفئات",
+    "average-prices": "متوسط الأسعار",
+    "clear-all": "مسح الكل",
+    "apply": "تطبيق",
+    "to": "إلي",
+    "from": "من"
   }
 }
