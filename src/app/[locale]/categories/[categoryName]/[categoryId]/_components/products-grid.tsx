@@ -1,4 +1,5 @@
 "use client";
+import NoDataAnimation from "@/components/common/no-data-animation";
 import { PaginationComponent } from "@/components/common/pagination-comp";
 import { ProductCard } from "@/components/common/product-card";
 import { usePathname, useRouter } from "@/i18n/routing";
@@ -25,6 +26,14 @@ export default function ProductsGrid({ products, pagination }: ProductsGridProps
     // Update URL with new parameters
     router.push(`${pathname}?${params.toString()}`);
   };
+
+  if (products.length === 0) {
+    return (
+      <div className="flex-center min-h-screen w-full">
+        <NoDataAnimation />
+      </div>
+    );
+  }
   return (
     <section className="flex w-full flex-1 flex-col items-center justify-center">
       <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
