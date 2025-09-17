@@ -134,7 +134,7 @@ function FilterContent({
   };
 
   return (
-    <div className="h-full w-full overflow-y-auto bg-white px-6 py-9 shadow-sm lg:rounded-4xl">
+    <div className="h-full w-full overflow-y-auto bg-white px-4 py-7 shadow-sm lg:rounded-lg">
       {/* Search by Name */}
       <div className="mb-8">
         <h3 className="mb-6 text-lg">{t("search-by-name")}</h3>
@@ -319,7 +319,7 @@ export default function Filter({
   return (
     <>
       {/* Desktop Filter - Hidden on mobile */}
-      <div className="mt-4 hidden w-full lg:top-4 lg:block lg:max-w-[300px] lg:min-w-[300px] xl:max-w-[400px] xl:min-w-[400px]">
+      <div className="hidden w-full lg:top-4 lg:block lg:max-w-[350px]">
         <FilterContent
           brands={brands}
           tags={tags}

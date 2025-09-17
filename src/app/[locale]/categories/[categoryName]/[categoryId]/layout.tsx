@@ -33,7 +33,7 @@ export default async function ProductsLayout({ children, searchParams }: Props) 
   const initialNameFilter = searchParams?.name || "";
 
   return (
-    <main className="box-container flex flex-col items-start gap-16 py-20 lg:flex-row xl:gap-28">
+    <main className="box-container mt-5 flex flex-col items-start gap-5 lg:flex-row xl:gap-5">
       <Filter
         brands={brands}
         tags={tags}

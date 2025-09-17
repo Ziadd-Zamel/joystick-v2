@@ -36,7 +36,7 @@ export default function ProductsGrid({ products, pagination }: ProductsGridProps
   }
   return (
     <section className="flex w-full flex-1 flex-col items-center justify-center">
-      <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((product: Product) => (
           <ProductCard key={product.id} product={product} />
         ))}
