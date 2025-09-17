@@ -138,6 +138,14 @@ export default function Sidebar() {
 
                     <CollapsibleContent className="mt-1">
                       <div id="target" className="h-[250px] overflow-y-auto pl-8">
+                        {isLoading && (
+                          <div className="space-y-1">
+                            {Array.from({ length: 2 }).map((_, i) => (
+                              <Skeleton key={i} className="h-10 w-full rounded-md" />
+                            ))}
+                          </div>
+                        )}
+
                         <InfiniteScroll
                           dataLength={allCategoires.length}
                           next={fetchNextPage}
