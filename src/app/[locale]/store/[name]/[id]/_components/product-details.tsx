@@ -7,7 +7,7 @@ import { getTranslations } from "next-intl/server";
 import RelatedProducts from "./related-roducts";
 import { Suspense } from "react";
 import RelatedProductsSkeleton from "./related-products-skeleton";
-import { getProductById } from "@/lib/api-actions/product.action";
+import { getProductById } from "@/lib/actions/product.actions";
 
 export default async function ProductDetails({ id }: { id: string }) {
   const product: Product = await getProductById(id);

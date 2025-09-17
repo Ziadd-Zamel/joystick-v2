@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { checkout } from "@/lib/api-actions/cart.api";
+import { checkout } from "@/lib/actions/cart.actions";
 import { useMutation } from "@tanstack/react-query";
 import { useTranslations } from "next-intl";
 import { toast } from "sonner";

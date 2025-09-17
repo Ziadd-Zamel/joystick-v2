@@ -1,6 +1,6 @@
 import { ProductCard } from "@/components/common/product-card";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import { getAllProducts } from "@/lib/api-actions/product.action";
+import { getAllProducts } from "@/lib/actions/product.actions";
 import { getLocale, getTranslations } from "next-intl/server";
 
 export default async function RelatedProducts({ category }: { category: string }) {

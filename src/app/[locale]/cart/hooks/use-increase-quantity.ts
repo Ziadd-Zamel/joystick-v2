@@ -1,7 +1,7 @@
 import { useMutation } from "@tanstack/react-query";
-import { increaseQuantity } from "@/lib/api-actions/cart.api";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
+import { increaseQuantity } from "@/lib/actions/cart.actions";
 
 export function useIncreaseQuantity() {
   const t = useTranslations("cart");

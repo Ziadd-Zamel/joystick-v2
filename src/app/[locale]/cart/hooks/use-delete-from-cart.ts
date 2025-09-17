@@ -1,8 +1,8 @@
 "use client";
 import { useMutation } from "@tanstack/react-query";
-import { deleteFromCart } from "@/lib/api-actions/cart.api";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
+import { deleteFromCart } from "@/lib/actions/cart.actions";
 
 export function useDeleteCart() {
   const t = useTranslations("cart");
