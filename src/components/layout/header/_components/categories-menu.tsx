@@ -19,7 +19,7 @@ export default function CategoriesMenu() {
   const t = useTranslations();
 
   const { data, fetchNextPage, hasNextPage, isLoading } = useInfiniteQuery({
-    queryKey: ["products"],
+    queryKey: ["categories"],
     queryFn: getPaginatedCategories,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {

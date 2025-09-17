@@ -58,7 +58,7 @@ export default function Sidebar() {
   };
 
   const { data, fetchNextPage, hasNextPage, isLoading } = useInfiniteQuery({
-    queryKey: ["products"],
+    queryKey: ["categories"],
     queryFn: getPaginatedCategories,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
