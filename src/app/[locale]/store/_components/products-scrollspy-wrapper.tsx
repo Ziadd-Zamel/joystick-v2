@@ -74,7 +74,7 @@ export default function ProductsScrollspyWrapper({ categories }: { categories: C
       <div
         ref={parentRef}
         id="scrollTarget"
-        className="-me-5 h-screen w-full grow overflow-y-auto p-5 pe-10 pt-24"
+        className="-me-5 h-screen w-full grow overflow-y-auto p-5 pe-10 pt-14"
       >
         {isLoading && (
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
