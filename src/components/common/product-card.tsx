@@ -22,7 +22,7 @@ export const ProductCard = ({ product }: CardProps) => {
   };
 
   return (
-    <Card className="my-4 flex h-fit shrink-0 cursor-grab flex-col rounded-lg bg-white p-4 shadow-[0_0_15px_-5px_rgba(0,0,0,0.1)]">
+    <Card className="my-4 flex h-fit shrink-0 flex-col rounded-lg bg-white p-4 shadow-[0_0_15px_-5px_rgba(0,0,0,0.1)]">
       <CardContent className="relative h-full px-0">
         {/* Fav Button */}
         <AddToFavoriteButton productId={product.id} isFav={Boolean(product.is_favorite)} />
@@ -38,7 +38,7 @@ export const ProductCard = ({ product }: CardProps) => {
           />
 
           {/* Ovelayer and Viwe Product Button */}
-          <div className="flex-center absolute inset-0 z-20 w-full cursor-grab rounded-xl bg-black/30 opacity-0 duration-300 group-hover:opacity-100">
+          <div className="flex-center absolute inset-0 z-20 w-full rounded-xl bg-black/30 opacity-0 duration-300 group-hover:opacity-100">
             <Button
               className="flex-center circle size-10 cursor-pointer duration-200 hover:scale-[1.08]"
               onClick={navigateToProductDetails}
