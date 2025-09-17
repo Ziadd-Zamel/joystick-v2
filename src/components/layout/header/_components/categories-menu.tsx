@@ -1,3 +1,5 @@
+"use client";
+
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -18,16 +20,19 @@ export default function CategoriesMenu({ categories }: { categories: Category[] 
           <NavigationMenuTrigger className="cursor-pointer text-base font-medium rtl:font-bold xl:rtl:text-xl">
             {t("categories")}
           </NavigationMenuTrigger>
-          <NavigationMenuContent className="md:left-1/2 md:-translate-x-1/2 rtl:flex-row-reverse">
+          <NavigationMenuContent className="max-h-[250px] overflow-y-auto text-nowrap md:left-1/2 md:-translate-x-1/2 rtl:flex-row-reverse">
             <div
-              className="grid auto-cols-max grid-flow-col gap-x-8"
-              style={{ gridTemplateRows: "repeat(4, auto)" }}
+              className="grid w-full grid-cols-2 gap-3"
+              style={{
+                gridTemplateRows: "repeat(4, auto)",
+                gridTemplateColumns: "repeat(2, auto)",
+              }}
             >
               {categories.map((category, index) => (
                 <Link
                   key={index}
                   href={`/categories/${category.name}/${category.id}`}
-                  className="hover:text-main w-full rounded-md px-4 py-2 text-right text-sm font-medium text-gray-900 transition-colors"
+                  className="hover:bg-main w-full rounded-md bg-zinc-100 p-2 text-sm font-medium text-gray-900 transition-all duration-300 hover:text-white"
                 >
                   {category.name}
                 </Link>
