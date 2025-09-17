@@ -1,12 +1,12 @@
 "use client";
 
 import { useRouter } from "@/i18n/routing";
-import { toggleFavouriteProduct } from "@/lib/actions/cart.actions";
 import { cn } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
 import { Heart, HeartPlus, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
+import { toggleFavouriteProduct } from "@/lib/actions/cart.actions";
 
 type Props = {
   productId: number;

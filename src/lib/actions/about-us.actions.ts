@@ -1,11 +1,12 @@
+"use server";
+
 import { getLocale } from "next-intl/server";
 
 // Get about us first section data.
 export async function fetchAboutJoyStick() {
-  const apiUrl = process.env.API;
   const locale = await getLocale();
   try {
-    const response = await fetch(`${apiUrl}about-us/section-one`, {
+    const response = await fetch(`${process.env.API}about-us/section-one`, {
       headers: {
         lang: locale,
       },
@@ -26,11 +27,10 @@ export async function fetchAboutJoyStick() {
 
 // Get about us video
 export async function getVideo() {
-  const apiUrl = process.env.API;
   const locale = await getLocale();
 
   try {
-    const response = await fetch(`${apiUrl}about-us/video`, {
+    const response = await fetch(`${process.env.API}about-us/video`, {
       headers: {
         lang: locale,
       },

@@ -16,8 +16,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { useLocale, useTranslations } from "next-intl";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { submitContactForm } from "@/lib/actions/contact.action";
 import { ContactFields, useContactSchema } from "@/lib/schemas/contact.schema";
+import { submitContactForm } from "@/lib/actions/contact.actions";
 
 export default function ContactForm({ onSuccess }: { onSuccess?: () => void }) {
   // Hooks

@@ -1,4 +1,4 @@
-import { getAllCart } from "@/lib/actions/cart.actions";
+import { getAllCart } from "@/lib/api-actions/cart.api";
 import CartEmptyState from "./cart-empty-state";
 import CartItemCard from "./cart-item-card";
 import DiscountSection from "./discount-section";

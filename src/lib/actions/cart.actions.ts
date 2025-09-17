@@ -1,4 +1,5 @@
 "use server";
+
 import { getLocale, getTranslations } from "next-intl/server";
 import { revalidatePath, revalidateTag } from "next/cache";
 import { getToken } from "../utils/server-cookies";

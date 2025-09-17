@@ -18,8 +18,8 @@ import {
 import { Button } from "@/components/ui/button";
 
 import { NewPasswordFields, useNewPasswordSchema } from "@/lib/schemas/auth.schema";
-import { confirmNewPassword } from "@/lib/actions/auth.actions";
 import { PasswordInput } from "./password-input";
+import { confirmNewPassword } from "@/lib/actions/auth.actions";
 
 export default function NewPasswordForm({
   onComplete,

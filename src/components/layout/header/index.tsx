@@ -12,7 +12,7 @@ import { isUserLoggedin } from "@/lib/utils/server-cookies";
 import { CgProfile } from "react-icons/cg";
 import { ShoppingCart } from "lucide-react";
 import NotificationsDropdown from "./_components/notifications-dropdown";
-import { getAllCategories } from "@/lib/actions/category.action";
+import { getAllCategories } from "@/lib/actions/category.actions";
 
 export default async function Navbar() {
   // Fetch all categories

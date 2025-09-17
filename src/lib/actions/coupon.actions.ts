@@ -1,4 +1,5 @@
 "use server";
+
 import { getLocale } from "next-intl/server";
 import { getToken } from "../utils/server-cookies";
 

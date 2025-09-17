@@ -1,6 +1,6 @@
-import { getAllVideos } from "@/lib/api/videos.api";
 import { getLocaleAssets } from "@/lib/utils/index";
 import VideoCard from "./video-card";
+import { getAllVideos } from "@/lib/actions/vidoes.actions";
 
 export default async function VidoesLoader() {
   const { t } = await getLocaleAssets();

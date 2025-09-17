@@ -1,10 +1,10 @@
 import Image from "next/image";
 import ContactForm from "./contact-form";
-import { getStaticInfo } from "@/lib/api/inf.api";
 import { getTranslations } from "next-intl/server";
 import { FaFacebook } from "react-icons/fa";
 import { BsInstagram, BsYoutube } from "react-icons/bs";
 import Link from "next/link";
+import { getStaticInfo } from "@/lib/actions/info.actions";
 
 export default async function ContactPage() {
   const t = await getTranslations("contact-route");

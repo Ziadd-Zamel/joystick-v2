@@ -1,7 +1,7 @@
-import { getAllBrands } from "@/lib/api/brands.api";
-import { getAllTags } from "@/lib/api/tag.api";
+import { getAllTags } from "@/lib/actions/tags.actions";
 import { ReactNode } from "react";
 import Filter from "./_components/filter";
+import { getAllBrands } from "@/lib/actions/brands.actions";
 
 interface Props {
   searchParams?: {

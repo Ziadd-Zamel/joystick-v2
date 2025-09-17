@@ -1,4 +1,4 @@
-import { getFilteredProduct } from "@/lib/api/product";
+import { getFilteredProduct } from "@/lib/actions/product.actions";
 import ProductsGrid from "./_components/products-grid";
 
 interface PageProps {

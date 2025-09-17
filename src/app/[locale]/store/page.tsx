@@ -1,4 +1,4 @@
-import { getAllCategories } from "@/lib/actions/category.action";
+import { getAllCategories } from "@/lib/actions/category.actions";
 import ProductsScrollspyWrapper from "./_components/products-scrollspy-wrapper";
 
 export default async function page() {

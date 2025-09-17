@@ -1,6 +1,6 @@
-import { getAllProducts } from "@/lib/actions/product.action";
+import { getAllCategories } from "@/lib/actions/category.actions";
 import TabsContentComponent from "./tabs-content";
-import { getAllCategories } from "@/lib/actions/category.action";
+import { getAllProducts } from "@/lib/actions/product.actions";
 
 export default async function OurProductsContent() {
   // Data

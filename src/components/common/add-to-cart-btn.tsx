@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
-import { addToCart } from "@/lib/actions/cart.actions";
+import { addToCart } from "@/lib/api-actions/cart.api";
 import Image from "next/image";
 import { useState } from "react";
 import AuthDialog from "../layout/header/_components/auth-dialog";

@@ -1,12 +1,13 @@
+"use server";
+
 import { getLocale, getTranslations } from "next-intl/server";
 
-export const getAllBrands = async () => {
+export const getAllVideos = async () => {
   const t = await getTranslations();
   const lang = await getLocale();
 
-  const response = await fetch(`${process.env.API}brands`, {
+  const response = await fetch(`${process.env.API}videos-youtube`, {
     headers: {
-      "Content-Type": "application/json",
       lang,
     },
   });
@@ -16,5 +17,5 @@ export const getAllBrands = async () => {
   }
 
   const data = await response.json();
-  return data.data.data;
+  return data.data;
 };

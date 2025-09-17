@@ -9,9 +9,9 @@ import { useRouter } from "next/navigation";
 import Cookies from "js-cookie";
 import { MapPin, Phone, Mail } from "lucide-react";
 import { useQuery } from "@tanstack/react-query";
-import { getStaticInfo } from "@/lib/api/info.api";
 import { FaFacebookF, FaInstagram, FaTiktok, FaYoutube } from "react-icons/fa";
 import { useTranslations } from "next-intl";
+import { getStaticInfo } from "@/lib/actions/info.actions";
 
 const Footer = () => {
   // Translations

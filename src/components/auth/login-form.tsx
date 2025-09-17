@@ -16,8 +16,8 @@ import { useLocale, useTranslations } from "next-intl";
 import { PasswordInput } from "./password-input";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { loginUser } from "@/lib/actions/auth.actions";
 import { useClientCookies } from "@/lib/utils/auth-cookies";
+import { loginUser } from "@/lib/actions/auth.actions";
 
 export default function LoginForm({
   setOpen,

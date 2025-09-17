@@ -1,10 +1,13 @@
-const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+"use server";
+
+import { getLocale } from "next-intl/server";
 
 export const getStaticInfo = async (endpoint: string) => {
+  const locale = await getLocale();
   try {
-    const response = await fetch(`${apiUrl}${endpoint}`, {
+    const response = await fetch(`${process.env.API}${endpoint}`, {
       headers: {
-        lang: "ar",
+        lang: locale,
       },
     });
 

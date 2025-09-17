@@ -1,7 +1,7 @@
-import { fetchAboutJoyStick } from "@/lib/api/about.api";
 import Image from "next/image";
 import OurAdvantages from "../(homePage)/_components/our-advantages/our-advantages";
 import BackgroundVideo from "./_components/background-video";
+import { fetchAboutJoyStick } from "@/lib/actions/about-us.actions";
 
 export async function generateMetadata() {
   const aboutJoyStick = await fetchAboutJoyStick();

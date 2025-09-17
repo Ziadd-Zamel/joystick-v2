@@ -1,6 +1,6 @@
 "use client";
 import { useMutation } from "@tanstack/react-query";
-import { decreaseQuantity } from "@/lib/actions/cart.actions";
+import { decreaseQuantity } from "@/lib/api-actions/cart.api";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 

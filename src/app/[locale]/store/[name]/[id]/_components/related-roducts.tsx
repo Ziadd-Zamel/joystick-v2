@@ -1,20 +1,20 @@
 import { ProductCard } from "@/components/common/product-card";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
-import { getAllProducts } from "@/lib/api/products.api";
+import { getAllProducts } from "@/lib/api-actions/product.action";
 import { getLocale, getTranslations } from "next-intl/server";
 
 export default async function RelatedProducts({ category }: { category: string }) {
-  const allProducts: Product[] = await getAllProducts();
+  const allProducts = await getAllProducts(9999999);
   const t = await getTranslations();
   const locale = await getLocale();
 
   // Filter products by category
-  const filteredProducts = allProducts.filter(
+  const filteredProducts = allProducts?.data?.data.filter(
     (product) => product.category?.toLowerCase() === category.toLowerCase(),
   );
 
   // If no products found in the category, show all products as fallback
-  const productsToShow = filteredProducts.length > 0 ? filteredProducts : allProducts;
+  const productsToShow = filteredProducts.length > 0 ? filteredProducts : allProducts?.data?.data;
 
   return (
     <section className="mt-28 mb-12">

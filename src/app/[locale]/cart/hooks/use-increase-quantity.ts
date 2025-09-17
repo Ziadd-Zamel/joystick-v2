@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { increaseQuantity } from "@/lib/actions/cart.actions";
+import { increaseQuantity } from "@/lib/api-actions/cart.api";
 import { toast } from "sonner";
 import { useTranslations } from "next-intl";
 

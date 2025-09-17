@@ -7,9 +7,9 @@ import Link from "next/link";
 import { useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { applyCoupon } from "@/lib/actions/coupon.actions";
 import Image from "next/image";
 import CheckoutButton from "../checkout/_components/checkout-button";
+import { applyCoupon } from "@/lib/actions/coupon.actions";
 
 interface DiscountSectionProps {
   cartItems?: Cart[];

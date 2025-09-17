@@ -1,4 +1,4 @@
-import { getVideo } from "@/lib/api/about.api";
+import { getVideo } from "@/lib/actions/about-us.actions";
 
 const BackgroundVideo = async () => {
   const video = await getVideo();

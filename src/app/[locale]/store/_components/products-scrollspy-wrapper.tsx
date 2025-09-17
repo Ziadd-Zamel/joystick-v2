@@ -8,7 +8,7 @@ import { ProductCard } from "@/components/common/product-card";
 import { ProductCardSkeleton } from "@/components/common/product-card-skeleton";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { getPaginatedProducts } from "@/lib/actions/product.action";
+import { getPaginatedProducts } from "@/lib/actions/product.actions";
 
 export default function ProductsScrollspyWrapper({ categories }: { categories: Category[] }) {
   const parentRef = useRef<HTMLDivElement | null>(null);
