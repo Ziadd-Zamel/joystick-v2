@@ -2,7 +2,7 @@
 
 import { useRouter } from "@/i18n/routing";
 import { cn } from "@/lib/utils";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Heart, HeartPlus, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { Button } from "../ui/button";
@@ -17,12 +17,16 @@ type Props = {
 export default function AddToFavoriteButton({ productId, className, isFav = false }: Props) {
   // Translations
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   // Mutations
   const addProductToFavourites = useMutation({
     mutationFn: toggleFavouriteProduct,
     onSuccess: (data) => {
       toast.success(data.message);
+      queryClient.invalidateQueries({
+        queryKey: ["products"],
+      });
       router.refresh();
     },
     onError: (error) => {
