@@ -1,11 +1,11 @@
 "use server";
 import { getLocale, getTranslations } from "next-intl/server";
 
-export const getAllCategories = async () => {
+export const getAllCategories = async (limit = 10) => {
   const t = await getTranslations();
   const lang = await getLocale();
 
-  const response = await fetch(`${process.env.API}categories`, {
+  const response = await fetch(`${process.env.API}categories?limit=${limit}`, {
     headers: {
       "Content-Type": "application/json",
       lang,

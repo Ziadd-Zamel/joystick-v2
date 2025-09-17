@@ -6,10 +6,10 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { getAllReviews } from "@/lib/api/reviews.api";
 import { getLocaleAssets } from "@/lib/utils/index";
 import BlobShape from "./blob-shape";
 import { HiMiniChevronLeft, HiMiniChevronRight } from "react-icons/hi2";
+import { getAllReviews } from "@/lib/actions/home.actions";
 
 export default async function Testimonials() {
   // Translations

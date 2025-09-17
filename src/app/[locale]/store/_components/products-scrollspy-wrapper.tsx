@@ -6,16 +6,16 @@ import { useRef } from "react";
 
 import { ProductCard } from "@/components/common/product-card";
 import { ProductCardSkeleton } from "@/components/common/product-card-skeleton";
-import { getAllProducts } from "@/lib/actions/product.action";
 import { useInfiniteQuery } from "@tanstack/react-query";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { getPaginatedProducts } from "@/lib/actions/product.action";
 
 export default function ProductsScrollspyWrapper({ categories }: { categories: Category[] }) {
   const parentRef = useRef<HTMLDivElement | null>(null);
 
   const { data, fetchNextPage, hasNextPage, isLoading } = useInfiniteQuery({
     queryKey: ["products"],
-    queryFn: getAllProducts,
+    queryFn: getPaginatedProducts,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       const isLastPage = lastPage.data.meta.current_page >= lastPage.data.meta.last_page;

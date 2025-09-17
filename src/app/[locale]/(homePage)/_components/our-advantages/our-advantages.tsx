@@ -1,5 +1,5 @@
 import { ClientImage } from "@/components/common/client-image";
-import { getAdvantages, getAdvantageText } from "@/lib/api/advantages.api";
+import { getAdvantages, getAdvantageText } from "@/lib/actions/home.actions";
 import { getLocale, getTranslations } from "next-intl/server";
 
 export default async function OurAdvantages() {

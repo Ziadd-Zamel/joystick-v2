@@ -1,4 +1,4 @@
-import { getHeroImage } from "@/lib/api/home.api";
+import { getHeroImage } from "@/lib/actions/home.actions";
 import Image from "next/image";
 
 export default async function HeroSection() {

@@ -2,6 +2,7 @@
 
 import { getLocale, getTranslations } from "next-intl/server";
 import { getToken } from "../utils/server-cookies";
+import { lightFormat } from "date-fns";
 
 export type Product = {
   id: number;
@@ -43,7 +44,31 @@ export type ProductsResponse = {
   };
 };
 
-export const getAllProducts = async ({ pageParam = 0 }) => {
+export const getAllProducts = async (limit = 10) => {
+  const t = await getTranslations();
+  const lang = await getLocale();
+  const token = await getToken();
+
+  try {
+    const response = await fetch(`${process.env.API}products?limit=${limit}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        lang,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(t("failed-to-fetch-data"));
+    }
+
+    const payload = await response.json();
+    return payload as ProductsResponse;
+  } catch (err) {
+    throw err;
+  }
+};
+export const getPaginatedProducts = async ({ pageParam = 0 }) => {
   const t = await getTranslations();
   const lang = await getLocale();
   const token = await getToken();
