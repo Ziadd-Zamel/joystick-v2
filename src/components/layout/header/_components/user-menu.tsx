@@ -42,7 +42,7 @@ export function UserDropdown() {
   return (
     <DropdownMenu dir={isRTL ? "rtl" : "ltr"}>
       <DropdownMenuTrigger asChild>
-        <Button className="size-10 rounded-full" variant={"ghost"}>
+        <Button className="size-10 rounded-full hover:!bg-zinc-100" variant={"ghost"}>
           <CgProfile className="size-8 text-[#02A09B]" />
         </Button>
       </DropdownMenuTrigger>

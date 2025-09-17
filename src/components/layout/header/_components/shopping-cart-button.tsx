@@ -13,7 +13,7 @@ export default async function ShoppingCartButton() {
   return (
     <div className="relative">
       <Link href="/cart">
-        <Button className="size-10" variant={"ghost"}>
+        <Button className="size-10 hover:!bg-zinc-100" variant={"ghost"}>
           <ShoppingCart className="size-7" strokeWidth={1.3} />
         </Button>
       </Link>

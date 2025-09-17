@@ -66,7 +66,7 @@ export default function NotificationsDropdown() {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant={"ghost"} className="relative !p-1">
+        <Button variant={"ghost"} className="relative !p-1 hover:!bg-zinc-100">
           <IoMdNotificationsOutline className="text-primary size-7" />
 
           {/* NO Read notifications number */}
