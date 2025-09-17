@@ -1,5 +1,6 @@
 "use server";
 
+import { cookies } from "next/headers";
 import {
   ForgotPasswordFields,
   LoginFields,
@@ -176,3 +177,27 @@ export async function confirmNewPassword(data: NewPasswordFields) {
     throw error;
   }
 }
+
+export const logout = async () => {
+  const cookieStore = await cookies();
+  const token = cookieStore.get("auth_token")?.value;
+
+  if (!token) {
+    throw new Error("Unauthorized: No token found");
+  }
+
+  try {
+    const res = await fetch(`${process.env.API}user/logout`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!res.ok) {
+      throw new Error("Error Logging out");
+    }
+  } catch (err) {
+    throw err;
+  }
+};

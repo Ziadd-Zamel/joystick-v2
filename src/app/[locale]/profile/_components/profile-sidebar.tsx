@@ -1,6 +1,9 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import { Link } from "@/i18n/routing";
+import { logout } from "@/lib/actions/auth.actions";
 import { cn } from "@/lib/utils";
+import { useMutation } from "@tanstack/react-query";
 import Cookies from "js-cookie";
 import { Heart, Layers, LogOut, MapPinned, ShoppingCart } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
@@ -45,40 +48,22 @@ const ProfileSideBar = () => {
   const locale = useLocale();
   const direction = locale === "ar" ? "rtl" : "ltr";
 
+  const logoutMutation = useMutation({
+    mutationFn: logout,
+    onSuccess: () => {
+      Cookies.remove("auth_token");
+      window.location.href = "/";
+    },
+    onError: (err) => {
+      toast.error((err as Error).message);
+    },
+  });
+
   // States
   const [isOpen, setIsOpen] = useState(false); // State to toggle sidebar on mobile
 
   // Navigation
   const pathName = usePathname();
-
-  const handleLogout = async () => {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    const token = Cookies.get("auth_token");
-
-    if (!token) {
-      console.error("Unauthorized: No token found");
-      return;
-    }
-
-    try {
-      const res = await fetch(`${apiUrl}user/logout`, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-
-      if (!res.ok) {
-        throw new Error("Error Logging out");
-      }
-
-      Cookies.remove("auth_token");
-      window.location.href = "/";
-    } catch (err) {
-      console.error("Error", err);
-      toast.error((err as Error).message);
-    }
-  };
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -130,29 +115,26 @@ const ProfileSideBar = () => {
           ))}
         </ul>
 
-        <div
-          className="hidden cursor-pointer lg:flex lg:flex-col lg:justify-end"
-          onClick={handleLogout}
+        <Button
+          className="mb-2 hidden h-auto w-full justify-start bg-red-500 py-3 text-white hover:bg-red-600 lg:flex"
+          variant={"transparent"}
+          disabled={logoutMutation.isPending}
+          onClick={() => logoutMutation.mutate()}
         >
-          <li className="lg:text-md cursor-pointe mb-4 flex w-full items-center gap-2 rounded-lg p-2 py-4 text-lg font-medium text-red-500 transition-all duration-300 hover:bg-red-500 hover:text-white">
-            <LogOut className="size-6" />
-            {t("profile-route.sign-out")}
-          </li>
-        </div>
+          <LogOut className="size-6" />
+          {t("profile-route.sign-out")}
+        </Button>
 
         {/* Logout Button for Mobile */}
-        <div
-          className="flex flex-col justify-end lg:hidden"
-          onClick={() => {
-            handleLogout();
-          }}
+        <Button
+          className="mb-2 h-auto w-full justify-start bg-red-500 py-3 text-white hover:bg-red-600 lg:hidden"
+          variant={"transparent"}
+          disabled={logoutMutation.isPending}
+          onClick={() => logoutMutation.mutate()}
         >
-          <li className="mb-4 flex w-full cursor-pointer items-center gap-2 p-2 py-4 text-lg font-semibold text-red-500 hover:bg-red-500 hover:text-white">
-            <LogOut className="size-6" />
-
-            {t("profile-route.sign-out")}
-          </li>
-        </div>
+          <LogOut className="size-6" />
+          {t("profile-route.sign-out")}
+        </Button>
       </div>
 
       {/* Overlay for Mobile */}
