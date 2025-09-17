@@ -71,7 +71,7 @@ export default function NotificationsDropdown() {
 
           {/* NO Read notifications number */}
           {data?.pages[0].data.unread_count !== 0 && (
-            <span className="absolute -end-1.5 -top-1 flex size-5 items-center justify-center rounded-full bg-[#EB5757] text-xs text-white">
+            <span className="absolute -end-0.5 -top-0.5 flex size-5 items-center justify-center rounded-full bg-[#EB5757] text-xs text-white">
               {data?.pages[0].data.unread_count}
             </span>
           )}
