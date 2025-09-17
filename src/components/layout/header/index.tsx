@@ -4,15 +4,15 @@ import { Suspense } from "react";
 
 import NavLinks from "./_components/nav-links";
 import Sidebar from "./_components/sidebar";
-import ShoppingCartButton from "./_components/shoping-cart-button";
+import ShoppingCartButton from "./_components/shopping-cart-button";
 import AuthDialog from "./_components/auth-dialog";
 import { UserDropdown } from "./_components/user-menu";
 
-import { getAllCategories } from "@/lib/api/categories.api";
 import { isUserLoggedin } from "@/lib/utils/server-cookies";
 import { CgProfile } from "react-icons/cg";
 import { ShoppingCart } from "lucide-react";
 import NotificationsDropdown from "./_components/notifications-dropdown";
+import { getAllCategories } from "@/lib/actions/category.action";
 
 export default async function Navbar() {
   // Fetch all categories

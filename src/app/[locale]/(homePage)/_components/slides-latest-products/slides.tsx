@@ -1,10 +1,9 @@
-import React from "react";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
 import Image from "next/image";
-import { getHomeSlides } from "@/lib/api/home.api";
 import { cn } from "@/lib/utils";
 import { getLocaleAssets } from "@/lib/utils/index";
 import { Link } from "@/i18n/routing";
+import { getHomeSlides } from "@/lib/actions/home.actions";
 
 export default async function Slides() {
   const { direction } = await getLocaleAssets();

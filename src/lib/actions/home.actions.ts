@@ -45,6 +45,21 @@ export const getAdvantageText = async () => {
   return data?.data || {};
 };
 
+// Get Home
+export const getHomeSlides = async () => {
+  const t = await getTranslations();
+
+  const response = await fetch(`${process.env.API}slider-homepage`);
+
+  if (!response.ok) {
+    throw new Error(t("failed-to-fetch-data"));
+  }
+
+  const data = await response.json();
+
+  return data.data.data;
+};
+
 export const getHome = async () => {
   const t = await getTranslations();
   const lang = await getLocale();
