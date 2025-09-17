@@ -9,8 +9,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "@/i18n/navigation";
 import { usePathname } from "@/i18n/routing";
+import { getPaginatedCategories } from "@/lib/actions/category.actions";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import {
   ChevronDown,
   ChevronUp,
@@ -25,6 +28,7 @@ import {
 import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 import { useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 // Nav links
 const navLinks = [
@@ -36,7 +40,7 @@ const navLinks = [
   { url: "/videos", title: "videos", icon: Video },
 ];
 
-export default function Sidebar({ categories }: { categories: Category[] }) {
+export default function Sidebar() {
   // state
   const [isOpen, setIsOpen] = useState(false);
   const [isCategoriesOpen, setIsCategoriesOpen] = useState(false);
@@ -52,6 +56,18 @@ export default function Sidebar({ categories }: { categories: Category[] }) {
   const handleOpenChange = (open: boolean) => {
     setIsOpen(open);
   };
+
+  const { data, fetchNextPage, hasNextPage, isLoading } = useInfiniteQuery({
+    queryKey: ["products"],
+    queryFn: getPaginatedCategories,
+    initialPageParam: 1,
+    getNextPageParam: (lastPage) => {
+      const isLastPage = lastPage.data.meta.current_page >= lastPage.data.meta.last_page;
+      return isLastPage ? undefined : lastPage.data.meta.current_page + 1;
+    },
+  });
+
+  const allCategoires = data?.pages.flatMap((page) => page.data.data) ?? [];
 
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -101,7 +117,7 @@ export default function Sidebar({ categories }: { categories: Category[] }) {
               })}
 
               {/* Categories Section */}
-              {categories && categories.length > 0 && (
+              {allCategoires && allCategoires.length > 0 && (
                 <>
                   {/* Divider */}
                   <div className="my-4 border-t border-gray-200"></div>
@@ -121,21 +137,32 @@ export default function Sidebar({ categories }: { categories: Category[] }) {
                     </CollapsibleTrigger>
 
                     <CollapsibleContent className="mt-1">
-                      <div className="space-y-1 pl-8">
-                        {categories.map((category, index) => (
-                          <Link
-                            key={index}
-                            href={`/categories/${category.name}/${category.id}`}
-                            onClick={() => handleOpenChange(false)}
-                            className={`block rounded-md px-3 py-2 text-sm font-medium transition-colors duration-200 ${
-                              pathName === `/store/${category.name}`
-                                ? "bg-teal-50 text-teal-700"
-                                : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                            }`}
-                          >
-                            {category.name}
-                          </Link>
-                        ))}
+                      <div id="target" className="h-[250px] overflow-y-auto pl-8">
+                        <InfiniteScroll
+                          dataLength={allCategoires.length}
+                          next={fetchNextPage}
+                          hasMore={!!hasNextPage}
+                          loader={Array.from({ length: 2 }).map((_, i) => (
+                            <Skeleton key={i} className="h-10 w-full rounded-md" />
+                          ))}
+                          scrollableTarget="target"
+                          className="space-y-1"
+                        >
+                          {allCategoires.map((category, index) => (
+                            <Link
+                              key={index}
+                              href={`/categories/${category.name}/${category.id}`}
+                              onClick={() => handleOpenChange(false)}
+                              className={`block rounded-md px-3 py-2 text-sm font-medium transition-colors duration-200 ${
+                                pathName === `/store/${category.name}`
+                                  ? "bg-teal-50 text-teal-700"
+                                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                              }`}
+                            >
+                              {category.name}
+                            </Link>
+                          ))}
+                        </InfiniteScroll>
                       </div>
                     </CollapsibleContent>
                   </Collapsible>

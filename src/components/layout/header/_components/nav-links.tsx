@@ -11,7 +11,7 @@ export const navLinks = [
   { url: "/videos", title: "videos" },
   { url: "/store", title: "store" },
 ];
-export default function NavLinks({ categories }: { categories: Category[] }) {
+export default function NavLinks() {
   // Translation
   const t = useTranslations();
   const pathName = usePathname();
@@ -31,7 +31,7 @@ export default function NavLinks({ categories }: { categories: Category[] }) {
           </Link>
         );
       })}
-      <CategoriesMenu categories={categories} />
+      <CategoriesMenu />
     </nav>
   );
 }
