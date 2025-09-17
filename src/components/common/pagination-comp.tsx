@@ -82,7 +82,7 @@ export function PaginationComponent({
 
   return (
     <Pagination>
-      <PaginationContent className="mt-20 flex w-full max-w-[300px] items-center justify-between px-7">
+      <PaginationContent className="mt-10 flex w-full max-w-[300px] items-center justify-between px-7">
         <PaginationItem>
           <PaginationPrevious
             disabled={!hasPrevious}
@@ -101,7 +101,7 @@ export function PaginationComponent({
                 <PaginationEllipsis />
               </PaginationItem>
             ) : (
-              <PaginationItem key={page} className="">
+              <PaginationItem key={page} className="hover:text-white">
                 <PaginationLink
                   href="#"
                   isActive={currentPage === page}

@@ -153,7 +153,7 @@ export const getFilteredProduct = async ({
     if (page) query.append("page", String(page));
     if (limit) query.append("limit", String(limit));
 
-    const response = await fetch(`${process.env.API}get/products/filter?${query.toString()}`, {
+    const response = await fetch(`${process.env.API}get/products/filter/?${query.toString()}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,

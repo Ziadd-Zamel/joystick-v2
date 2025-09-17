@@ -52,7 +52,7 @@ const PaginationPrevious = ({ className, ...props }: React.ComponentProps<"butto
     aria-label="Go to previous page"
     size="default"
     className={cn(
-      "bg-background gap-2 border text-xl shadow-sm hover:bg-slate-200 disabled:bg-[#FAFAFA]",
+      "bg-background gap-2 border text-xl shadow-sm hover:bg-slate-200 disabled:bg-[#FAFAFA] ltr:rotate-180",
       className,
     )}
     {...props}
@@ -69,7 +69,7 @@ const PaginationNext = ({ className, ...props }: React.ComponentProps<"button">)
     aria-label="Go to next page"
     size="default"
     className={cn(
-      "bg-background gap-2 border text-xl shadow-sm hover:bg-slate-200 disabled:bg-[#FAFAFA]",
+      "bg-background gap-2 border text-xl shadow-sm hover:bg-slate-200 disabled:bg-[#FAFAFA] ltr:rotate-180",
       className,
     )}
     {...props}

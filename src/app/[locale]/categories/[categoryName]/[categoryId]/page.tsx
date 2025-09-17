@@ -2,29 +2,41 @@ import { getFilteredProduct } from "@/lib/actions/product.actions";
 import ProductsGrid from "./_components/products-grid";
 
 interface PageProps {
+  params: {
+    [key: string]: string;
+  };
   searchParams?: {
     brand_id?: string;
     tags?: string;
     price_from?: string;
     price_to?: string;
     name?: string;
-    categoryId?: string;
     page?: string;
     limit?: string;
   };
 }
 
-export default async function Page({ searchParams }: PageProps) {
-  const page = Math.max(1, Number(searchParams?.page) || 1);
+export default async function Page({ params, searchParams }: PageProps) {
+  const { categoryId } = await params;
+  const {
+    name,
+    brand_id,
+    price_from,
+    price_to,
+    tags,
+    page: pageParam,
+  } = (await searchParams) ?? {};
+
+  const page = Math.max(1, Number(pageParam) || 1);
   const limit = 9;
 
   const payload = await getFilteredProduct({
-    name: searchParams?.name,
-    brand_id: searchParams?.brand_id,
-    category_id: searchParams?.categoryId,
-    price_from: searchParams?.price_from,
-    price_to: searchParams?.price_to,
-    tags: searchParams?.tags,
+    name: name,
+    brand_id: brand_id,
+    category_id: categoryId,
+    price_from: price_from,
+    price_to: price_to,
+    tags: tags,
     page: page,
     limit: limit,
   });
