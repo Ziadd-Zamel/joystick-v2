@@ -6,9 +6,6 @@ import { useRef } from "react";
 
 import { ProductCard } from "@/components/common/product-card";
 import { ProductCardSkeleton } from "@/components/common/product-card-skeleton";
-import { useInfiniteQuery } from "@tanstack/react-query";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { getPaginatedProducts } from "@/lib/actions/product.actions";
 import {
   Carousel,
   CarouselContent,
@@ -16,8 +13,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { HiOutlineChevronDoubleLeft, HiOutlineChevronDoubleRight } from "react-icons/hi2";
+import { getPaginatedOrderdProducts } from "@/lib/actions/product.actions";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { useLocale } from "next-intl";
+import { HiOutlineChevronDoubleLeft, HiOutlineChevronDoubleRight } from "react-icons/hi2";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 export default function ProductsScrollspyWrapper({ categories }: { categories: Category[] }) {
   const parentRef = useRef<HTMLDivElement | null>(null);
@@ -25,7 +25,7 @@ export default function ProductsScrollspyWrapper({ categories }: { categories: C
 
   const { data, fetchNextPage, hasNextPage, isLoading } = useInfiniteQuery({
     queryKey: ["products"],
-    queryFn: getPaginatedProducts,
+    queryFn: getPaginatedOrderdProducts,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => {
       const isLastPage = lastPage.data.meta.current_page >= lastPage.data.meta.last_page;

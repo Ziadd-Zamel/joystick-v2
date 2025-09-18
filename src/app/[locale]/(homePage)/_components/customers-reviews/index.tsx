@@ -25,7 +25,7 @@ export default async function Testimonials() {
           opts={{ align: "center", direction }}
           className="z-20 mx-auto w-[85%] cursor-grab select-none md:w-full"
         >
-          <CarouselPrevious className="rtl:-start-10">
+          <CarouselPrevious className="bg-white rtl:-start-10">
             <HiMiniChevronLeft className="rtl:rotate-180" />
           </CarouselPrevious>
           <CarouselContent className="w-full items-stretch justify-stretch">
@@ -42,7 +42,7 @@ export default async function Testimonials() {
               </CarouselItem>
             ))}
           </CarouselContent>
-          <CarouselNext className="rtl:start-auto rtl:-end-10">
+          <CarouselNext className="bg-white rtl:start-auto rtl:-end-10">
             <HiMiniChevronRight className="rtl:rotate-180" />
           </CarouselNext>
         </Carousel>

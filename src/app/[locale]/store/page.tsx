@@ -1,8 +1,8 @@
-import { getAllCategories } from "@/lib/actions/category.actions";
+import { getOrderdCategories } from "@/lib/actions/category.actions";
 import ProductsScrollspyWrapper from "./_components/products-scrollspy-wrapper";
 
 export default async function page() {
-  const categories: Category[] = await getAllCategories(9999);
+  const categories: Category[] = await getOrderdCategories();
 
   return (
     <section className="sm:p-6 md:p-8">

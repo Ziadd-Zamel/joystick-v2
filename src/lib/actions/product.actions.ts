@@ -94,6 +94,31 @@ export const getPaginatedProducts = async ({ pageParam = 0 }) => {
   }
 };
 
+export const getPaginatedOrderdProducts = async ({ pageParam = 0 }) => {
+  const t = await getTranslations();
+  const lang = await getLocale();
+  const token = await getToken();
+
+  try {
+    const response = await fetch(`${process.env.API}store/products?limit=10&page=${pageParam}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+        lang,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(t("failed-to-fetch-data"));
+    }
+
+    const payload = await response.json();
+    return payload as ProductsResponse;
+  } catch (err) {
+    throw err;
+  }
+};
+
 export const getProductById = async (id: string) => {
   const token = await getToken();
   const { locale } = await getLocaleAssets();
