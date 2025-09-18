@@ -107,6 +107,12 @@
     "password-change-failed": "فشل في تغيير كلمة المرور. يرجى المحاولة مرة أخرى."
   },
   "profile-route": {
+    "total-payment": "إجمالي الدفع",
+    "no-address-provided": "لم يتم توفير عنوان",
+    "payment-method": "طريقة الدفع",
+    "payment-time": "وقت الدفع",
+    "order-status": "حالة الطلب",
+    "order-details": "تفاصيل الطلب",
     "products": "المنتجات",
     "address-id-required": "العنوان مطلوب",
     "available-day-required": "اليوم مطلوب",

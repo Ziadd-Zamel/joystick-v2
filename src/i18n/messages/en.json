@@ -109,6 +109,12 @@
     "password-change-failed": "Failed to change password. Please try again."
   },
   "profile-route": {
+    "total-payment": "Total Payment",
+    "no-address-provided": "No Address Provided",
+    "payment-method": "Payment Method",
+    "payment-time": "Payment Time",
+    "order-status": "Order Status",
+    "order-details": "Order Details",
     "products": "Products",
     "address-id-required": "Address is required",
     "available-day-required": "Day is required",

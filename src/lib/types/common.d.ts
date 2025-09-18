@@ -4,7 +4,7 @@ declare global {
   type SearchParams = { [key: string]: string | string[] | undefined };
 
   type RouteProps = {
-    params: Promise<{ locale: Locale; productSlug: string }>;
+    params: Promise<{ locale: Locale; productSlug: string; [key: string]: string | undefined }>;
     searchParams: SearchParams;
   };
 

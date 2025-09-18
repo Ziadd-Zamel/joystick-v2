@@ -6,6 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { Link } from "@/i18n/routing";
 import { getPrevOrders } from "@/lib/actions/profile.actions";
 import { getTranslations } from "next-intl/server";
 
@@ -44,7 +45,14 @@ export default async function PrevOrdersTable() {
         <TableBody className="text-sm font-medium text-zinc-700">
           {orderData.map((order) => (
             <TableRow key={order.id}>
-              <TableCell className="text-center">{order.order_number}</TableCell>
+              <TableCell className="text-center">
+                <Link
+                  href={`/profile/previous-orders/order-details/${order.id}`}
+                  className="underline-offset-2 hover:underline"
+                >
+                  {order.order_number}
+                </Link>
+              </TableCell>
               <TableCell className="text-center">{order.total_price}</TableCell>
               <TableCell className="text-center">{order.status}</TableCell>
               <TableCell className="text-center">{order.created_at}</TableCell>
