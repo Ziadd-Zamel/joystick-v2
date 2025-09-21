@@ -35,7 +35,7 @@ const Footer = () => {
     <footer className={`from-main relative z-10 mt-10 bg-gradient-to-bl to-[#073433] text-white`}>
       {/* Main Footer Content */}
       <div className="container mx-auto px-4 pt-12 pb-8 2xl:max-w-[80%]">
-        <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
           <div className="col-span-1 space-y-6">
             <Link href="/" className="block w-36">
               <Image
@@ -94,21 +94,24 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="col-span-1 flex justify-start gap-20 md:justify-center">
-            <div className="">
+          {/* App Links */}
+          <div className="col-span-1 flex justify-start gap-8 md:justify-evenly">
+            {/* Quick links */}
+            <div>
               <h3 className="mb-6 text-start text-lg font-bold">{t("quick-links")}</h3>
               <ul className="space-y-3 text-start">
                 {navLinks.map((link) => (
                   <li key={link.title}>
                     <NavLink
                       link={{ title: t(link.title), url: link.url }}
-                      className="!transform-none !text-base !font-normal !text-gray-300 !transition-colors hover:!text-white"
+                      className="!transform-none !px-0 !text-base !font-normal !text-gray-300 !transition-colors hover:!text-white"
                     />
                   </li>
                 ))}
               </ul>
             </div>
 
+            {/* Other links */}
             <div>
               <h3 className="mb-6 text-start text-lg font-bold">{t("other-links")}</h3>
               <ul className="space-y-3 text-start">
@@ -126,7 +129,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="col-span-1 flex flex-col lg:items-center">
+          <div className="col-span-1 flex flex-col md:justify-self-end">
             <h3 className="mb-6 text-start text-lg font-bold">{t("contact-info")}</h3>
             <ul className="space-y-4">
               <li className="flex flex-row gap-2 text-start text-gray-200">
