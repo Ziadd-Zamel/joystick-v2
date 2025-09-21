@@ -27,7 +27,7 @@ export default async function ProductsLayout({ children, searchParams }: Props) 
 
   const initialPriceRange = [
     searchParams?.price_from ? parseInt(searchParams.price_from) : 0,
-    searchParams?.price_to ? parseInt(searchParams.price_to) : 9999,
+    searchParams?.price_to ? parseInt(searchParams.price_to) : 99999,
   ];
 
   const initialNameFilter = searchParams?.name || "";

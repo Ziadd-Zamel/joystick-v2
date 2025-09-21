@@ -42,7 +42,7 @@ function FilterContent({
   tags,
   initialBrandIds = [],
   initialTagIds = [],
-  initialPriceRange = [0, 9999],
+  initialPriceRange = [0, 99999],
   initialNameFilter = "",
 }: FilterProps) {
   const router = useRouter();
@@ -60,7 +60,7 @@ function FilterContent({
       const params = new URLSearchParams(searchParams.toString());
 
       Object.entries(updates).forEach(([key, value]) => {
-        if (value === null || value === "" || value === "0,9999") {
+        if (value === null || value === "" || value === "0,99999") {
           params.delete(key);
         } else {
           params.set(key, value);
@@ -102,8 +102,8 @@ function FilterContent({
 
   const applyPriceFilters = () => {
     updateSearchParams({
-      price_from: localPriceRange[0] > 0 ? localPriceRange[0].toString() : null,
-      price_to: localPriceRange[1] < 9999 ? localPriceRange[1].toString() : null,
+      price_from: localPriceRange[0] >= 0 ? localPriceRange[0].toString() : null,
+      price_to: localPriceRange[1] <= 99999 ? localPriceRange[1].toString() : null,
     });
   };
 
@@ -122,7 +122,7 @@ function FilterContent({
   const clearAll = () => {
     setLocalBrandIds([]);
     setLocalTagIds([]);
-    setLocalPriceRange([0, 9999]);
+    setLocalPriceRange([0, 99999]);
     setLocalNameFilter("");
     updateSearchParams({
       brand_id: null,
@@ -255,7 +255,7 @@ function FilterContent({
           value={localPriceRange}
           onValueChange={handlePriceChange}
           min={0}
-          max={9999}
+          max={99999}
           step={1}
         />
 
@@ -285,10 +285,10 @@ function FilterContent({
               id="price-to"
               type="number"
               min={localPriceRange[0]}
-              max={9999}
+              max={99999}
               value={localPriceRange[1]}
               onChange={(e) => {
-                const val = Math.min(9999, Math.max(Number(e.target.value), localPriceRange[0]));
+                const val = Math.min(99999, Math.max(Number(e.target.value), localPriceRange[0]));
                 setLocalPriceRange([localPriceRange[0], val]);
               }}
             />
