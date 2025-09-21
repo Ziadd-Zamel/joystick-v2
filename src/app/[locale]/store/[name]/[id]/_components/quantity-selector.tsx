@@ -113,9 +113,7 @@ export default function QuantitySelector({
 
       {showAvailableText && (
         <p className="text-sm text-gray-600">
-          {selectedColor
-            ? `${availableText}: ${availableQuantity || maxQuantity}`
-            : selectColorText}
+          {selectedColor ? `${availableText} ${availableQuantity || maxQuantity}` : selectColorText}
         </p>
       )}
     </div>

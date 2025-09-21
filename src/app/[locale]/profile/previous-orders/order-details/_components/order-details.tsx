@@ -35,12 +35,12 @@ export default async function OrderDetails({ orderId }: { orderId: string | unde
 					</div> */}
 
               <div className="flex-1 space-y-2">
-                <Link
-                  href={`/store/${encodeURIComponent(product.product_name.split(" ")[0])}/${product.id}`}
-                  className="font-semibold underline-offset-2 hover:underline"
+                <div
+                  // href={`/store/${encodeURIComponent(product.product_name.split(" ")[0])}/${product.id}`}
+                  className="font-semibold underline-offset-2"
                 >
                   {product.product_name}
-                </Link>
+                </div>
 
                 <div className="text-main mt-4 flex items-center justify-between font-medium">
                   <p>
@@ -78,7 +78,11 @@ export default async function OrderDetails({ orderId }: { orderId: string | unde
 
           <div className="rounded-sm border p-4">
             <p className="text-sm text-zinc-500">{t("payment-time")}</p>
-            <p>{orderDetails.data.updated_at}</p>
+            <p>
+              {orderDetails.data.status === "Completed"
+                ? orderDetails.data.updated_at
+                : orderDetails.data.status}{" "}
+            </p>
           </div>
 
           <div className="rounded-sm border p-4">

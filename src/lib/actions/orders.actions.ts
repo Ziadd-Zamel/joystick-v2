@@ -31,7 +31,7 @@ type OrderResponse = {
     };
     total: string;
     payment_method: "cashOnDelivery" | string; // extend if you have other methods
-    status: "pending" | "completed" | "cancelled" | string; // extend as needed
+    status: "pending" | "Completed" | "cancelled" | string; // extend as needed
     created_at: string;
     updated_at: string;
     order_detalis: {

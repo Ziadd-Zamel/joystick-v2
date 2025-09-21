@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
@@ -27,11 +27,11 @@ export default function CartEmptyState() {
         <p className="mb-8 text-gray-500">{t("description")}</p>
 
         {/* Action Button */}
-        <Link href="/products" aria-label={t("button")}>
-          <Button className="rounded-lg bg-[#02A09B] px-8 py-3 font-medium text-white shadow-sm transition-colors duration-200 hover:bg-[#02A09B]/80 hover:shadow-md">
+        <Button asChild>
+          <Link href="/store" aria-label={t("button")}>
             {t("button")}
-          </Button>
-        </Link>
+          </Link>
+        </Button>
       </div>
     </div>
   );
