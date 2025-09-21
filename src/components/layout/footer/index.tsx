@@ -1,70 +1,35 @@
 "use client";
-import React from "react";
-import Image from "next/image";
-import NavLink from "@/components/common/NavLink";
-import Link from "next/link";
-import { useState, useEffect } from "react";
-import { useSnackbar } from "notistack";
-import { useRouter } from "next/navigation";
-import Cookies from "js-cookie";
-import { MapPin, Phone, Mail } from "lucide-react";
-import { useQuery } from "@tanstack/react-query";
-import { FaFacebookF, FaInstagram, FaTiktok, FaYoutube } from "react-icons/fa";
-import { useTranslations } from "next-intl";
+import NavLink from "@/components/common/nav-link";
+import { Link } from "@/i18n/routing";
 import { getStaticInfo } from "@/lib/actions/info.actions";
+import { useQuery } from "@tanstack/react-query";
+import { Mail, MapPin, Phone } from "lucide-react";
+import { useTranslations } from "next-intl";
+import Image from "next/image";
+import { FaFacebookF, FaInstagram, FaTiktok, FaYoutube } from "react-icons/fa";
+
+const navLinks = [
+  { url: "/", title: "home" },
+  { url: "/store", title: "store" },
+  { url: "/about", title: "about" },
+  { url: "/videos", title: "videos" },
+];
+
+const otherLinks = [
+  { href: "/terms", label: "terms" },
+  { href: "/privacy-policy", label: "privacy-policy" },
+  { href: "/return-policy", label: "return-policy" },
+  { href: "/contact", label: "contact" },
+];
 
 const Footer = () => {
   // Translations
   const t = useTranslations();
-
-  // Navigation
-  const router = useRouter();
-
-  // States
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-
-  // Hooks
-  const { enqueueSnackbar } = useSnackbar();
-
   // Queries
   const { data: contactInfo } = useQuery({
     queryKey: ["contact-info"],
     queryFn: () => getStaticInfo("get-site-data"),
   });
-
-  // Variables
-  const navLinks = [
-    { url: "/", title: t("home") },
-    { url: "/about", title: t("about") },
-    { url: "/profile/maintenance", title: t("maintenance") },
-    { url: "/videos", title: t("videos") },
-  ];
-
-  const otherLinks = [
-    { href: "/terms", label: t("terms") },
-    { href: "/privacy-policy", label: t("privacy-policy") },
-    { href: "/return-policy", label: t("return-policy") },
-  ];
-
-  // Side Effects
-  useEffect(() => {
-    const token = Cookies.get("token");
-    if (token) {
-      setIsAuthenticated(true);
-    } else {
-      setIsAuthenticated(false);
-    }
-  }, []);
-
-  const handleMaintenanceClick = () => {
-    if (!isAuthenticated) {
-      enqueueSnackbar(t("login-required-for-maintenance"), {
-        variant: "error",
-      });
-    } else {
-      router.push("/profile/maintenance");
-    }
-  };
 
   return (
     <footer className={`from-main relative z-10 mt-10 bg-gradient-to-bl to-[#073433] text-white`}>
@@ -135,21 +100,10 @@ const Footer = () => {
               <ul className="space-y-3 text-start">
                 {navLinks.map((link) => (
                   <li key={link.title}>
-                    {link.title.includes(t("maintenance").toLocaleLowerCase()) ? (
-                      <button
-                        type="button"
-                        title={link.title}
-                        onClick={handleMaintenanceClick}
-                        className="text-base text-gray-300 transition-colors hover:text-white"
-                      >
-                        {link.title}
-                      </button>
-                    ) : (
-                      <NavLink
-                        link={link}
-                        className="!transform-none !text-base !font-normal !text-gray-300 !transition-colors hover:!text-white"
-                      />
-                    )}
+                    <NavLink
+                      link={{ title: t(link.title), url: link.url }}
+                      className="!transform-none !text-base !font-normal !text-gray-300 !transition-colors hover:!text-white"
+                    />
                   </li>
                 ))}
               </ul>
@@ -164,7 +118,7 @@ const Footer = () => {
                       href={link.href}
                       className="!transform-none !text-base !font-normal !text-gray-300 !transition-colors hover:!text-white"
                     >
-                      {link.label}
+                      {t(link.label)}
                     </Link>
                   </li>
                 ))}
