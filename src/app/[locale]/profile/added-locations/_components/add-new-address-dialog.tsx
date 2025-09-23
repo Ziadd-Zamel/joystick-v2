@@ -73,11 +73,9 @@ export default function AddNewAddressDialog({
     try {
       if (address) {
         const data = await updateAddress(values, address.id);
-        console.log("address res data", data);
         toast.success(data.message);
       } else {
         const data = await addNewAddress(values);
-        console.log("address res data", data);
         toast.success(data.message);
         form.reset();
       }
@@ -85,7 +83,6 @@ export default function AddNewAddressDialog({
       router.refresh();
       setTimeout(() => setOpen(false), 500);
     } catch (err) {
-      console.log(err);
       toast.error((err as Error).message);
     }
   }

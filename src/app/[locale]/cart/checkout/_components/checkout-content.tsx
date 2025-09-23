@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import AddressSection from "./address-section";
-import UserInfoForm from "./user-Info-orm";
+import UserInfoForm from "./user-Info-form";
 import DiscountSection from "../../_components/discount-section";
 
 export default function CheckoutContent({

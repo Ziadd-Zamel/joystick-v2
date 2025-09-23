@@ -39,24 +39,24 @@ export default function Error({ error, reset }: ErrorProps) {
 
   return (
     <div
-      className="min-h-screen bg-hero-gradient flex flex-col items-center justify-center text-gray-800 text-center px-4"
+      className="bg-hero-gradient flex min-h-screen flex-col items-center justify-center px-4 text-center text-gray-800"
       role="alert"
       aria-live="assertive"
     >
-      <div className="max-w-md w-full">
-        <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900" id="error-title">
+      <div className="w-full max-w-md">
+        <h1 className="mb-4 text-4xl font-bold text-gray-900 sm:text-5xl" id="error-title">
           Something went wrong
         </h1>
 
-        <p className="text-lg sm:text-xl mb-8 text-gray-700" aria-describedby="error-title">
+        <p className="mb-8 text-lg text-gray-700 sm:text-xl" aria-describedby="error-title">
           {getErrorMessage(error)}
         </p>
 
         {/* Action buttons */}
-        <div className="flex gap-4 flex-wrap justify-center mb-6">
+        <div className="mb-6 flex flex-wrap justify-center gap-4">
           <Button
             onClick={reset}
-            className="px-6 py-3 rounded-xl font-semibold text-white bg-blue-600 hover:bg-blue-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 shadow-lg"
+            className="rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg transition-colors duration-200 hover:bg-blue-700 focus:ring-2 focus:ring-blue-500/50 focus:outline-none"
             aria-label="Try the action again"
           >
             Try Again
@@ -64,7 +64,7 @@ export default function Error({ error, reset }: ErrorProps) {
 
           <Button
             onClick={handleRefresh}
-            className="px-6 py-3 rounded-xl font-semibold text-gray-800 bg-white/80 hover:bg-white/90 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-400/50 shadow-lg"
+            className="rounded-xl bg-white/80 px-6 py-3 font-semibold text-gray-800 shadow-lg transition-colors duration-200 hover:bg-white/90 focus:ring-2 focus:ring-gray-400/50 focus:outline-none"
             aria-label="Refresh the page"
           >
             Refresh Page
@@ -72,7 +72,7 @@ export default function Error({ error, reset }: ErrorProps) {
 
           <Button
             onClick={handleGoHome}
-            className="px-6 py-3 rounded-xl font-semibold text-gray-800 bg-gray-200/80 hover:bg-gray-300/80 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-gray-400/50 shadow-lg"
+            className="rounded-xl bg-gray-200/80 px-6 py-3 font-semibold text-gray-800 shadow-lg transition-colors duration-200 hover:bg-gray-300/80 focus:ring-2 focus:ring-gray-400/50 focus:outline-none"
             aria-label="Go to home page"
           >
             Go Home
@@ -81,20 +81,20 @@ export default function Error({ error, reset }: ErrorProps) {
 
         {/* Error details for development */}
         {process.env.NODE_ENV === "development" && (
-          <details className="mt-4 text-sm text-gray-600 text-left max-w-full">
-            <summary className="cursor-pointer hover:text-gray-800 transition-colors mb-2 text-center">
+          <details className="mt-4 max-w-full text-left text-sm text-gray-600">
+            <summary className="mb-2 cursor-pointer text-center transition-colors hover:text-gray-800">
               Show Error Details
             </summary>
-            <div className="bg-white/70 backdrop-blur-sm p-4 rounded-lg overflow-auto border border-gray-300/50 shadow-lg">
-              <p className="font-semibold mb-2 text-gray-800">Error Message:</p>
-              <pre className="whitespace-pre-wrap break-words mb-4 text-red-700 bg-red-50/80 p-2 rounded">
+            <div className="overflow-auto rounded-lg border border-gray-300/50 bg-white/70 p-4 shadow-lg backdrop-blur-sm">
+              <p className="mb-2 font-semibold text-gray-800">Error Message:</p>
+              <pre className="mb-4 rounded bg-red-50/80 p-2 break-words whitespace-pre-wrap text-red-700">
                 {error.message}
               </pre>
 
               {error.stack && (
                 <>
-                  <p className="font-semibold mb-2 text-gray-800">Stack Trace:</p>
-                  <pre className="whitespace-pre-wrap break-words text-xs text-gray-700 font-mono bg-gray-50/80 p-2 rounded">
+                  <p className="mb-2 font-semibold text-gray-800">Stack Trace:</p>
+                  <pre className="rounded bg-gray-50/80 p-2 font-mono text-xs break-words whitespace-pre-wrap text-gray-700">
                     {error.stack}
                   </pre>
                 </>

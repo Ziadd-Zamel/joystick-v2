@@ -33,7 +33,6 @@ export async function applyCoupon(data: ApplyCouponFields): Promise<CouponRespon
         total_price: data.total_price,
       }),
     });
-    console.log(response);
     if (!response.ok) {
       const errorData = await response.json().catch(() => ({}));
       throw new Error(errorData.message);
@@ -44,7 +43,6 @@ export async function applyCoupon(data: ApplyCouponFields): Promise<CouponRespon
     if (!result.success) {
       throw new Error(result.message);
     }
-    console.log(result);
     return result;
   } catch (error) {
     console.error("Apply coupon error:", error);

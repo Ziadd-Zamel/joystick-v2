@@ -34,7 +34,6 @@ export default function ProfilePasswordForm() {
       toast.success(data.message);
       form.reset();
     } catch (err) {
-      console.log(err);
       toast.success((err as Error).message);
     }
   }

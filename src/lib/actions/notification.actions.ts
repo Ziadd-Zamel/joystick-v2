@@ -78,7 +78,6 @@ export const markNotificationAsRead = async (notificationId: string) => {
   const cookieStore = await cookies();
   const token = cookieStore.get("auth_token")?.value;
 
-  console.log("token", token);
   const locale = await getLocale();
 
   if (!token) {

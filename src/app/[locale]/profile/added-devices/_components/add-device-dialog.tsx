@@ -54,14 +54,12 @@ export default function AddDeviceDialog() {
   async function onSubmit(values: AddDeviceFormValues) {
     try {
       const data = await addDevice(values);
-      console.log("address res data", data);
       toast.success(data.message);
       form.reset();
 
       router.refresh();
       setTimeout(() => setOpen(false), 500);
     } catch (err) {
-      console.log(err);
       toast.error((err as Error).message);
     }
   }

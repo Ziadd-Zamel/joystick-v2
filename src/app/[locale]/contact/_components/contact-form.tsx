@@ -58,7 +58,6 @@ export default function ContactForm({ onSuccess }: { onSuccess?: () => void }) {
 
   // Submit Function
   const onSubmit: SubmitHandler<ContactFields> = async (values) => {
-    console.log(values);
     contactMutation.mutate(values);
   };
 

@@ -63,7 +63,6 @@ export default function LoginForm({
 
   // Submit Function
   const onSubmit: SubmitHandler<LoginFields> = async (values) => {
-    console.log(values);
     loginMutation.mutate(values);
   };
 

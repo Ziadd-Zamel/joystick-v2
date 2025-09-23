@@ -65,7 +65,6 @@ export default function RegisterForm({ setOpen }: { setOpen: (open: boolean) => 
   });
   // Submit Function
   const onSubmit: SubmitHandler<RegisterFields> = async (values) => {
-    console.log(values);
     registerMutation.mutate(values);
   };
 

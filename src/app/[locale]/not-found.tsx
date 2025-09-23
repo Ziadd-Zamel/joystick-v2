@@ -13,31 +13,31 @@ export default function NotFound() {
   };
 
   return (
-    <div className="min-h-screen bg-hero-gradient flex flex-col items-center justify-center text-gray-800 text-center px-4">
-      <div className="max-w-md w-full">
+    <div className="bg-hero-gradient flex min-h-screen flex-col items-center justify-center px-4 text-center text-gray-800">
+      <div className="w-full max-w-md">
         {/* 404 Number */}
-        <div className="text-8xl sm:text-9xl font-bold text-gray-900/20 mb-4 select-none">404</div>
+        <div className="mb-4 text-8xl font-bold text-gray-900/20 select-none sm:text-9xl">404</div>
 
         {/* Main heading */}
-        <h1 className="text-4xl sm:text-5xl font-bold mb-4 text-gray-900">Page Not Found</h1>
+        <h1 className="mb-4 text-4xl font-bold text-gray-900 sm:text-5xl">Page Not Found</h1>
 
         {/* Description */}
-        <p className="text-lg sm:text-xl mb-8 text-gray-700">
+        <p className="mb-8 text-lg text-gray-700 sm:text-xl">
           The page you&#39;re looking for doesn&#39;t exist or has been moved.
         </p>
 
         {/* Action buttons */}
-        <div className="flex gap-4 flex-wrap justify-center mb-6">
+        <div className="mb-6 flex flex-wrap justify-center gap-4">
           <Link
             href="/"
-            className="px-6 py-3 rounded-xl font-semibold text-white bg-main hover:bg-green-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500/50 shadow-lg"
+            className="bg-main rounded-xl px-6 py-3 font-semibold text-white shadow-lg transition-colors duration-200 hover:bg-green-700 focus:ring-2 focus:ring-blue-500/50 focus:outline-none"
           >
             Go Home
           </Link>
 
           <Button
             onClick={handleGoBack}
-            className="px-6 py-[26px] cursor-pointer rounded-xl font-semibold text-gray-800 bg-transparent border-main border-1 hover:bg-main hover:text-white transition-colors duration-500 focus:outline-none focus:ring-2 focus:ring-main/50 shadow-lg"
+            className="border-main hover:bg-main focus:ring-main/50 cursor-pointer rounded-xl border-1 bg-transparent px-6 py-[26px] font-semibold text-gray-800 shadow-lg transition-colors duration-500 hover:text-white focus:ring-2 focus:outline-none"
           >
             Go Back
           </Button>

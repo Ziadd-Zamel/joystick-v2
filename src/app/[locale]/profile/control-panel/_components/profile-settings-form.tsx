@@ -54,7 +54,6 @@ export default function ProfileSettingsForm({ userData }: { userData: User }) {
         setOpenOTPDialog(true);
       }
     } catch (err) {
-      console.log(err);
       toast.error((err as Error).message);
     }
   }

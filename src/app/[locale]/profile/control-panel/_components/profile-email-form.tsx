@@ -32,7 +32,6 @@ export default function ProfileEmailForm() {
       toast.success(payload.message);
       form.reset();
     } catch (err) {
-      console.log(err);
       toast.error((err as Error).message);
     }
   }

@@ -35,8 +35,6 @@ export async function registerUser(data: RegisterFields) {
     }
 
     const result = await response.json();
-    console.log(data);
-    console.log(result);
 
     return { success: true, data: result };
   } catch (error) {
