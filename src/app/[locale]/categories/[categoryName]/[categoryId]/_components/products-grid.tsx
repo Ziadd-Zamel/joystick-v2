@@ -5,15 +5,18 @@ import { ProductCard } from "@/components/common/product-card";
 import { usePathname, useRouter } from "@/i18n/routing";
 
 interface ProductsGridProps {
-  products: Product[];
-  pagination: {
+  products?: Product[];
+  pagination?: {
     currentPage: number;
     totalPages: number;
     limit: number;
   };
 }
 
-export default function ProductsGrid({ products, pagination }: ProductsGridProps) {
+export default function ProductsGrid({
+  products = [],
+  pagination = { currentPage: 0, totalPages: 0, limit: 0 },
+}: ProductsGridProps) {
   // Router
   const router = useRouter();
   const pathname = usePathname();

@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 
 declare global {
-  type SearchParams = { [key: string]: string | string[] | undefined };
+  type SearchParams = Promise<{ [key: string]: string | string[] | undefined }>;
 
   type RouteProps = {
     params: Promise<{ locale: Locale; productSlug: string; [key: string]: string | undefined }>;

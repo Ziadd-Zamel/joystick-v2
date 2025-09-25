@@ -107,6 +107,12 @@
     "password-change-failed": "فشل في تغيير كلمة المرور. يرجى المحاولة مرة أخرى."
   },
   "profile-route": {
+    "address-required": "العنوان مطلوب",
+    "day-required": "اليوم مطلوب",
+    "time-required": "الوقت مطلوب",
+    "notes-max": "الملاحظات لا يمكن أن تتجاوز 500 حرف",
+    "problem-parts-required": "يجب إدخال أجزاء العطل",
+    "problem-parts-min": "يجب اختيار جزء واحد على الأقل",
     "total-payment": "إجمالي الدفع",
     "no-address-provided": "لم يتم توفير عنوان",
     "payment-method": "طريقة الدفع",

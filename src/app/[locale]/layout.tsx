@@ -30,9 +30,13 @@ const montserrat = Montserrat({
 });
 
 export const metadata = {
-  title: "DEV JOY STICK",
+  title: "JOY STICK",
   description: "Joy stick website",
 };
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 export default async function LocaleLayout({ children, params }: LayoutProps) {
   const { locale } = await params;

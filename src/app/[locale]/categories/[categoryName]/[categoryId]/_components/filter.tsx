@@ -37,21 +37,29 @@ interface FilterProps {
   initialNameFilter?: string;
 }
 
-function FilterContent({
-  brands,
-  tags,
-  initialBrandIds = [],
-  initialTagIds = [],
-  initialPriceRange = [0, 99999],
-  initialNameFilter = "",
-}: FilterProps) {
+function FilterContent({ brands, tags }: FilterProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const t = useTranslations("category-route");
 
+  const initialBrandIds = searchParams.get("brand_id")
+    ? searchParams.get("brand_id")?.split(",").map(Number)
+    : [];
+
+  const initialTagIds = searchParams.get("tags")
+    ? searchParams.get("tags")?.split(",").map(Number)
+    : [];
+
+  const initialPriceRange = [
+    searchParams.get("price_from") ? parseInt(searchParams.get("price_from")!) : 0,
+    searchParams.get("price_to") ? parseInt(searchParams.get("price_to")!) : 99999,
+  ];
+
+  const initialNameFilter = searchParams?.get("name") || "";
+
   // Local state for filters initialized with props
-  const [localBrandIds, setLocalBrandIds] = useState<number[]>(initialBrandIds);
-  const [localTagIds, setLocalTagIds] = useState<number[]>(initialTagIds);
+  const [localBrandIds, setLocalBrandIds] = useState<number[]>(initialBrandIds!);
+  const [localTagIds, setLocalTagIds] = useState<number[]>(initialTagIds!);
   const [localPriceRange, setLocalPriceRange] = useState<number[]>(initialPriceRange);
   const [localNameFilter, setLocalNameFilter] = useState(initialNameFilter);
 

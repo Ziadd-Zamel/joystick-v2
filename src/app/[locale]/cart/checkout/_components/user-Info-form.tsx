@@ -39,7 +39,7 @@ export default function UserInfoForm() {
   });
 
   // Submit Function
-  const onSubmit: SubmitHandler<UserInfoFields> = async (values) => {
+  const onSubmit: SubmitHandler<UserInfoFields> = async () => {
     // console.log(values);
     // Handle form submission here
   };

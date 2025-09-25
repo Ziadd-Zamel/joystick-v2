@@ -109,6 +109,12 @@
     "password-change-failed": "Failed to change password. Please try again."
   },
   "profile-route": {
+    "address-required": "Address is required",
+    "day-required": "Day is required",
+    "time-required": "Time is required",
+    "notes-max": "Notes can't be more than 500 chars",
+    "problem-parts-required": "Problem parts is required",
+    "problem-parts-min": "At least one part is required",
     "total-payment": "Total Payment",
     "no-address-provided": "No Address Provided",
     "payment-method": "Payment Method",

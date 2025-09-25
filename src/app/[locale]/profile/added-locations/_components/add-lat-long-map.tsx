@@ -3,8 +3,8 @@
 import React, { useState, useEffect } from "react";
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
 import { UseFormReturn } from "react-hook-form";
-import { UserAddressFormValues } from "./add-new-address-dialog";
 import { Skeleton } from "@/components/ui/skeleton";
+import { UserAddressFormValues } from "@/lib/schemas/profile.schema";
 
 const containerStyle = {
   width: "100%",

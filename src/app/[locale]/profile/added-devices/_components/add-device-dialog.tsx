@@ -16,7 +16,6 @@ import { format } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
 
 import { Calendar } from "@/components/ui/calendar";
 import {
@@ -31,10 +30,10 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useRouter } from "@/i18n/routing";
 import { addDevice } from "@/lib/actions/profile.actions";
+import { addDeviceFormSchema, AddDeviceFormValues } from "@/lib/schemas/profile.schema";
+import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { toast } from "sonner";
-import { useTranslations } from "next-intl";
-import { addDeviceFormSchema, AddDeviceFormValues } from "@/lib/schemas/profile.schema";
 
 export default function AddDeviceDialog() {
   const [open, setOpen] = useState(false);

@@ -2,10 +2,10 @@ import { getFilteredProduct } from "@/lib/actions/product.actions";
 import ProductsGrid from "./_components/products-grid";
 
 interface PageProps {
-  params: {
+  params: Promise<{
     [key: string]: string;
-  };
-  searchParams?: {
+  }>;
+  searchParams?: Promise<{
     brand_id?: string;
     tags?: string;
     price_from?: string;
@@ -13,7 +13,7 @@ interface PageProps {
     name?: string;
     page?: string;
     limit?: string;
-  };
+  }>;
 }
 
 export default async function Page({ params, searchParams }: PageProps) {

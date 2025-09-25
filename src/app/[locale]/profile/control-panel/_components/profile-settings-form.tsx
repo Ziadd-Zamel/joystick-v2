@@ -1,5 +1,14 @@
 "use client";
+import OtpForm from "@/components/auth/otp-form";
 import { Button } from "@/components/ui/button";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import {
   Form,
   FormControl,
@@ -9,7 +18,6 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useRouter } from "@/i18n/routing";
 import { updateProfile, updateUserPhone } from "@/lib/actions/profile.actions";
 import { ProfileSettingFormValues, profileSettingsSchema } from "@/lib/schemas/profile.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -17,21 +25,11 @@ import { useTranslations } from "next-intl";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import OtpForm from "@/components/auth/otp-form";
 
 export default function ProfileSettingsForm({ userData }: { userData: User }) {
   const [openOTPDialog, setOpenOTPDialog] = useState(false);
 
   const t = useTranslations("profile-route");
-  const router = useRouter();
 
   const form = useForm<ProfileSettingFormValues>({
     resolver: zodResolver(profileSettingsSchema(t)),

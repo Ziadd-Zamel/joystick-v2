@@ -83,13 +83,11 @@ export type AddDeviceFormValues = z.infer<ReturnType<typeof addDeviceFormSchema>
 export const repairRequestSchema = (t: TZodIntel) =>
   z.object({
     deviceId: z.any(),
-    addressId: z.string().min(1, "Address is Required"),
-    availableDay: z.date("Day is required"),
-    availableDayId: z.string().min(1, "Day is Required"),
-    availableTimeId: z.string().min(1, "Time is Required"),
-    extraNotes: z.string().max(500, "Notes can't be more than 500 chars").optional(),
-    problemsParts: z
-      .array(z.number(), "Problem parts is required")
-      .min(1, "At least one part is required"),
+    addressId: z.string().min(1, t("address-required")),
+    availableDay: z.date(t("day-required")),
+    availableDayId: z.string().min(1, t("day-required")),
+    availableTimeId: z.string().min(1, t("time-required")),
+    extraNotes: z.string().max(500, t("notes-max")).optional(),
+    problemsParts: z.array(z.number(), t("problem-parts-required")).min(1, t("problem-parts-min")),
   });
 export type RepairRequeseFormValues = z.infer<ReturnType<typeof repairRequestSchema>>;
